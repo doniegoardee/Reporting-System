@@ -73,7 +73,7 @@
 
     <span class="heading">Extras</span>
     <ul class="list-unstyled">
-        <li><a class="{{ Request::is('admin-2/profile/view-profile') ? 'active' : '' }}"
-                href="{{ route('admin-2.profile') }}"><i class="icon-settings"></i>Settings </a></li>
+        <li class="{{ Request::is('admin-2/settings/setting') ? 'active' : '' }}"><a
+                href="{{ route('admin-2.settings') }}"><i class="icon-settings"></i>Settings </a></li>
     </ul>
 </nav>

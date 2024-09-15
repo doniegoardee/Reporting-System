@@ -21,6 +21,7 @@
 
     </ul><span class="heading">Extras</span>
     <ul class="list-unstyled">
-        <li> <a href="#"> <i class="icon-settings"></i>Settings </a></li>
+        <li class="{{ Request::is('setting') ? 'active' : '' }}"> <a href="{{ route('user.settings') }}"> <i
+                    class="icon-settings"></i>Settings </a></li>
     </ul>
 </nav>

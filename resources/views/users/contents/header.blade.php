@@ -22,8 +22,8 @@
                 <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
-                <div class="list-inline-item"><a href="#" class="search-open nav-link"><i
-                            class="icon-magnifying-glass-browser"></i></a></div>
+                {{-- <div class="list-inline-item"><a href="#" class="search-open nav-link"><i
+                            class="icon-magnifying-glass-browser"></i></a></div> --}}
                 <div class="list-inline-item dropdown">
                     <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" class="nav-link messages-toggle">
@@ -71,16 +71,6 @@
         </div>  --}}
                 <!-- Log out               -->
 
-                <div class="list-inline-item logout">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="">
-                        @csrf
-                        <button style="border: none; background:transparent;" type="submit">
-                            logout
-                        </button>
-                    </form>
-
-
-                </div>
             </div>
     </nav>
 </header>

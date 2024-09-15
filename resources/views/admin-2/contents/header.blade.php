@@ -71,16 +71,7 @@
         </div>  --}}
                 <!-- Log out               -->
 
-                <div class="list-inline-item logout">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="">
-                        @csrf
-                        <button style="border: none; background:transparent;" type="submit">
-                            logout
-                        </button>
-                    </form>
 
-
-                </div>
             </div>
     </nav>
 </header>

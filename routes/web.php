@@ -38,6 +38,11 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
     Route::get('/reports/{id}/edit', [ControllerReports::class, 'editReport'])->name('reports.edit');
 
     Route::get('/reports/{id}', [ControllerReports::class, 'show'])->name('reports.show');
+
+    Route::get('/setting', [UsersController::class, 'user_settings'])->name('user.settings');
+    Route::put('/profile', [UsersController::class, 'update'])->name('user.profile-update');
+    Route::post('/change-password', [UsersController::class, 'updatePassword'])->name('user.change');
+    Route::delete('/delete-account', [UsersController::class, 'deleteAccount'])->name('user.delete');
 });
 
 
@@ -73,8 +78,11 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
 
     Route::put('/update/{id}/{status}', [Adminreports::class, 'updateStatus'])->name('update');
 
-    Route::prefix('profile')->group(function () {
-        Route::get('/view-profile', [UsersController::class, 'profile'])->name('profile');
+    Route::prefix('settings')->group(function () {
+        Route::get('/setting', [UsersController::class, 'settings'])->name('settings');
+        Route::put('/profile', [UsersController::class, 'update'])->name('profile-update');
+        Route::post('/change-password', [UsersController::class, 'updatePassword'])->name('change');
+        Route::delete('/delete-account', [UsersController::class, 'deleteAccount'])->name('delete');
     });
 });
 

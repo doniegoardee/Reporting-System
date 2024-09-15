@@ -2,17 +2,16 @@
 <html>
 
 <head>
-    @include('admin-2.contents.css')
+    @include('users.contents.css')
 </head>
 
 <body>
-    @include('admin-2.contents.header')
+    @include('users.contents.header')
 
     <div class="d-flex align-items-stretch">
         <!-- Sidebar Navigation-->
-        @include('admin-2.contents.sidebar')
+        @include('users.contents.sidebar')
         <!-- Sidebar Navigation end-->
-
         <div class="page-content scrollable-content">
             <div class="page-header">
                 <div class="container-fluid">
@@ -28,7 +27,7 @@
                             <div class="block">
                                 <div class="title"><strong>Profile</strong></div>
                                 <div class="block-body">
-                                    <form method="POST" action="{{ route('admin-2.profile-update') }}"
+                                    <form method="POST" action="{{ route('user.profile-update') }}"
                                         enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
@@ -72,7 +71,7 @@
                             <div class="block mt-4">
                                 <div class="title"><strong>Change Password</strong></div>
                                 <div class="block-body">
-                                    <form method="POST" action="{{ route('admin-2.change') }}">
+                                    <form method="POST" action="{{ route('user.change') }}">
                                         @csrf
 
                                         <div class="form-group mb-3">
@@ -104,7 +103,7 @@
                                     <div class="block mt-4">
                                         <div class="title"><strong>Delete Account</strong></div>
                                         <div class="block-body">
-                                            <form method="POST" action="{{ route('admin-2.delete') }}">
+                                            <form method="POST" action="{{ route('user.delete') }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger"
@@ -142,8 +141,7 @@
             </section>
 
 
-
-            @include('admin-2.contents.footer')
+            @include('users.contents.footer')
         </div>
     </div>
 </body>
