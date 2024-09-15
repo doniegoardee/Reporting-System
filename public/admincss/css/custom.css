@@ -1,0 +1,16 @@
+/* your styles go here */
+
+.scrollable-content {
+    overflow-y: scroll;
+    height: 100vh;
+    /* Full viewport height */
+    scrollbar-width: none;
+    /* For Firefox */
+    -ms-overflow-style: none;
+    /* For Internet Explorer and Edge */
+}
+
+/* For WebKit browsers (Chrome, Safari, and newer versions of Opera) */
+.scrollable-content::-webkit-scrollbar {
+    display: none;
+}
