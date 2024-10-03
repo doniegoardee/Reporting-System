@@ -19,7 +19,7 @@
 </head>
 
 <body class="antialiased">
-    <h1 class=" bg-primary p-3 fw-bold text-center">inccident reporting System</h1>
+    <h1 class=" bg-primary p-3 fw-bold text-center">Incident Report System</h1>
 
     <div class="mt-4 pt-4">
 
