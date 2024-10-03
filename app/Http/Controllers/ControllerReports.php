@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barangay;
+use App\Models\IncidentType;
 use App\Models\Reports;
 use App\Models\User;
 use App\Notifications\Notifications;
@@ -75,9 +77,16 @@ class ControllerReports extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function incident()
     {
-        return view('users.create-reports');
+        $incidentTypes = IncidentType::all();
+        return view('users.incident-type', compact('incidentTypes'));
+    }
+
+    public function create($subject_type)
+    {
+        $barangay = Barangay::all();
+        return view('users.create-reports', compact('subject_type', 'barangay'));
     }
 
     /**
@@ -88,12 +97,18 @@ class ControllerReports extends Controller
         if (Auth::check()) {
             $user = Auth::user();
             $userid = $user->id;
+
             $username = $user->name;
             $email = $user->email;
 
+            if ($request->has('addAsterisk')) {
+                $username = '*****';
+                $email = '*****';
+            }
+
             $reports = new Reports;
 
-            $reports->subject_type = $request->issue;
+            $reports->subject_type = $request->subject_type;
             $reports->status = 'pending';
             $reports->location = $request->location;
             $reports->description = $request->details;
@@ -118,6 +133,8 @@ class ControllerReports extends Controller
             return redirect()->back()->with('message', 'Report added successfully');
         }
     }
+
+
 
     /**
      * Display the specified resource.
@@ -166,8 +183,11 @@ class ControllerReports extends Controller
     public function editReport($id)
     {
         $report = Reports::findOrFail($id);
-        return view('users.edit-report', compact('report'));
+        $incidentTypes = IncidentType::all();
+        $barangay = Barangay::all();
+        return view('users.edit-report', compact('report', 'incidentTypes', 'barangay'));
     }
+
 
     public function updateReports(Request $request, $id)
     {
@@ -175,6 +195,9 @@ class ControllerReports extends Controller
             'subject_type' => 'required',
             'location' => 'required',
             'description' => 'required',
+            'severity' => 'required',
+            'num_affected' => 'required|integer|min:0',
+            'needs' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -182,12 +205,14 @@ class ControllerReports extends Controller
         $report->subject_type = $validatedData['subject_type'];
         $report->location = $validatedData['location'];
         $report->description = $validatedData['description'];
+        $report->severity = $validatedData['severity'];
+        $report->num_affected = $validatedData['num_affected'];
+        $report->needs = $validatedData['needs'];
 
-        $image = $request->image;
-
-        if ($image) {
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
             $imagename = time() . '.' . $image->getClientOriginalExtension();
-            $request->image->move(public_path('/image'), $imagename);
+            $image->move(public_path('/image'), $imagename);
             $report->image = $imagename;
         }
 

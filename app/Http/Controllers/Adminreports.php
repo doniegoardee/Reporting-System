@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Barangay;
+use App\Models\IncidentType;
 use Illuminate\Http\Request;
 use App\Models\Reports;
 use App\Models\User;
@@ -226,5 +228,58 @@ class Adminreports extends Controller
         }
 
         return redirect()->back()->withErrors(['Unauthorized action.']);
+    }
+
+    public function incident()
+    {
+        return view('admin-2.add.add-incident');
+    }
+
+
+    public function add_incident(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'color' => 'nullable|string|max:7',
+        ]);
+
+
+        $imageName = null;
+
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+        }
+
+        IncidentType::create([
+            'name' => $request->name,
+            'image' => $imageName,
+            'color' => $request->color,
+        ]);
+
+
+        return redirect()->route('admin-2.incident')->with('success', 'Incident added successfully!');
+    }
+
+    public function barangay()
+    {
+        return view('admin-2.add.add-barangay');
+    }
+
+
+    public function add_barangay(Request $request)
+    {
+
+        $request->validate([
+            'barangay' => 'required|string|max:255',
+        ]);
+
+        Barangay::create([
+            'barangay' => $request->barangay,
+        ]);
+
+        return redirect()->route('admin-2.barangay')->with('success', '');
     }
 }

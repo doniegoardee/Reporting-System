@@ -55,6 +55,24 @@
             </ul>
         </li>
 
+        <li class="{{ Request::is('admin-2/add/incident', 'admin-2/add/incident/barangay') ? 'active' : '' }}">
+            <a href="#incident"
+                aria-expanded="{{ Request::is('admin-2/add/incident', 'admin-2/add/incident/barangay') ? 'true' : 'false' }}"
+                data-toggle="collapse">
+                <i class="fa-solid fa-plus"></i>Add
+            </a>
+            <ul id="incident"
+                class="collapse list-unstyled {{ Request::is('admin-2/add/incident', 'admin-2/add/incident/barangay') ? 'show' : '' }}">
+                <li><a href="{{ route('admin-2.incident') }}"
+                        class="{{ Request::is('admin-2/add/incident') ? 'active' : '' }}">Add Incident</a></li>
+                <li><a href="{{ route('admin-2.barangay') }}"
+                        class="{{ Request::is('admin-2/add/incident/barangay') ? 'active' : '' }}">Add Barangay</a>
+                </li>
+            </ul>
+        </li>
+
+
+
 
         <li class="{{ Request::is('admin-2/analysis') ? 'active' : '' }}">
             <a href="{{ route('admin-2.analysis') }}">

@@ -20,4 +20,9 @@ class Reports extends Model
         'needs',
         'image',
     ];
+
+    public function incidentType()
+    {
+        return $this->belongsTo(IncidentType::class, 'subject_type');
+    }
 }

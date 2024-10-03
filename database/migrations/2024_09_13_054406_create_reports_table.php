@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('location');
             $table->string('status');
             $table->text('description');
-            $table->text('name');
-            $table->string('email')->unique();
-            $table->text('user_id');
+            $table->text('name')->nullable();
+            $table->string('email')->nullable();
+            $table->text('user_id')->nullable();
             $table->text('severity');
             $table->text('num_affected');
             $table->text('needs');

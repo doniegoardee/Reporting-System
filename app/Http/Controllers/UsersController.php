@@ -142,4 +142,11 @@ class UsersController extends Controller
 
         return redirect('/')->with('success', 'Your account has been deleted successfully.');
     }
+
+    public function show()
+    {
+        $user = Auth::user();
+
+        return view('profile.show', compact('user'));
+    }
 }

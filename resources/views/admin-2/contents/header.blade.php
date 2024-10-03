@@ -24,40 +24,43 @@
             <div class="right-menu list-inline no-margin-bottom">
                 {{-- <div class="list-inline-item"><a href="#" class="search-open nav-link"><i
                             class="icon-magnifying-glass-browser"></i></a></div> --}}
-                <div class="list-inline-item dropdown">
-                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" class="nav-link messages-toggle">
-                        <i class="fa-solid fa-bell"></i>
-                        <span class="badge dashbg-1">{{ $user->notifications->count() }}</span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                        @if ($user && $user->notifications->count())
-                            @forelse ($user->notifications as $notification)
-                                <a class="dropdown-item"
-                                    style="
-                                                   background-color: #d0e7ff; /* Light blue background */
-                                                   color: black;
-                                                   border: 1px solid #a0c4ff; /* Slightly darker blue border */
-                                                   margin: 5px 0;
-                                                   padding: 10px;
-                                                   border-radius: 5px;
-                                               "
-                                    href="#">
-                                    {{ $notification->data['name'] }}
-                                </a>
-                            @empty
-
+                <div class="right-menu list-inline no-margin-bottom">
+                    <div class="list-inline-item dropdown">
+                        <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" class="nav-link messages-toggle">
+                            <i class="fa-solid fa-bell"></i>
+                            <span class="badge dashbg-1">{{ $user->notifications->count() }}</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                            @if ($user && $user->notifications->count())
+                                @forelse ($user->notifications as $notification)
+                                    <a class="dropdown-item"
+                                        style="background-color: #d0e7ff; color: black; border: 1px solid #a0c4ff; margin: 5px 0; padding: 10px; border-radius: 5px;"
+                                        href="#">
+                                        {{ $notification->data['name'] }}
+                                    </a>
+                                @empty
+                                    <div
+                                        class="dropdown-item text-warning bg-dark border border-warning rounded my-2 p-2">
+                                        No notifications
+                                    </div>
+                                @endforelse
+                            @else
                                 <div class="dropdown-item text-warning bg-dark border border-warning rounded my-2 p-2">
                                     No notifications
                                 </div>
-                            @endforelse
-                        @else
-                            <div class="dropdown-item text-warning bg-dark border border-warning rounded my-2 p-2">
-                                No notifications
-                            </div>
-                        @endif
+                            @endif
+                        </div>
                     </div>
+
+
+                    <a href="{{ route('admin-2.settings') }}">
+                        <img src="{{ asset($user->profile_image) }}" class="img-thumbnail" alt="Profile Image"
+                            style="width: 35px; height: 35px; border-radius:50%;">
+                    </a>
+
                 </div>
+
 
                 <!-- Tasks-->
 

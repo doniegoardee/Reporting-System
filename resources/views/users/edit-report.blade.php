@@ -12,13 +12,13 @@
     <div class="d-flex align-items-stretch">
         <!-- Sidebar Navigation-->
         @include('users.contents.sidebar')
-
         <!-- Sidebar Navigation end-->
+
         <div class="page-content">
             <div class="container mt-5">
-                <div class="card">
-                    <div class="card-header">
-                        <h1>Edit Report</h1>
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">Edit Report</h2>
                     </div>
 
                     <div class="card-body">
@@ -29,54 +29,41 @@
 
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="issue">Incident/Disaster Type</label>
-                                    <select class="form-select" name="issue" id="issue" required>
-                                        <option class="dropdown-item" value="flood"
-                                            {{ $report->issue == 'flood' ? 'selected' : '' }}>Flood</option>
-                                        <option class="dropdown-item" value="typhoon"
-                                            {{ $report->issue == 'typhoon' ? 'selected' : '' }}>Typhoon</option>
-                                        <option class="dropdown-item" value="earthquake"
-                                            {{ $report->issue == 'earthquake' ? 'selected' : '' }}>Earthquake</option>
-                                        <option class="dropdown-item" value="fire"
-                                            {{ $report->issue == 'fire' ? 'selected' : '' }}>Fire</option>
-                                        <option class="dropdown-item" value="medical"
-                                            {{ $report->issue == 'medical' ? 'selected' : '' }}>Medical Emergency
-                                        </option>
-                                        <option class="dropdown-item" value="infrastructure"
-                                            {{ $report->issue == 'infrastructure' ? 'selected' : '' }}>Infrastructure
-                                            Damage</option>
+                                    <label for="subject_type">Incident/Disaster Type</label>
+                                    <select class="form-select" name="subject_type" id="subject_type" required>
+                                        @foreach ($incidentTypes as $incident)
+                                            <option value="{{ $incident->name }}"
+                                                {{ $report->subject_type == $incident->name ? 'selected' : '' }}>
+                                                {{ $incident->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label for="location">Location</label>
                                     <select class="form-select" name="location" id="location" required>
-                                        <option class="dropdown-item" value="Centro"
-                                            {{ $report->location == 'Centro' ? 'selected' : '' }}>Centro</option>
-                                        <option class="dropdown-item" value="Centro West"
-                                            {{ $report->location == 'Centro West' ? 'selected' : '' }}>Centro West
-                                        </option>
-                                        <option class="dropdown-item" value="Cabaritan"
-                                            {{ $report->location == 'Cabaritan' ? 'selected' : '' }}>Cabaritan</option>
-                                        <option class="dropdown-item" value="Santa Maria"
-                                            {{ $report->location == 'Santa Maria' ? 'selected' : '' }}>Santa Maria
-                                        </option>
-                                        <option class="dropdown-item" value="Leron"
-                                            {{ $report->location == 'Leron' ? 'selected' : '' }}>Leron</option>
+                                        @foreach ($barangay as $barangay)
+                                            <option value="{{ $barangay->barangay }}"
+                                                {{ $report->location == $barangay->barangay ? 'selected' : '' }}>
+                                                {{ $barangay->barangay }}
+                                            </option>
+                                            @endforeach" {{ $report->location == 'Leron' ? 'selected' : '' }}>
+                                            Leron</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mt-3">
                                 <div class="form-group col-md-6">
                                     <label for="severity">Severity</label>
                                     <select class="form-select" name="severity" id="severity" required>
-                                        <option class="dropdown-item" value="low"
-                                            {{ $report->severity == 'low' ? 'selected' : '' }}>Low</option>
-                                        <option class="dropdown-item" value="medium"
-                                            {{ $report->severity == 'medium' ? 'selected' : '' }}>Medium</option>
-                                        <option class="dropdown-item" value="high"
-                                            {{ $report->severity == 'high' ? 'selected' : '' }}>High</option>
+                                        <option value="low" {{ $report->severity == 'low' ? 'selected' : '' }}>Low
+                                        </option>
+                                        <option value="medium" {{ $report->severity == 'medium' ? 'selected' : '' }}>
+                                            Medium</option>
+                                        <option value="high" {{ $report->severity == 'high' ? 'selected' : '' }}>High
+                                        </option>
                                     </select>
                                 </div>
 
@@ -87,34 +74,39 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mt-3">
                                 <label for="description">Details</label>
                                 <textarea class="form-control" name="description" id="description" cols="30" rows="5" required>{{ $report->description }}</textarea>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mt-3">
                                 <label for="urgent_needs">Urgent Needs</label>
                                 <textarea class="form-control" id="urgent_needs" name="needs" rows="3">{{ $report->needs }}</textarea>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mt-3">
                                 <label for="image">Image</label>
                                 @if ($report->image)
                                     <div class="mb-3">
-                                        <img src="{{ url('/image', $report->image) }}" class="img-fluid"
+                                        <img src="{{ url('/image', $report->image) }}" class="img-fluid img-thumbnail"
                                             style="max-width: 150px;" alt="Report Image">
                                     </div>
                                 @endif
                                 <input type="file" class="form-control-file" id="image" name="image">
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Update Report</button>
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary btn-block">Update Report</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
 
             @include('users.contents.footer')
+
+        </div>
+    </div>
 
 </body>
 

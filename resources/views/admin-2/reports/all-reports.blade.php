@@ -137,6 +137,7 @@
                             </div>
                             <div class="modal-body">
                                 <p><strong>Subject Type:</strong> {{ $report->subject_type }}</p>
+                                <p><strong>Name:</strong> {{ $report->name }}</p>
                                 <p><strong>Location:</strong> {{ $report->location }}</p>
                                 <p><strong>Description:</strong> {{ $report->description }}</p>
                                 <p><strong>Status:</strong> {{ $report->status }}</p>
