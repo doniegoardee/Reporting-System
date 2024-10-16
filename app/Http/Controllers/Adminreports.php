@@ -20,12 +20,46 @@ class Adminreports extends Controller
 
     public function all_reports()
     {
+        $incidentTypes = IncidentType::all();
 
-        $allReports = Reports::orderBy('created_at', 'desc')
-            ->paginate(5);
+        $allReports = Reports::orderBy('created_at', 'desc')->paginate(5);
 
-        return view('admin-2.reports.all-reports', compact('allReports'));
+        return view('admin-2.reports.all-reports', compact('allReports', 'incidentTypes'));
     }
+
+
+    public function filtering(Request $request)
+    {
+
+        $incidentTypes = IncidentType::all();
+
+        $query = Reports::query();
+
+        if ($request->filled('report')) {
+            $incidentTypeName = IncidentType::find($request->input('report'))->name;
+            $query->where('subject_type', $incidentTypeName);
+        }
+
+        if ($request->filled('location')) {
+            $query->where('location', $request->input('location'));
+        }
+
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->whereBetween('created_at', [
+                $request->input('start_date'),
+                $request->input('end_date')
+            ]);
+        } elseif ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->input('start_date'));
+        } elseif ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->input('end_date'));
+        }
+
+        $allReports = $query->paginate(5);
+
+        return view('admin-2.reports.all-reports', compact('allReports', 'incidentTypes'));
+    }
+
 
     public function pending()
     {
@@ -36,56 +70,6 @@ class Adminreports extends Controller
 
 
         return view('admin-2.reports.pending', compact('pending'));
-    }
-
-    public function resolved()
-    {
-        $resolved = Reports::where('status', 'resolved')
-            ->orderBy('created_at', 'desc')
-            ->paginate(5);
-
-        return view('admin-2.reports.resolved', compact('resolved'));
-    }
-
-    public function closed()
-    {
-        $closed = Reports::where('status', 'closed')
-            ->orderBy('created_at', 'desc')
-            ->paginate(5);
-
-        return view('admin-2.reports.closed', compact(var_name: 'closed'));
-    }
-
-
-    public function activitylog()
-    {
-        $activity = Activity::all();
-
-        return view('admin-2.activity-log', compact('activity'));
-    }
-
-
-    public function filtering(Request $request)
-    {
-
-        $query = Reports::query();
-
-
-        if ($request->filled('report')) {
-            $query->where('subject_type', $request->input('report'));
-        }
-        if ($request->filled('location')) {
-            $query->where('location', $request->input('location'));
-        }
-        if ($request->filled('created_at')) {
-            $date = $request->input('created_at');
-            $query->whereDate('created_at', '=', $date);
-        }
-
-
-        $allReports = $query->paginate(5);
-
-        return view('admin-2.reports.all-reports', compact('allReports'));
     }
 
     public function filter_pending(Request $request)
@@ -111,6 +95,16 @@ class Adminreports extends Controller
     }
 
 
+
+    public function resolved()
+    {
+        $resolved = Reports::where('status', 'resolved')
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        return view('admin-2.reports.resolved', compact('resolved'));
+    }
+
     public function filter_resolved(Request $request)
     {
         $query = Reports::query();
@@ -134,6 +128,14 @@ class Adminreports extends Controller
     }
 
 
+    public function closed()
+    {
+        $closed = Reports::where('status', 'closed')
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        return view('admin-2.reports.closed', compact(var_name: 'closed'));
+    }
 
     public function filter_closed(Request $request)
     {
@@ -281,5 +283,13 @@ class Adminreports extends Controller
         ]);
 
         return redirect()->route('admin-2.barangay')->with('success', '');
+    }
+
+
+    public function activitylog()
+    {
+        $activity = Activity::all();
+
+        return view('admin-2.activity-log', compact('activity'));
     }
 }

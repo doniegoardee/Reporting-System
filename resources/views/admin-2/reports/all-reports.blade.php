@@ -26,26 +26,22 @@
                 </div>
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin-2.filter') }}">
-                        <div class="row g-3">
+                        <div class="row gy-3">
                             <div class="col-md-4">
-                                <label for="report" class="form-label">Report Type</label>
+                                <label for="report" class="form-label">Incident Type</label>
                                 <select class="form-select" name="report" id="report">
                                     <option value="">Select Incident Type</option>
-                                    <option value="flood" {{ request('report') == 'flood' ? 'selected' : '' }}>Flood
-                                    </option>
-                                    <option value="typhoon" {{ request('report') == 'typhoon' ? 'selected' : '' }}>
-                                        Typhoon</option>
-                                    <option value="earthquake"
-                                        {{ request('report') == 'earthquake' ? 'selected' : '' }}>Earthquake</option>
-                                    <option value="fire" {{ request('report') == 'fire' ? 'selected' : '' }}>Fire
-                                    </option>
-                                    <option value="medical" {{ request('report') == 'medical' ? 'selected' : '' }}>
-                                        Medical Emergency</option>
-                                    <option value="infrastructure"
-                                        {{ request('report') == 'infrastructure' ? 'selected' : '' }}>Infrastructure
-                                        Damage</option>
+                                    @foreach ($incidentTypes as $incidentType)
+                                        <option value="{{ $incidentType->id }}"
+                                            {{ request('report') == $incidentType->id ? 'selected' : '' }}>
+                                            {{ $incidentType->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
+
+
+                            <!-- Location -->
                             <div class="col-md-4">
                                 <label for="location" class="form-label">Location</label>
                                 <select id="location" name="location" class="form-select">
@@ -64,21 +60,36 @@
                                     </option>
                                 </select>
                             </div>
+
+                            <!-- Start Date and End Date in One Row -->
                             <div class="col-md-4">
-                                <label for="created_at" class="form-label">Date</label>
-                                <input type="date" id="created_at" name="created_at" class="form-control"
-                                    value="{{ request('created_at') }}">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="start_date" class="form-label">Start Date</label>
+                                        <input type="date" id="start_date" name="start_date" class="form-control"
+                                            value="{{ request('start_date') }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="end_date" class="form-label">End Date</label>
+                                        <input type="date" id="end_date" name="end_date" class="form-control"
+                                            value="{{ request('end_date') }}">
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- Submit and Clear Buttons -->
                         <div class="row mt-4">
                             <div class="col-md-12 text-end">
-                                <button type="submit" class="btn btn-primary">Filter</button>
-                                <a href="{{ route('admin-2.filter') }}" class="btn btn-secondary ms-2">Clear Filter</a>
+                                <button type="submit" class="btn btn-primary px-4">Filter</button>
+                                <a href="{{ route('admin-2.filter') }}" class="btn btn-secondary ms-2 px-4">Clear
+                                    Filter</a>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+
 
             <div class="card-body px-2 py-2">
                 <button class="btn btn-success">Export PDF</button>
@@ -151,7 +162,8 @@
                                 @endif
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
