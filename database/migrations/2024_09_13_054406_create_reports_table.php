@@ -24,6 +24,8 @@ return new class extends Migration
             $table->text('num_affected');
             $table->text('needs');
             $table->string('image')->nullable();
+            $table->string('responding_agency')->nullable();
+            $table->string('resolved_time')->nullable();
             $table->timestamps();
         });
     }

@@ -142,6 +142,7 @@
 
 
             @foreach ($pending as $report)
+                <!-- Modal for Viewing Report Details -->
                 <div class="modal fade" id="exampleModal{{ $report->id }}" tabindex="-1"
                     aria-labelledby="exampleModalLabel{{ $report->id }}" aria-hidden="true">
                     <div class="modal-dialog">
@@ -156,6 +157,10 @@
                                 <p><strong>Location:</strong> {{ $report->location }}</p>
                                 <p><strong>Description:</strong> {{ $report->description }}</p>
                                 <p><strong>Date & Time:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
+                                <p><strong>Responding Agency:</strong> {{ $report->responding_agency ?? 'N/A' }}</p>
+                                <p><strong>Resolved Time:</strong>
+                                    {{ $report->resolved_at ? $report->resolved_at->format('d M Y, h:i A') : 'Not resolved yet' }}
+                                </p>
 
                                 @if ($report->image)
                                     <div class="text-center mt-3">
@@ -170,11 +175,8 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
 
-
-
-            @foreach ($pending as $report)
+                <!-- Modal for Marking Report as Resolved -->
                 <div class="modal fade" id="resolveModal{{ $report->id }}" tabindex="-1"
                     aria-labelledby="resolveModalLabel{{ $report->id }}" aria-hidden="true">
                     <div class="modal-dialog">
@@ -190,6 +192,20 @@
                                 <p><strong>Subject Type:</strong> {{ $report->subject_type }}</p>
                                 <p><strong>Location:</strong> {{ $report->location }}</p>
                                 <p><strong>Date & Time:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
+
+                                <div class="mb-3">
+                                    <label for="responding-agency{{ $report->id }}" class="form-label">Responding
+                                        Agency</label>
+                                    <input type="text" class="form-control"
+                                        id="responding-agency{{ $report->id }}" name="responding_agency" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="resolved-time{{ $report->id }}" class="form-label">Resolved
+                                        Time</label>
+                                    <input type="datetime-local" class="form-control"
+                                        id="resolved-time{{ $report->id }}" name="resolved_time" required>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <form id="resolve-form{{ $report->id }}"
@@ -197,17 +213,17 @@
                                     method="POST" style="display: none;">
                                     @csrf
                                     @method('PUT')
-                                </form>
-
-                                <form id="close-form{{ $report->id }}"
-                                    action="{{ route('admin-2.update', ['id' => $report->id, 'status' => 'closed']) }}"
-                                    method="POST" style="display: none;">
-                                    @csrf
-                                    @method('PUT')
+                                    <input type="hidden" name="responding_agency"
+                                        id="hidden-responding-agency{{ $report->id }}">
+                                    <input type="hidden" name="resolved_time"
+                                        id="hidden-resolved-time{{ $report->id }}">
                                 </form>
 
                                 <button type="button" class="btn btn-success"
-                                    onclick="event.preventDefault(); document.getElementById('resolve-form{{ $report->id }}').submit();">Yes,
+                                    onclick="event.preventDefault();
+                                document.getElementById('hidden-responding-agency{{ $report->id }}').value = document.getElementById('responding-agency{{ $report->id }}').value;
+                                document.getElementById('hidden-resolved-time{{ $report->id }}').value = document.getElementById('resolved-time{{ $report->id }}').value;
+                                document.getElementById('resolve-form{{ $report->id }}').submit();">Yes,
                                     Mark as Resolved</button>
                                 <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Cancel</button>
@@ -216,7 +232,6 @@
                     </div>
                 </div>
             @endforeach
-
 
             @include('admin-2.contents.footer')
 

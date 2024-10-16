@@ -14,6 +14,11 @@
         .color-picker-container {
             width: 100%;
         }
+
+        .image-preview {
+            max-width: 100%;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -46,7 +51,15 @@
 
                             <div class="form-group">
                                 <label for="image">Image (Optional)</label>
-                                <input type="file" class="form-control" id="image" name="image">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="image" name="image"
+                                        accept="image/*">
+                                    <label class="custom-file-label" for="image">
+                                        <i class="bi bi-upload"></i> Choose file
+                                    </label>
+                                </div>
+                                <img id="imagePreview" class="image-preview" src="#" alt="Image Preview"
+                                    style="display: none;">
                             </div>
 
                             <div class="form-group">
@@ -64,11 +77,13 @@
         </div>
 
         @include('admin-2.contents.footer')
+
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
 
         <script>
             $(document).ready(function() {
+                // Color Picker Initialization
                 $("#colorPicker").spectrum({
                     color: "#ff5733",
                     showInput: true,
@@ -79,6 +94,49 @@
                         $("#colorPicker").val(color.toHexString()); // Set the input value
                     }
                 });
+
+                // Handle image upload and background removal
+                const input = document.getElementById('image');
+                input.addEventListener('change', async function() {
+                    if (this.files && this.files[0]) {
+                        const file = this.files[0];
+                        const reader = new FileReader();
+
+                        reader.onload = async function(e) {
+                            const imageSrc = e.target.result;
+                            $('#imagePreview').attr('src', imageSrc).show();
+
+                            // Call the background removal function
+                            const newImageSrc = await removeBackground(imageSrc);
+                            $('#imagePreview').attr('src', newImageSrc);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                // Background removal function using remove.bg API
+                async function removeBackground(imageData) {
+                    const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+                    const response = await fetch('https://api.remove.bg/v1.0/removebg', {
+                        method: 'POST',
+                        headers: {
+                            'X-Api-Key': apiKey,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            image_file_b64: imageData.split(',')[1],
+                            size: 'auto',
+                        }),
+                    });
+
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        return URL.createObjectURL(blob); // Return the URL of the new image
+                    } else {
+                        console.error('Error removing background:', response);
+                        return imageData; // Return original if there's an error
+                    }
+                }
             });
         </script>
     </div>

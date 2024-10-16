@@ -19,6 +19,13 @@ class Reports extends Model
         'num_affected',
         'needs',
         'image',
+        'responding_agency',
+        'resolved_time'
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'resolved_time' => 'datetime',
     ];
 
     public function incidentType()

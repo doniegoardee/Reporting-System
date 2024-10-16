@@ -83,7 +83,6 @@
                 </div>
             </div>
 
-
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
@@ -111,7 +110,7 @@
                                                 <a href="#"
                                                     class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2 me-2"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal{{ $report->id }}">
+                                                    data-bs-target="#viewModal{{ $report->id }}">
                                                     View
                                                 </a>
 
@@ -123,13 +122,47 @@
                                         </td>
                                     </tr>
 
+                                    <!-- View Modal -->
+                                    <div class="modal fade" id="viewModal{{ $report->id }}" tabindex="-1"
+                                        aria-labelledby="viewModalLabel{{ $report->id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="viewModalLabel{{ $report->id }}">
+                                                        Report Details</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p><strong>Incident Type:</strong> {{ $report->subject_type }}</p>
+                                                    <p><strong>Location:</strong> {{ $report->location }}</p>
+                                                    <p><strong>Description:</strong> {{ $report->description }}</p>
+                                                    <p><strong>Status:</strong> {{ $report->status }}</p>
+                                                    <p><strong>Created At:</strong>
+                                                        {{ \Carbon\Carbon::parse($report->created_at)->format('d M Y, h:i A') }}
+                                                    </p>
+                                                    <p><strong>Responding Agency:</strong>
+                                                        {{ $report->responding_agency ?? 'N/A' }}</p>
+                                                    <p><strong>Resolved Time:</strong>
+                                                        {{ $report->resolved_time ? \Carbon\Carbon::parse($report->resolved_time)->format('d M Y, h:i A') : 'N/A' }}
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!-- Confirmation Modal -->
                                     <div class="modal fade" id="confirmModal{{ $report->id }}" tabindex="-1"
                                         aria-labelledby="confirmModalLabel{{ $report->id }}" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="confirmModalLabel{{ $report->id }}">
+                                                    <h5 class="modal-title"
+                                                        id="confirmModalLabel{{ $report->id }}">
                                                         Confirm Action</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
@@ -145,7 +178,8 @@
                                                         method="POST">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="btn btn-success">Confirm</button>
+                                                        <button type="submit"
+                                                            class="btn btn-success">Confirm</button>
                                                     </form>
                                                 </div>
                                             </div>

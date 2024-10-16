@@ -76,6 +76,7 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
     });
 
 
+
     Route::prefix('users')->group(function () {
         Route::get('/list', [UsersController::class, 'user'])->name('user');
         Route::get('/add', [UsersController::class, 'add_user'])->name('add_user');
@@ -112,7 +113,6 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
     Route::get('/profile', [UsersController::class, 'show'])->name('profile.show');
 
 
-    Route::get('/admin-2/suggestions', [UsersController::class, 'getSuggestions'])->name('admin-2.suggestions');
 
 
 
