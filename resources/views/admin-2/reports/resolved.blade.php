@@ -25,49 +25,53 @@
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin-2.filter-resolved') }}">
                         <div class="row g-3">
+
                             <div class="col-md-4">
                                 <label for="issue" class="form-label">Report Type</label>
                                 <select class="form-select" name="issue" id="issue">
-                                    <option value="">Select Incident Type</option>
-                                    <option value="flood" {{ request('issue') == 'flood' ? 'selected' : '' }}>Flood
+                                    <option value="" disabled {{ !request('issue') ? 'selected' : '' }}>
+                                        Select Incident Type
                                     </option>
-                                    <option value="typhoon" {{ request('issue') == 'typhoon' ? 'selected' : '' }}>
-                                        Typhoon</option>
-                                    <option value="earthquake" {{ request('issue') == 'earthquake' ? 'selected' : '' }}>
-                                        Earthquake</option>
-                                    <option value="fire" {{ request('issue') == 'fire' ? 'selected' : '' }}>Fire
-                                    </option>
-                                    <option value="medical" {{ request('issue') == 'medical' ? 'selected' : '' }}>
-                                        Medical Emergency</option>
-                                    <option value="infrastructure"
-                                        {{ request('issue') == 'infrastructure' ? 'selected' : '' }}>Infrastructure
-                                        Damage</option>
+                                    @foreach ($incident as $incidentType)
+                                        <option value="{{ $incidentType->id }}"
+                                            {{ request('issue') == $incidentType->id ? 'selected' : '' }}>
+                                            {{ $incidentType->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
+
                             <div class="col-md-4">
                                 <label for="location" class="form-label">Location</label>
                                 <select id="location" name="location" class="form-select">
-                                    <option value="">Select Location</option>
-                                    <option value="Centro" {{ request('location') == 'Centro' ? 'selected' : '' }}>
-                                        Centro</option>
-                                    <option value="Centro West"
-                                        {{ request('location') == 'Centro West' ? 'selected' : '' }}>Centro West
+                                    <option value="" disabled {{ !request('location') ? 'selected' : '' }}>
+                                        Select Location
                                     </option>
-                                    <option value="Cabaritan"
-                                        {{ request('location') == 'Cabaritan' ? 'selected' : '' }}>Cabaritan</option>
-                                    <option value="Santa Maria"
-                                        {{ request('location') == 'Santa Maria' ? 'selected' : '' }}>Santa Maria
-                                    </option>
-                                    <option value="Leron" {{ request('location') == 'Leron' ? 'selected' : '' }}>Leron
-                                    </option>
+                                    @foreach ($barangay as $barangays)
+                                        <option value="{{ $barangays->id }}"
+                                            {{ request('location') == $barangays->id ? 'selected' : '' }}>
+                                            {{ $barangays->barangay }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
+
                             <div class="col-md-4">
-                                <label for="created_at" class="form-label">Date</label>
-                                <input type="date" id="created_at" name="created_at" class="form-control"
-                                    value="{{ request('created_at') }}">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="start_date" class="form-label">Start Date</label>
+                                        <input type="date" id="start_date" name="start_date" class="form-control"
+                                            value="{{ request('start_date') }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="end_date" class="form-label">End Date</label>
+                                        <input type="date" id="end_date" name="end_date" class="form-control"
+                                            value="{{ request('end_date') }}">
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                         <div class="row mt-4">
                             <div class="col-md-12 text-end">
                                 <button type="submit" class="btn btn-primary">Filter</button>
@@ -78,6 +82,7 @@
                     </form>
                 </div>
             </div>
+
 
             <div class="card mb-4">
                 <div class="card-body">

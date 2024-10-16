@@ -30,7 +30,9 @@ Auth::routes();
 // user routes
 Route::middleware(['auth', 'user-role:user'])->group(function () {
     Route::prefix('user')->group(function () {
+
         Route::get("/home", [HomeController::class, 'userHome'])->name('home.user');
+
 
         Route::prefix('reports')->group(function () {
             Route::get("/incident", [ControllerReports::class, 'incident'])->name('user.incident');
@@ -42,7 +44,11 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
             // Route::get('/{id}', [ControllerReports::class, 'show'])->name('reports.show');
         });
 
+
+
         Route::get('/profile', [UsersController::class, 'profile'])->name('user.profile');
+
+
 
         Route::prefix('settings')->group(function () {
             Route::get('/setting', [UsersController::class, 'user_settings'])->name('user.settings');
@@ -61,6 +67,7 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
 
     Route::get('/dashboard', [HomeController::class, 'admin_2'])->name('index');
 
+
     Route::prefix('reports')->group(function () {
         Route::get('/all', [Adminreports::class, 'all_reports'])->name('all-reports');
         Route::get('/pending', [Adminreports::class, 'pending'])->name('pending');
@@ -75,12 +82,16 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
         Route::post('/add', [UsersController::class, 'register_user'])->name('adduser');
     });
 
+
+
     Route::prefix('filter')->group(function () {
         Route::get('/all', [Adminreports::class, 'filtering'])->name('filter');
         Route::get('/pending', [Adminreports::class, 'filter_pending'])->name('filter-pending');
         Route::get('/resolved', [Adminreports::class, 'filter_resolved'])->name('filter-resolved');
         Route::get('/closed', [Adminreports::class, 'filter_closed'])->name('filter-closed');
     });
+
+
 
     Route::prefix('add/incident')->group(function () {
         Route::get('/', [Adminreports::class, 'incident'])->name('incident');
@@ -89,13 +100,18 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
         Route::post('/store/barangay', [Adminreports::class, 'add_barangay'])->name('add_barangay');
     });
 
+
     Route::get('/activity-log', [Adminreports::class, 'activitylog'])->name('activity-log');
     Route::get('/pdf', [ExportFileController::class, 'generatePDF'])->name('export.pdf');
     Route::get('/analysis', [Adminreports::class, 'analysis'])->name('analysis');
 
+
     Route::put('/update/{id}/{status}', [Adminreports::class, 'updateStatus'])->name('update');
 
+
     Route::get('/profile', [UsersController::class, 'show'])->name('profile.show');
+
+
 
     Route::prefix('settings')->group(function () {
         Route::get('/setting', [UsersController::class, 'settings'])->name('settings');
