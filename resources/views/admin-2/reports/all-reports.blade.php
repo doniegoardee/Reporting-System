@@ -40,28 +40,19 @@
                                 </select>
                             </div>
 
-
-                            <!-- Location -->
                             <div class="col-md-4">
                                 <label for="location" class="form-label">Location</label>
                                 <select id="location" name="location" class="form-select">
                                     <option value="">Select Location</option>
-                                    <option value="Centro" {{ request('location') == 'Centro' ? 'selected' : '' }}>
-                                        Centro</option>
-                                    <option value="Centro West"
-                                        {{ request('location') == 'Centro West' ? 'selected' : '' }}>Centro West
-                                    </option>
-                                    <option value="Cabaritan"
-                                        {{ request('location') == 'Cabaritan' ? 'selected' : '' }}>Cabaritan</option>
-                                    <option value="Santa Maria"
-                                        {{ request('location') == 'Santa Maria' ? 'selected' : '' }}>Santa Maria
-                                    </option>
-                                    <option value="Leron" {{ request('location') == 'Leron' ? 'selected' : '' }}>Leron
-                                    </option>
+                                    @foreach ($barangay as $barangays)
+                                        <option value="{{ $barangays->id }}"
+                                            {{ request('location') == $barangays->id ? 'selected' : '' }}>
+                                            {{ $barangays->barangay }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
 
-                            <!-- Start Date and End Date in One Row -->
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -78,7 +69,6 @@
                             </div>
                         </div>
 
-                        <!-- Submit and Clear Buttons -->
                         <div class="row mt-4">
                             <div class="col-md-12 text-end">
                                 <button type="submit" class="btn btn-primary px-4">Filter</button>
