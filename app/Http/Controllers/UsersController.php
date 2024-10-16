@@ -16,10 +16,36 @@ class UsersController extends Controller
 
     public function user(Request $request)
     {
-
         $query = $request->input('query');
         $usersQuery = User::where('role', 0);
-        $admins = User::where('role', 1)->get();
+        if ($request->ajax()) {
+
+
+            $nameSuggestions = $usersQuery->where('name', 'LIKE', "%{$query}%")->get();
+            $emailSuggestions = $usersQuery->where('email', 'LIKE', "%{$query}%")->get();
+
+            $output = '<ul class="list-group">';
+
+            if ($nameSuggestions->isNotEmpty()) {
+                foreach ($nameSuggestions as $user) {
+                    $output .= '<li class="list-group-item suggestion name-suggestion">' . $user->name . '</li>';
+                }
+            }
+
+            if ($emailSuggestions->isNotEmpty()) {
+                foreach ($emailSuggestions as $user) {
+                    $output .= '<li class="list-group-item suggestion email-suggestion">' . $user->email . '</li>';
+                }
+            }
+
+            if ($output === '<ul class="list-group"></ul>') {
+                $output .= '<li class="list-group-item">No results found</li>';
+            }
+
+            $output .= '</ul>';
+
+            return response()->json(['html' => $output]);
+        }
 
         if ($query) {
             $usersQuery = $usersQuery->where(function ($q) use ($query) {
@@ -30,8 +56,9 @@ class UsersController extends Controller
 
         $users = $usersQuery->get();
 
-        return view('admin-2.users.user', compact('users', 'admins'));
+        return view('admin-2.users.user', compact('users'));
     }
+
 
 
     public function add_user()

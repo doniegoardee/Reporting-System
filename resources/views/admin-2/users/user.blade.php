@@ -1,43 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
     @include('admin-2.contents.css')
+    <style>
+        #suggestions {
+            position: absolute;
+            z-index: 1000;
+            background: white;
+            border: 1px solid #ccc;
+            display: none;
+        }
 
+        .list-group-item {
+            cursor: pointer;
+        }
+
+        .list-group-item:hover {
+            background-color: #f0f0f0;
+
+        }
+    </style>
 </head>
 
 <body>
-
     @include('admin-2.contents.header')
 
-
     <div class="d-flex align-items-stretch">
-        <!-- Sidebar Navigation-->
         @include('admin-2.contents.sidebar')
-
-        <!-- Sidebar Navigation end-->
 
         <div class="page-content">
             <div class="container mt-5">
-                <!-- Card for Users -->
                 <div class="card">
                     <div class="card-header text-center">
                         <h2 class="mb-0">Users</h2>
                     </div>
 
                     <div class="card-body">
-                        <!-- Search Form -->
                         <form action="{{ route('admin-2.user') }}" method="GET" class="mb-4">
-                            <div class="input-group">
-                                <input type="text" name="query" class="form-control"
-                                    placeholder="Search by name or email" value="{{ request('query') }}">
+                            <div class="input-group position-relative">
+                                <input type="text" name="query" id="user-search" class="form-control"
+                                    placeholder="Search by name or email" autocomplete="off"
+                                    value="{{ request('query') }}">
                                 <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i>
                                     Search</button>
                             </div>
+                            <div id="suggestions" class="position-absolute"></div>
                         </form>
 
-                        <!-- User Table -->
+
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered">
                                 <thead class="table-light text-center">
@@ -65,9 +76,39 @@
             </div>
         </div>
 
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#user-search').on('keyup', function() {
+                    var query = $(this).val();
+
+                    if (query.length > 1) {
+                        $.ajax({
+                            url: "{{ route('admin-2.user') }}",
+                            method: "GET",
+                            data: {
+                                query: query
+                            },
+                            success: function(data) {
+                                $('#suggestions').html(data.html).show();
+                            }
+                        });
+                    } else {
+                        $('#suggestions').hide();
+                    }
+                });
+
+                $(document).on('click', '.suggestion', function() {
+                    $('#user-search').val($(this).text());
+                    $('#suggestions').hide();
+                });
+            });
+        </script>
+
         @include('admin-2.contents.footer')
-
-
 </body>
 
 </html>

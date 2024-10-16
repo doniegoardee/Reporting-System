@@ -112,6 +112,9 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
     Route::get('/profile', [UsersController::class, 'show'])->name('profile.show');
 
 
+    Route::get('/admin-2/suggestions', [UsersController::class, 'getSuggestions'])->name('admin-2.suggestions');
+
+
 
     Route::prefix('settings')->group(function () {
         Route::get('/setting', [UsersController::class, 'settings'])->name('settings');
