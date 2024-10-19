@@ -102,6 +102,15 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
     });
 
 
+
+    Route::prefix('del')->group(function () {
+        Route::get('/barangays', [Adminreports::class, 'bar'])->name('bar');
+        Route::delete('/barangays/{id}', [Adminreports::class, 'del_bar'])->name('del-bar');
+        Route::get('/incident', [Adminreports::class, 'inc'])->name('inc');
+        Route::delete('/Incident/{id}', [Adminreports::class, 'del_inc'])->name('del-inc');
+    });
+
+
     Route::get('/activity-log', [Adminreports::class, 'activitylog'])->name('activity-log');
     Route::get('/pdf', [ExportFileController::class, 'generatePDF'])->name('export.pdf');
     Route::get('/analysis', [Adminreports::class, 'analysis'])->name('analysis');

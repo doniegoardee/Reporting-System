@@ -253,26 +253,22 @@ class Adminreports extends Controller
 
     public function updateStatus($id, $status, Request $request)
     {
-        // Find the report
+
         $data = Reports::find($id);
         if (!$data) {
             return redirect()->back()->withErrors(['Report not found.']);
         }
 
-        // Find the user associated with the report
         $user = User::find($data->user_id);
         if (!$user) {
             return redirect()->back()->withErrors(['User not found.']);
         }
 
-        // Get all admin users
         $admins = User::where('role', 2)->get();
 
         if (Auth::check()) {
-            // Prepare the message variable
             $message = '';
 
-            // Update report status and send notifications
             switch ($status) {
                 case 'resolved':
                     if ($data->status === 'resolved') {
@@ -374,5 +370,38 @@ class Adminreports extends Controller
         $activity = Activity::all();
 
         return view('admin-2.activity-log', compact('activity'));
+    }
+
+
+    public function bar()
+    {
+        $bar = Barangay::all();
+
+        return view('admin-2.del.barangay', compact('bar'));
+    }
+    public function del_bar($id)
+    {
+
+        $barangay = Barangay::findOrFail($id);
+        $barangay->delete();
+
+        return redirect()->route('admin-2.del-bar')->with('success', 'Barangay deleted successfully');
+    }
+
+    public function inc()
+    {
+
+        $inc = IncidentType::all();
+
+        return view('admin-2.del.incident', compact('inc'));
+    }
+
+    public function del_inc($id)
+    {
+
+        $incident = IncidentType::findOrFail($id);
+        $incident->delete();
+
+        return redirect()->route('admin-2.inc')->with('success', 'Incident deleted successfully');
     }
 }

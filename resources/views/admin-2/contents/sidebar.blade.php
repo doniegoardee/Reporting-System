@@ -55,6 +55,8 @@
             </ul>
         </li>
 
+
+
         <li class="{{ Request::is('admin-2/add/incident', 'admin-2/add/incident/barangay') ? 'active' : '' }}">
             <a href="#incident"
                 aria-expanded="{{ Request::is('admin-2/add/incident', 'admin-2/add/incident/barangay') ? 'true' : 'false' }}"
@@ -68,6 +70,22 @@
                 <li><a href="{{ route('admin-2.barangay') }}"
                         class="{{ Request::is('admin-2/add/incident/barangay') ? 'active' : '' }}">Add Barangay</a>
                 </li>
+            </ul>
+        </li>
+
+
+        <li class="{{ Request::is('admin-2/del/incident', 'admin-2/del/barangays') ? 'active' : '' }}">
+            <a href="#del"
+                aria-expanded="{{ Request::is('admin-2/del/incident', 'admin-2/del/barangays') ? 'true' : 'false' }}"
+                data-toggle="collapse">
+                <i class="fa-solid fa-minus"></i> Delete
+            </a>
+            <ul id="del"
+                class="collapse list-unstyled {{ Request::is('admin-2/del/incident', 'admin-2/del/barangays') ? 'show' : '' }}">
+                <li><a href="{{ route('admin-2.inc') }}"
+                        class="{{ Request::is('admin-2/del/incident') ? 'active' : '' }}">Delete Incident</a></li>
+                <li><a href="{{ route('admin-2.bar') }}"
+                        class="{{ Request::is('admin-2/del/barangays') ? 'active' : '' }}">Delete Barangay</a></li>
             </ul>
         </li>
 
