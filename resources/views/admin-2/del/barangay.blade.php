@@ -6,7 +6,6 @@
 </head>
 
 <body>
-
     @include('admin-2.contents.header')
 
     <div class="d-flex align-items-stretch">
@@ -24,7 +23,7 @@
             <div class="container mt-4">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Add Barangay</h4>
+                        <h4 class="card-title">Barangay List</h4>
                     </div>
                     <div class="card-body">
                         @if (session('success'))
@@ -62,16 +61,12 @@
 
             @include('admin-2.contents.footer')
 
-
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
-
                     document.querySelectorAll('.delete-form').forEach(function(form) {
                         form.addEventListener('submit', function(e) {
                             e.preventDefault();
-
                             Swal.fire({
                                 title: 'Are you sure?',
                                 text: "You won't be able to revert this!",
@@ -89,7 +84,8 @@
                     });
                 });
             </script>
-
+        </div>
+    </div>
 </body>
 
 </html>
