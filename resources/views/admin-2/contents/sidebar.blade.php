@@ -61,7 +61,7 @@
             <a href="#incident"
                 aria-expanded="{{ Request::is('admin-2/add/incident', 'admin-2/add/incident/barangay') ? 'true' : 'false' }}"
                 data-toggle="collapse">
-                <i class="fa-solid fa-plus"></i>Add
+                <i class="fa-solid fa-plus"></i>Add Incident/Barangay
             </a>
             <ul id="incident"
                 class="collapse list-unstyled {{ Request::is('admin-2/add/incident', 'admin-2/add/incident/barangay') ? 'show' : '' }}">
@@ -78,7 +78,7 @@
             <a href="#del"
                 aria-expanded="{{ Request::is('admin-2/del/incident', 'admin-2/del/barangays') ? 'true' : 'false' }}"
                 data-toggle="collapse">
-                <i class="fa-solid fa-minus"></i> Delete
+                <i class="fa-solid fa-minus"></i> Del Incident/Barangay
             </a>
             <ul id="del"
                 class="collapse list-unstyled {{ Request::is('admin-2/del/incident', 'admin-2/del/barangays') ? 'show' : '' }}">
