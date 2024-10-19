@@ -51,20 +51,23 @@
             <div class="container mt-4">
                 <div class="row">
                     @foreach ($incidentTypes as $incident)
-                        <div class="col-md-3 mb-4"> <!-- Changed from col-md-4 to col-md-3 -->
+                        <div class="col-md-3 mb-4">
                             <a href="{{ route('user.create', ['subject_type' => $incident->name]) }}" class="incident-box"
                                 style="text-decoration: none;">
                                 <div class="card incident-card text-center"
                                     style="background-color: {{ $incident->color }}; color: #fff;">
                                     <div class="card-body d-flex flex-column justify-content-between">
                                         <h5 class="incident-title">{{ $incident->name }}</h5>
-                                        <img src="{{ asset('images/' . $incident->image) }}"
-                                            alt="{{ $incident->name }} " class="img-fluid incident-image">
+                                        @if (!empty($incident->image))
+                                            <img src="{{ asset('images/' . $incident->image) }}"
+                                                alt="{{ $incident->name }}" class="img-fluid incident-image">
+                                        @endif
                                     </div>
                                 </div>
                             </a>
                         </div>
                     @endforeach
+
                 </div>
             </div>
 
