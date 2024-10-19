@@ -1,11 +1,20 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\ControllerReports;
-use App\Http\Controllers\ExportFileController;
+
+use App\Http\Controllers\Admin2\ExportFileController;
+use App\Http\Controllers\admin2\Adminreports;
+use App\Http\Controllers\Admin2\Analysis;
+use App\Http\Controllers\Admin2\BarangayAndIncident;
+use App\Http\Controllers\Admin2\FilterController;
+use App\Http\Controllers\Admin2\Settings;
+use App\Http\Controllers\Admin2\Status;
+use App\Http\Controllers\admin2\UsersController;
+
+use App\Http\Controllers\Users\ControllerReports;
+use App\Http\Controllers\Users\Setting;
+
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Adminreports;
-use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -51,10 +60,10 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
 
 
         Route::prefix('settings')->group(function () {
-            Route::get('/setting', [UsersController::class, 'user_settings'])->name('user.settings');
-            Route::put('/profile', [UsersController::class, 'update'])->name('user.profile-update');
-            Route::post('/change-password', [UsersController::class, 'updatePassword'])->name('user.change');
-            Route::delete('/delete-account', [UsersController::class, 'deleteAccount'])->name('user.delete');
+            Route::get('/setting', [Setting::class, 'user_settings'])->name('user.settings');
+            Route::put('/profile', [Setting::class, 'update'])->name('user.profile-update');
+            Route::post('/change-password', [Setting::class, 'updatePassword'])->name('user.change');
+            Route::delete('/delete-account', [Setting::class, 'deleteAccount'])->name('user.delete');
         });
     });
 });
@@ -86,37 +95,37 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
 
 
     Route::prefix('filter')->group(function () {
-        Route::get('/all', [Adminreports::class, 'filtering'])->name('filter');
-        Route::get('/pending', [Adminreports::class, 'filter_pending'])->name('filter-pending');
-        Route::get('/resolved', [Adminreports::class, 'filter_resolved'])->name('filter-resolved');
-        Route::get('/closed', [Adminreports::class, 'filter_closed'])->name('filter-closed');
+        Route::get('/all', [FilterController::class, 'filtering'])->name('filter');
+        Route::get('/pending', [FilterController::class, 'filter_pending'])->name('filter-pending');
+        Route::get('/resolved', [FilterController::class, 'filter_resolved'])->name('filter-resolved');
+        Route::get('/closed', [FilterController::class, 'filter_closed'])->name('filter-closed');
     });
 
 
 
     Route::prefix('add/incident')->group(function () {
-        Route::get('/', [Adminreports::class, 'incident'])->name('incident');
-        Route::post('/store', [Adminreports::class, 'add_incident'])->name('store');
-        Route::get('/barangay', [Adminreports::class, 'barangay'])->name('barangay');
-        Route::post('/store/barangay', [Adminreports::class, 'add_barangay'])->name('add_barangay');
+        Route::get('/', [BarangayAndIncident::class, 'incident'])->name('incident');
+        Route::post('/store', [BarangayAndIncident::class, 'add_incident'])->name('store');
+        Route::get('/barangay', [BarangayAndIncident::class, 'barangay'])->name('barangay');
+        Route::post('/store/barangay', [BarangayAndIncident::class, 'add_barangay'])->name('add_barangay');
     });
 
 
 
     Route::prefix('del')->group(function () {
-        Route::get('/barangays', [Adminreports::class, 'bar'])->name('bar');
-        Route::delete('/barangays/{id}', [Adminreports::class, 'del_bar'])->name('del-bar');
-        Route::get('/incident', [Adminreports::class, 'inc'])->name('inc');
-        Route::delete('/Incident/{id}', [Adminreports::class, 'del_inc'])->name('del-inc');
+        Route::get('/barangays', [BarangayAndIncident::class, 'bar'])->name('bar');
+        Route::delete('/barangays/{id}', [BarangayAndIncident::class, 'del_bar'])->name('del-bar');
+        Route::get('/incident', [BarangayAndIncident::class, 'inc'])->name('inc');
+        Route::delete('/Incident/{id}', [BarangayAndIncident::class, 'del_inc'])->name('del-inc');
     });
 
 
-    Route::get('/activity-log', [Adminreports::class, 'activitylog'])->name('activity-log');
+    Route::get('/activity-log', [UsersController::class, 'activitylog'])->name('activity-log');
     Route::get('/pdf', [ExportFileController::class, 'generatePDF'])->name('export.pdf');
-    Route::get('/analysis', [Adminreports::class, 'analysis'])->name('analysis');
+    Route::get('/analysis', [Analysis::class, 'analysis'])->name('analysis');
 
 
-    Route::put('/update/{id}/{status}', [Adminreports::class, 'updateStatus'])->name('update');
+    Route::put('/update/{id}/{status}', [Status::class, 'updateStatus'])->name('update');
 
 
     Route::get('/profile', [UsersController::class, 'show'])->name('profile.show');
@@ -126,10 +135,10 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
 
 
     Route::prefix('settings')->group(function () {
-        Route::get('/setting', [UsersController::class, 'settings'])->name('settings');
-        Route::put('/profile', [UsersController::class, 'update'])->name('profile-update');
-        Route::post('/change-password', [UsersController::class, 'updatePassword'])->name('change');
-        Route::delete('/delete-account', [UsersController::class, 'deleteAccount'])->name('delete');
+        Route::get('/setting', [Settings::class, 'settings'])->name('settings');
+        Route::put('/profile', [Settings::class, 'update'])->name('profile-update');
+        Route::post('/change-password', [Settings::class, 'updatePassword'])->name('change');
+        Route::delete('/delete-account', [Settings::class, 'deleteAccount'])->name('delete');
     });
 });
 
