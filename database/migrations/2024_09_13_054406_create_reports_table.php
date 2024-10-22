@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('subject_type');
             $table->string('location');
             $table->string('status');
             $table->text('description');
             $table->text('name')->nullable();
             $table->string('email')->nullable();
-            $table->text('user_id')->nullable();
             $table->text('severity');
             $table->text('num_affected');
             $table->text('needs');
@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('responding_agency')->nullable();
             $table->string('resolved_time')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

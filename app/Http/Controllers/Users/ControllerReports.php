@@ -107,6 +107,7 @@ class ControllerReports extends Controller
 
             $reports = new Reports;
 
+            $reports->user_id = $userid;
             $reports->subject_type = $request->subject_type;
             $reports->status = 'pending';
             $reports->location = $request->location;
@@ -115,7 +116,6 @@ class ControllerReports extends Controller
             $reports->num_affected = $request->num_affected;
             $reports->needs = $request->needs;
 
-            $reports->user_id = $userid;
             $reports->name = $username;
             $reports->email = $email;
 

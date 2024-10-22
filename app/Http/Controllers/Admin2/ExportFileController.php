@@ -7,24 +7,25 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ReportDataExport;
 use App\Exports\ResolvedReportExport;
 use App\Models\Reports;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use PDF;
+
 
 class ExportFileController extends Controller
 {
 
     public function generatePDF()
     {
-        $reports = Reports::where('status', 'solved')->get();
+        $reports = Reports::where('status', 'resolved')->get();
 
         // Convert the collection to an array and pass it as part of the data array
-        $data = ['reports' => $reports->toArray()];
+        $data = ['reports' => $reports];
 
         // Load the view and pass the data array to it
-        $pdf = PDF::loadView('admin.reports.mypdf', $data)->setPaper('a4', 'portrait');
+        $pdf = Pdf::loadView('admin-2.pdf.mypdf', $data)->setPaper('a4', 'portrait');
 
         // Return the generated PDF for download
-        return $pdf->download('reports.pdf');
+        return $pdf->stream('reports.pdf');
     }
 
 

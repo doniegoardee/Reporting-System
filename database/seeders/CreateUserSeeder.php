@@ -26,7 +26,7 @@ class CreateUserSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('password'),
-                'role' => 1,
+                'role' => 2,
             ],
         ];
         foreach ($users as $user) {

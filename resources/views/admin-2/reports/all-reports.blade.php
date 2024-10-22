@@ -82,7 +82,7 @@
 
 
             <div class="card-body px-2 py-2">
-                <button class="btn btn-success">Export PDF</button>
+                <a href="{{ route('admin-2.export.pdf') }}" class="btn btn-success">Export PDF</a>
             </div>
 
             <div class="card mb-4">
