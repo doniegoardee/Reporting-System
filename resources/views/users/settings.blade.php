@@ -46,16 +46,16 @@
                                         </div>
 
                                         <div class="form-group mb-3">
-                                            <label for="email">Email</label>
-                                            <input type="email" id="email" name="email" class="form-control"
+                                            <input type="hidden" id="email" name="email" class="form-control"
                                                 value="{{ $user->email }}" required>
                                         </div>
 
 
-                                        <small class="form-text text-muted">Upload a new profile image if you want
-                                            to change it. Current image:</small>
 
                                         <div class="form-group mb-3">
+                                            <small class="form-text text-muted">Upload a new profile image if you want
+                                                to change it. Current image:</small>
+
                                             <label for="profile_image">Profile Image</label>
                                             <input type="file" id="profile_image" name="profile_image"
                                                 class="form-control">
