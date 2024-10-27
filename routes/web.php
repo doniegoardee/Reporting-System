@@ -13,6 +13,7 @@ use App\Http\Controllers\admin2\UsersController;
 
 use App\Http\Controllers\Users\ControllerReports;
 use App\Http\Controllers\Users\Setting;
+use App\Http\Controllers\Users\ChatBotController;
 
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,8 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
             Route::get('/{id}/edit', [ControllerReports::class, 'editReport'])->name('reports.edit');
             // Route::get('/{id}', [ControllerReports::class, 'show'])->name('reports.show');
         });
+
+        Route::post('/botman', [ChatBotController::class, 'handleBot']);
 
 
 
