@@ -1,3 +1,32 @@
+<style>
+    .dropdown-menu {
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 5px;
+        background-color: #fff;
+        border: 1px solid #d0e7ff;
+    }
+
+    .notification-item {
+        background-color: #f1f8ff;
+        color: #333;
+        margin: 5px 0;
+        padding: 8px 10px;
+        line-height: 1.5;
+        border-bottom: 1px solid #d0e7ff;
+        transition: background-color 0.2s;
+    }
+
+    .notification-item:last-child {
+        border-bottom: none;
+    }
+
+    .notification-item:hover {
+        background-color: #e0f2ff;
+        text-decoration: none;
+    }
+</style>
+
 <header class="header">
     <nav class="navbar navbar-expand-lg">
         <div class="search-panel">
@@ -27,18 +56,16 @@
                     <i class="fa-solid fa-comment"></i>
                 </button>
                 <div class="list-inline-item dropdown">
-                    <a id="notificationDropdown" href="#" class="nav-link messages-toggle" aria-haspopup="true"
-                        aria-expanded="false">
+                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" class="nav-link messages-toggle">
                         <i class="fa-solid fa-bell"></i>
                         <span class="badge dashbg-1">{{ $user->notifications->count() }}</span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown"
-                        style="display: none;">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1"
+                        style="max-height: 300px; overflow-y: auto;">
                         @if ($user && $user->notifications->count())
                             @forelse ($user->notifications as $notification)
-                                <a class="dropdown-item"
-                                    style="background-color: #d0e7ff; color: black; border: 1px solid #a0c4ff; margin: 5px 0; padding: 10px; border-radius: 5px;"
-                                    href="#">
+                                <a class="dropdown-item notification-item" href="#">
                                     {{ $notification->data['name'] }}
                                 </a>
                             @empty
@@ -53,6 +80,7 @@
                         @endif
                     </div>
                 </div>
+
                 <a href="{{ route('user.settings') }}">
                     <img src="{{ asset($user->profile_image) }}" class="img-thumbnail" alt="Profile Image"
                         style="width: 35px; height: 35px; border-radius:50%;">
