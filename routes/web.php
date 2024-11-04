@@ -16,6 +16,7 @@ use App\Http\Controllers\Users\Setting;
 use App\Http\Controllers\Users\ChatBotController;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Users\Notification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -56,7 +57,7 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
 
         Route::post('/botman', [ChatBotController::class, 'handleBot']);
 
-
+        Route::post('/notifications/{id}/read', [Notification::class, 'markNotificationAsRead']);
 
         Route::get('/profile', [UsersController::class, 'profile'])->name('user.profile');
 

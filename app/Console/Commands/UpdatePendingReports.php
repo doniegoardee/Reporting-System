@@ -3,7 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\Notifications;
 use App\Models\Reports;
+use App\Models\User;
 use Carbon\Carbon;
 
 class UpdatePendingReports extends Command
@@ -15,10 +18,20 @@ class UpdatePendingReports extends Command
     {
         $threeDaysAgo = Carbon::now()->subDays(3);
 
-        Reports::where('status', 'pending')
+        $reports = Reports::where('status', 'pending')
             ->where('created_at', '<', $threeDaysAgo)
-            ->update(['status' => 'closed']);
+            ->get();
 
-        $this->info('Pending reports older than 3 days have been updated to closed.');
+        foreach ($reports as $report) {
+            $report->update(['status' => 'closed']);
+
+            $user = User::find($report->user_id);
+            if ($user) {
+                $notificationMessage = 'Your report with ID ' . $report->id . ' has been closed due to no action taken.';
+                Notification::send($user, new Notifications($notificationMessage));
+            }
+        }
+
+        $this->info('Pending reports older than 3 days have been updated to closed and users notified.');
     }
 }

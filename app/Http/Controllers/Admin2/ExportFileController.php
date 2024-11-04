@@ -18,13 +18,10 @@ class ExportFileController extends Controller
     {
         $reports = Reports::where('status', 'resolved')->get();
 
-        // Convert the collection to an array and pass it as part of the data array
         $data = ['reports' => $reports];
 
-        // Load the view and pass the data array to it
         $pdf = Pdf::loadView('admin-2.pdf.mypdf', $data)->setPaper('a4', 'portrait');
 
-        // Return the generated PDF for download
         return $pdf->stream('reports.pdf');
     }
 
