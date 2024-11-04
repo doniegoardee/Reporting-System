@@ -1,5 +1,5 @@
 <x-app-layout>
     <h1>
-        sample
+        hi
     </h1>
 </x-app-layout>
