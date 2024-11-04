@@ -1,96 +1,4 @@
 <style>
-    .dropdown-menu {
-        max-height: 300px;
-        overflow-y: auto;
-        padding: 5px;
-        background-color: #fff;
-        border: 1px solid #d0e7ff;
-    }
-
-    .notification-item {
-        background-color: #f1f8ff;
-        color: #333;
-        margin: 5px 0;
-        padding: 8px 10px;
-        line-height: 1.5;
-        border-bottom: 1px solid #d0e7ff;
-        transition: background-color 0.2s;
-    }
-
-    .notification-item:last-child {
-        border-bottom: none;
-    }
-
-    .notification-item:hover {
-        background-color: #e0f2ff;
-        text-decoration: none;
-    }
-</style>
-
-<header class="header">
-    <nav class="navbar navbar-expand-lg">
-        <div class="search-panel">
-            <div class="search-inner d-flex align-items-center justify-content-center">
-                <div class="close-btn">Close <i class="fa fa-close"></i></div>
-                <form id="searchForm" action="#">
-                    <div class="form-group">
-                        <input type="search" name="search" placeholder="What are you searching for...">
-                        <button type="submit" class="submit">Search</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="container-fluid d-flex align-items-center justify-content-between">
-            <div class="navbar-header">
-                <a href="{{ url('/') }}" class="navbar-brand">
-                    <div class="brand-text brand-big visible text-uppercase">
-                        <strong class="text-primary">Incident</strong><strong>Reporting</strong>
-                    </div>
-                    <div class="brand-text brand-sm"><strong class="text-primary">I</strong><strong>R</strong></div>
-                </a>
-                <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
-            </div>
-            <div class="right-menu list-inline no-margin-bottom">
-                <button type="button" style="border:none; background:transparent;" data-toggle="modal"
-                    data-target="#chatModal">
-                    <i class="fa-solid fa-comment"></i>
-                </button>
-                <div class="list-inline-item dropdown">
-                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" class="nav-link messages-toggle">
-                        <i class="fa-solid fa-bell"></i>
-                        <span class="badge dashbg-1">{{ $user->notifications->count() }}</span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1"
-                        style="max-height: 300px; overflow-y: auto;">
-                        @if ($user && $user->notifications->count())
-                            @forelse ($user->notifications as $notification)
-                                <a class="dropdown-item notification-item" href="#">
-                                    {{ $notification->data['name'] }}
-                                </a>
-                            @empty
-                                <div class="dropdown-item text-warning bg-dark border border-warning rounded my-2 p-2">
-                                    No notifications
-                                </div>
-                            @endforelse
-                        @else
-                            <div class="dropdown-item text-warning bg-dark border border-warning rounded my-2 p-2">
-                                No notifications
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
-                <a href="{{ route('user.settings') }}">
-                    <img src="{{ asset($user->profile_image) }}" class="img-thumbnail" alt="Profile Image"
-                        style="width: 35px; height: 35px; border-radius:50%;">
-                </a>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<style>
     .modern-modal {
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -168,7 +76,106 @@
     .chatbox::-webkit-scrollbar-track {
         background: #f1f1f1;
     }
+
+    .dropdown-menu {
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 5px;
+        background-color: #fff;
+        border: 1px solid #d0e7ff;
+    }
+
+    .notification-item {
+        background-color: #f1f8ff;
+        color: #333;
+        margin: 5px 0;
+        padding: 8px 10px;
+        line-height: 1.5;
+        border-bottom: 1px solid #d0e7ff;
+        transition: background-color 0.2s;
+    }
+
+    .notification-item:last-child {
+        border-bottom: none;
+    }
+
+    .notification-item:hover {
+        background-color: #e0f2ff;
+        text-decoration: none;
+    }
 </style>
+
+<header class="header">
+    <nav class="navbar navbar-expand-lg">
+        <div class="search-panel">
+            <div class="search-inner d-flex align-items-center justify-content-center">
+                <div class="close-btn">Close <i class="fa fa-close"></i></div>
+                <form id="searchForm" action="#">
+                    <div class="form-group">
+                        <input type="search" name="search" placeholder="What are you searching for...">
+                        <button type="submit" class="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <div class="navbar-header">
+                <a href="{{ url('/') }}" class="navbar-brand">
+                    <div class="brand-text brand-big visible text-uppercase">
+                        <strong class="text-primary">Incident</strong><strong>Reporting</strong>
+                    </div>
+                    <div class="brand-text brand-sm"><strong class="text-primary">I</strong><strong>R</strong></div>
+                </a>
+                <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
+            </div>
+            <div class="right-menu list-inline no-margin-bottom">
+                <button type="button" style="border:none; background:transparent;" data-toggle="modal"
+                    data-target="#chatModal">
+                    <i class="fa-solid fa-comment"></i>
+                </button>
+                <div class="list-inline-item dropdown">
+                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" class="nav-link messages-toggle">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="badge dashbg-1">{{ $user->notifications->where('read_at', null)->count() }}</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1"
+                        style="max-height: 300px; overflow-y: auto;">
+                        @if ($user && $user->notifications->count())
+                            @php
+                                $unreadNotifications = $user->notifications->where('read_at', null);
+                            @endphp
+                            @if ($unreadNotifications->count())
+                                @foreach ($unreadNotifications as $notification)
+                                    <a class="dropdown-item notification-item" href="#"
+                                        onclick="markAsRead('{{ $notification->id }}')">
+                                        {{ $notification->data['name'] }}
+                                        <span class="text-danger">(Unread)</span>
+                                    </a>
+                                @endforeach
+                            @else
+                                <div class="dropdown-item border rounded my-2 p-2">
+                                    All notifications have been read.
+                                </div>
+                            @endif
+                        @else
+                            <div class="dropdown-item text-warning bg-dark border border-warning rounded my-2 p-2">
+                                No notifications
+                            </div>
+                        @endif
+                    </div>
+
+                </div>
+
+                <a href="{{ route('user.settings') }}">
+                    <img src="{{ asset($user->profile_image) }}" class="img-thumbnail" alt="Profile Image"
+                        style="width: 35px; height: 35px; border-radius:50%;">
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
 
 <div class="modal fade" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="chatModalLabel"
     aria-hidden="true">
@@ -198,6 +205,31 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function markAsRead(notificationId) {
+        fetch(`/user/notifications/${notificationId}/read`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Refresh the notification count and update the UI
+                    location.reload(); // Reload the page to update notifications
+                } else {
+                    alert(data.error || 'Error marking notification as read');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An unexpected error occurred. Please try again later.');
+            });
+    }
+</script>
 
 <script>
     $(document).ready(function() {
