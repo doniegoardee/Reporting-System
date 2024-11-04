@@ -10,6 +10,7 @@
         "botman/botman": "^2.8",
         "botman/driver-web": "^1.5",
         "guzzlehttp/guzzle": "^7.2",
+        "jeroennoten/laravel-adminlte": "^3.14",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
