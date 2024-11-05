@@ -316,75 +316,96 @@ return [
             'text' => 'search',
         ],
         [
-           'text' => 'Dashboard',
+            'text' => 'Dashboard',
             'url' => 'admin-2/dashboard',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fa-solid fa-house',
             'label' => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Manage Reports',
+            'icon' => 'far fa-fw fa-file',
             'submenu' => [
                 [
-                    'text' => 'level_one',
+                    'text' => 'All Reports',
+                    'url' => 'admin-2/reports/all',
+                ],
+                [
+                    'text' => 'Pending Reports',
+                    'url' => 'admin-2/reports/pending',
+                ],
+                [
+                    'text' => 'Resolved Reports',
+                    'url' => 'admin-2/reports/resolved',
+                ],
+                [
+                    'text' => 'Closed Reports',
+                    'url' => 'admin-2/reports/closed',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Manage Users',
+            'icon' => 'fa-solid fa-users',
+            'submenu' => [
+                [
+                    'text' => 'All Users',
                     'url' => '#',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
+                    'text' => 'Add Users',
                     'url' => '#',
                 ],
             ],
         ],
-        ['header' => 'labels'],
         [
-            'text' => 'important',
+            'text' => 'Add Incident/Barangay',
+            'icon' => 'fa-solid fa-plus',
+            'icon_color' => 'success',
+            'submenu' => [
+                [
+                    'text' => 'Add Incident',
+                    'url' => '#',
+                ],
+                [
+                    'text' => 'Add Barangay',
+                    'url' => '#',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Del Incident/Barangay',
+            'icon' => 'fa-solid fa-trash',
             'icon_color' => 'red',
+            'submenu' => [
+                [
+                    'text' => 'Delete Incident',
+                    'url' => '',
+                    // 'icon' => 'fa-solid fa-trash',
+                ],
+                [
+                    'text' => 'Delete Barangay',
+                    'url' => '#',
+                ],
+            ],
+        ],
+
+        [
+            'text' => 'Analysis',
             'url' => '#',
+            'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'warning',
+            'text' => 'Activity Log',
+            'url' => '#',
+            'icon' => 'fa-solid fa-clock-rotate-left',
+        ],
+        //  ['header' => 'EXTRA'],
+        ['header' => 'EXTRA '],
+        [
+            'text' => 'Setting',
+            'icon' => 'fa-solid fa-gear',
             'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
             'url' => '#',
         ],
     ],
@@ -491,6 +512,16 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+        'FontAwesome' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
                 ],
             ],
         ],
