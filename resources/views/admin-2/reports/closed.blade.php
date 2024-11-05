@@ -1,32 +1,15 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-    @include('admin-2.contents.css')
-
-</head>
-
-<body>
-
-    @include('admin-2.contents.header')
-
-    <div class="d-flex align-items-stretch">
-        <!-- Sidebar Navigation-->
-        @include('admin-2.contents.sidebar')
-
-        <!-- Sidebar Navigation end-->
-
-        <div class="page-content scrollable-content">
-            <div class="page-header">
-                <div class="container-fluid">
-                    <h2 class="h5 no-margin-bottom">Closed Reports</h2>
-                </div>
+<x-app-layout>
+    <div class="page-content scrollable-content bg-light">
+        <div class="page-header">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">Closed Reports</h2>
             </div>
+        </div>
 
+        <div class="container-fluid mt-4">
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">Filter Reports</h3>
+                    <h5 class="mb-0">Filter Reports</h5>
                 </div>
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin-2.filter-closed') }}">
@@ -165,10 +148,6 @@
                 </div>
             @endforeach
 
+        </div>
 
-            @include('admin-2.contents.footer')
-
-
-</body>
-
-</html>
+</x-app-layout>

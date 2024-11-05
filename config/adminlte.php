@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Reporting System',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,9 +63,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo' => '<b>Reporting System</b>',
+    'logo_img' => 'image/logo.jpg',
+    'logo_img_class' => 'brand-image img-circle',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
@@ -154,8 +154,8 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
@@ -217,7 +217,7 @@ return [
     'sidebar_mini' => 'lg',
     'sidebar_collapse' => false,
     'sidebar_collapse_auto_size' => false,
-    'sidebar_collapse_remember' => false,
+    'sidebar_collapse_remember' => true,
     'sidebar_collapse_remember_no_transition' => true,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
@@ -302,7 +302,7 @@ return [
         // Navbar items:
         [
             'type' => 'navbar-search',
-            'text' => 'search',
+            'text' => 'Search',
             'topnav_right' => true,
         ],
         [
@@ -313,13 +313,13 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Search',
         ],
         [
             'text' => 'Dashboard',
             'url' => 'admin-2/dashboard',
             'icon' => 'fa-solid fa-house',
-            'label' => 4,
+            // 'label' => 4,
             'label_color' => 'success',
         ],
         [
@@ -350,11 +350,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'All Users',
-                    'url' => '#',
+                    'url' => 'admin-2/users/list',
                 ],
                 [
                     'text' => 'Add Users',
-                    'url' => '#',
+                    'url' => 'admin-2/users/add',
                 ],
             ],
         ],
@@ -365,11 +365,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Add Incident',
-                    'url' => '#',
+                    'url' => 'admin-2/add/incident',
                 ],
                 [
                     'text' => 'Add Barangay',
-                    'url' => '#',
+                    'url' => 'admin-2/add/incident/barangay',
                 ],
             ],
         ],
@@ -380,24 +380,24 @@ return [
             'submenu' => [
                 [
                     'text' => 'Delete Incident',
-                    'url' => '',
+                    'url' => 'admin-2/del/incident',
                     // 'icon' => 'fa-solid fa-trash',
                 ],
                 [
                     'text' => 'Delete Barangay',
-                    'url' => '#',
+                    'url' => 'admin-2/del/barangays',
                 ],
             ],
         ],
 
         [
             'text' => 'Analysis',
-            'url' => '#',
+            'url' => 'admin-2/analysis',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Activity Log',
-            'url' => '#',
+            'url' => 'admin-2/activity-log',
             'icon' => 'fa-solid fa-clock-rotate-left',
         ],
         //  ['header' => 'EXTRA'],
@@ -406,7 +406,7 @@ return [
             'text' => 'Setting',
             'icon' => 'fa-solid fa-gear',
             'icon_color' => 'yellow',
-            'url' => '#',
+            'url' => 'admin-2/settings/setting',
         ],
     ],
 

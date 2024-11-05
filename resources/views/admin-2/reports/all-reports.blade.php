@@ -1,28 +1,14 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    @include('admin-2.contents.css')
-</head>
-
-<body>
-    @include('admin-2.contents.header')
-
-    <div class="d-flex align-items-stretch">
-        <!-- Sidebar Navigation -->
-        @include('admin-2.contents.sidebar')
-        <!-- Sidebar Navigation end -->
-
-        <div class="page-content scrollable-content">
-            <div class="page-header">
-                <div class="container-fluid">
-                    <h2 class="h5 no-margin-bottom">All Reports</h2>
-                </div>
+<x-app-layout>
+    <div class="page-content scrollable-content bg-light">
+        <div class="page-header">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">All Reports</h2>
             </div>
-
+        </div>
+        <div class="container-fluid mt-4">
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">Filter Reports</h3>
+                    <h5 class="mb-0">Filter Reports</h5>
                 </div>
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin-2.filter') }}">
@@ -108,7 +94,8 @@
                                         <td class="text-center">{{ $report->subject_type }}</td>
                                         <td class="text-center">{{ $report->location }}</td>
                                         <td class="text-center">{{ $report->status }}</td>
-                                        <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                        <td class="text-center">
+                                            {{ $report->created_at->format('d M Y, h:i A') }}</td>
                                         <td class="text-center">
                                             <a href="#"
                                                 class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
@@ -132,7 +119,8 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel{{ $report->id }}">Report Details</h5>
+                                <h5 class="modal-title" id="exampleModalLabel{{ $report->id }}">Report
+                                    Details</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -142,7 +130,8 @@
                                 <p><strong>Location:</strong> {{ $report->location }}</p>
                                 <p><strong>Description:</strong> {{ $report->description }}</p>
                                 <p><strong>Status:</strong> {{ $report->status }}</p>
-                                <p><strong>Date & Time:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
+                                <p><strong>Date & Time:</strong>
+                                    {{ $report->created_at->format('d M Y, h:i A') }}</p>
 
                                 @if ($report->image)
                                     <div class="text-center mt-3">
@@ -160,9 +149,6 @@
                 </div>
             @endforeach
 
-            @include('admin-2.contents.footer')
-        </div>
-    </div>
-</body>
 
-</html>
+        </div>
+</x-app-layout>

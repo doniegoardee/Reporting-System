@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    @include('admin-2.contents.css')
-</head>
-
-<body>
-    @include('admin-2.contents.header')
-
-    <div class="d-flex align-items-stretch">
-        <!-- Sidebar Navigation-->
-        @include('admin-2.contents.sidebar')
-        <!-- Sidebar Navigation end-->
-
-        <div class="page-content scrollable-content">
-            <div class="page-header">
-                <div class="container-fluid">
-                    <h2 class="h5 no-margin-bottom">Settings</h2>
-                </div>
+<x-app-layout>
+    <div class="page-content scrollable-content bg-light">
+        <div class="page-header">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">Setting</h2>
             </div>
+        </div>
 
+        <div class="container-fluid mt-4">
             <section class="no-padding-top">
                 <div class="container-fluid">
 
@@ -141,12 +128,6 @@
 
                 </div>
             </section>
-
-
-
-            @include('admin-2.contents.footer')
         </div>
-    </div>
-</body>
 
-</html>
+</x-app-layout>
