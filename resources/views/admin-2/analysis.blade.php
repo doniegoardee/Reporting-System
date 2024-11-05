@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @include('admin-2.contents.css')
-
+<x-app-layout>
     <style>
         .chart-container {
             position: relative;
@@ -17,26 +12,17 @@
             }
         }
     </style>
-</head>
-
-<body>
-    @include('admin-2.contents.header')
-
-    <div class="d-flex align-items-stretch">
-        <!-- Sidebar Navigation-->
-        @include('admin-2.contents.sidebar')
-        <!-- Sidebar Navigation end-->
-
-        <div class="page-content scrollable-content">
-            <div class="page-header">
-                <div class="container-fluid">
-                    <h2 class="h5 no-margin-bottom">Analysis</h2>
-                </div>
+    <div class="page-content scrollable-content bg-light">
+        <div class="page-header">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">Analysis</h2>
             </div>
+        </div>
 
+        <div class="container-fluid mt-4">
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">Incident Report Summary</h3>
+                    <h5 class="mb-0">Incident Report Summary</h5>
                 </div>
                 <div class="card-body">
                     <!-- Filter Form -->
@@ -104,12 +90,6 @@
                 </div>
             </div>
 
-            @include('admin-2.contents.footer')
-
-            <!-- Chart.js Script -->
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
             <script>
                 var ctx = document.getElementById('incidentTypeChart').getContext('2d');
                 var chart = new Chart(ctx, {
@@ -154,7 +134,5 @@
                 });
             </script>
         </div>
-    </div>
-</body>
 
-</html>
+</x-app-layout>
