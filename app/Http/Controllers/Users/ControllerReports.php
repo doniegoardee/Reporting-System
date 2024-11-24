@@ -98,6 +98,7 @@ class ControllerReports extends Controller
             $userid = $user->id;
 
             $username = $user->name;
+            $contact = $user->contact;
             $email = $user->email;
 
             if ($request->has('addAsterisk')) {
@@ -118,6 +119,8 @@ class ControllerReports extends Controller
 
             $reports->name = $username;
             $reports->email = $email;
+            $reports->contact = $contact;
+
 
             $image = $request->image;
 

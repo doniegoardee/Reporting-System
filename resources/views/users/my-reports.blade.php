@@ -13,92 +13,98 @@
         @include('users.contents.sidebar')
         <!-- Sidebar Navigation end-->
         <div class="page-content flex-grow-1 scrollable-content">
+
+
             <div class="container mt-5">
                 <div class="card">
                     <div class="card-header">
                         <h1>My Reports</h1>
                     </div>
                     <div class="card-body">
-                        @forelse ($data as $report)
-                            <div class="report-item mb-4 p-3 border rounded">
-                                @if ($report->image)
-                                    <div class="mb-3">
-                                        <img src="{{ url('/image', $report->image) }}" class="img-fluid"
-                                            style="max-width: 150px;" alt="Report Image">
-                                    </div>
-                                @endif
-                                <div>
-                                    <h5>Issue Type: {{ $report->subject_type }}</h5>
-                                    <p><strong>Status:</strong> {{ $report->status }}</p>
-                                    <p><strong>Description:</strong> {{ $report->description }}</p>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th></th>
+                                        <th>Issue Type</th>
+                                        <th>Status</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($data as $index => $report)
+                                        <tr>
+                                            <td>{{ ($data->currentPage() - 1) * $data->perPage() + $index + 1 }}</td>
+                                            <td>{{ $report->subject_type }}</td>
+                                            <td>{{ ucfirst($report->status) }}</td>
+                                            <td>{{ $report->description }}</td>
 
-                                    @if ($report->status !== 'closed')
-                                        <a class="btn btn-primary {{ $report->status === 'resolved' ? 'disabled-link' : '' }}"
-                                            href="{{ $report->status === 'pending' || $report->status === 'resolved' ? route('reports.edit', $report->id) : '#' }}">
-                                            Edit
-                                        </a>
-                                    @endif
+                                            <td>
 
-                                    @if ($report->status === 'closed')
-                                        <a class="btn btn-primary" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#viewReportModal">
-                                            View
-                                        </a>
-                                    @endif
+                                                <a class="btn btn-sm btn-primary {{ $report->status === 'resolved' ? 'disabled-link' : '' }}"
+                                                    href="{{ $report->status === 'pending' ? route('reports.edit', $report->id) : '#' }}">
+                                                    Edit
+                                                 </a>
 
-                                    <!-- Modal Structure -->
-                                    <div class="modal fade" id="viewReportModal" tabindex="-1"
-                                        aria-labelledby="viewReportModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="viewReportModalLabel">Report Details
-                                                    </h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p><strong>Subject Type:</strong> {{ $report->subject_type }}</p>
-                                                    <p><strong>Location:</strong> {{ $report->location }}</p>
-                                                    <p><strong>Status:</strong> {{ $report->status }}</p>
-                                                    <p><strong>Description:</strong> {{ $report->description }}</p>
-                                                    <p><strong>Severity:</strong> {{ $report->severity }}</p>
-                                                    <p><strong>Number Affected:</strong> {{ $report->num_affected }}
-                                                    </p>
-                                                    @if ($report->image)
-                                                        <p><strong>Image:</strong> <img
-                                                                src="{{ asset('storage/' . $report->image) }}"
-                                                                alt="Report Image" class="img-fluid"></p>
-                                                    @endif
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
+
+                                                    <a class="btn btn-sm btn-info" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#viewReportModal{{ $report->id }}">
+                                                        View
+                                                    </a>
+
+                                            </td>
+                                        </tr>
+
+                                        <!-- Modal for Viewing Report -->
+                                        <div class="modal fade" id="viewReportModal{{ $report->id }}" tabindex="-1"
+                                            aria-labelledby="viewReportModalLabel{{ $report->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewReportModalLabel{{ $report->id }}">
+                                                            Report Details
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p><strong>Subject Type:</strong> {{ $report->subject_type }}</p>
+                                                        <p><strong>Location:</strong> {{ $report->location }}</p>
+                                                        <p><strong>Status:</strong> {{ ucfirst($report->status) }}</p>
+                                                        <p><strong>Description:</strong> {{ $report->description }}</p>
+                                                        <p><strong>Severity:</strong> {{ $report->severity }}</p>
+                                                        <p><strong>Number Affected:</strong> {{ $report->num_affected }}
+                                                        </p>
+                                                        @if ($report->image)
+                                                            <p><strong>Image:</strong>
+                                                                <img src="{{ asset('image/' . $report->image) }}"
+                                                                    alt="Report Image" class="img-fluid rounded"
+                                                                    style="max-width: 200px;">
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="text-center text-muted">No reports found.</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
 
-                                    <style>
-                                        .disabled-link {
-                                            pointer-events: none;
-                                            cursor: not-allowed;
-                                            opacity: 0.6;
-                                        }
-                                    </style>
-
-
-
-                                </div>
-                            </div>
-                        @empty
-                            <p>No reports found.</p>
-                        @endforelse
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-center mt-4">
+                            {{ $data->onEachSide(1)->links() }}
+                        </div>
                     </div>
-                </div>
-
-                <div class="d-flex justify-content-center mt-4">
-                    {{ $data->onEachSide(1)->links() }}
                 </div>
             </div>
 

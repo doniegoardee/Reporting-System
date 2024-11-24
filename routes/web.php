@@ -118,9 +118,9 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
 
     Route::prefix('del')->group(function () {
         Route::get('/barangays', [BarangayAndIncident::class, 'bar'])->name('bar');
-        Route::delete('/barangays/{id}', [BarangayAndIncident::class, 'del_bar'])->name('del-bar');
+        Route::delete('/barangays/{id}', [BarangayAndIncident::class, 'archive_bar'])->name('del-bar');
         Route::get('/incident', [BarangayAndIncident::class, 'inc'])->name('inc');
-        Route::delete('/Incident/{id}', [BarangayAndIncident::class, 'del_inc'])->name('del-inc');
+        Route::delete('/Incident/{id}', [BarangayAndIncident::class, '_inc'])->name('del-inc');
     });
 
 

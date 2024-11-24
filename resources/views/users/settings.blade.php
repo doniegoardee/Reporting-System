@@ -50,8 +50,6 @@
                                                 value="{{ $user->email }}" required>
                                         </div>
 
-
-
                                         <div class="form-group mb-3">
                                             <small class="form-text text-muted">Upload a new profile image if you want
                                                 to change it. Current image:</small>
@@ -99,21 +97,6 @@
 
 
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="block mt-4">
-                                        <div class="title"><strong>Delete Account</strong></div>
-                                        <div class="block-body">
-                                            <form method="POST" action="{{ route('user.delete') }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
-                                                    Delete Account
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-6">
                                     <div class="block mt-4">
                                         <div class="title"><strong>Log out</strong></div>

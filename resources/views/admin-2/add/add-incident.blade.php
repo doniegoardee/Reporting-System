@@ -29,6 +29,13 @@
                     <h4 class="card-title">Incident Details</h4>
                 </div>
                 <div class="card-body">
+
+
+                        @if (session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+
+
                     <form action="{{ route('admin-2.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
@@ -40,20 +47,18 @@
                         <div class="form-group">
                             <label for="image">Image (Optional)</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="image" name="image"
-                                    accept="image/*">
+                                <input type="file" class="custom-file-input" id="image" name="image" accept="image/*">
                                 <label class="custom-file-label" for="image">
                                     <i class="bi bi-upload"></i> Choose file
                                 </label>
                             </div>
-                            <img id="imagePreview" class="image-preview" src="#" alt="Image Preview"
-                                style="display: none;">
+                            <img id="imagePreview" class="image-preview" src="#" alt="Image Preview" style="display: none;">
                         </div>
 
                         <div class="form-group">
                             <label>Choose Color (Optional)</label>
                             <div class="color-picker-container">
-                                <input type="text" id="colorPicker" name="color" class="form-control">
+                                <input type="text" id="colorPicker" name="color" class="form-control spectrum">
                             </div>
                         </div>
 
@@ -64,19 +69,27 @@
         </div>
     </div>
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <!-- Spectrum CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum-colorpicker/1.8.1/spectrum.min.css" />
+
+    <!-- Spectrum JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum-colorpicker/1.8.1/spectrum.min.js"></script>
 
     <script>
         $(document).ready(function() {
-            // Color Picker Initialization
+            // Initialize the color picker
             $("#colorPicker").spectrum({
-                color: "#ff5733",
+                color: "#ff5733",  // Default color
                 showInput: true,
                 showAlpha: true,
                 allowEmpty: true,
                 preferredFormat: "hex",
                 change: function(color) {
-                    $("#colorPicker").val(color.toHexString()); // Set the input value
+                    // Update the input field with the selected color
+                    $("#colorPicker").val(color.toHexString());
                 }
             });
 
@@ -90,8 +103,6 @@
                     reader.onload = async function(e) {
                         const imageSrc = e.target.result;
                         $('#imagePreview').attr('src', imageSrc).show();
-
-                        // Call the background removal function
                         const newImageSrc = await removeBackground(imageSrc);
                         $('#imagePreview').attr('src', newImageSrc);
                     };
@@ -99,7 +110,7 @@
                 }
             });
 
-            // Background removal function using remove.bg API
+            // Background removal function
             async function removeBackground(imageData) {
                 const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
                 const response = await fetch('https://api.remove.bg/v1.0/removebg', {

@@ -58,58 +58,64 @@
                         <div class="row mt-4">
                             <div class="col-md-12 text-end">
                                 <button type="submit" class="btn btn-primary px-4">Filter</button>
-                                <a href="{{ route('admin-2.filter') }}" class="btn btn-secondary ms-2 px-4">Clear
-                                    Filter</a>
+                                <a href="{{ route('admin-2.filter') }}" class="btn btn-secondary ms-2 px-4">Clear Filter</a>
+                                <a href="{{ route('admin-2.export.pdf', [
+                                    'report' => request('report'),
+                                    'location' => request('location'),
+                                    'start_date' => request('start_date'),
+                                    'end_date' => request('end_date')
+                                ]) }}" class="btn btn-success ms-2">Export PDF</a>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
 
 
-            <div class="card-body px-2 py-2">
-                <a href="{{ route('admin-2.export.pdf') }}" class="btn btn-success">Export PDF</a>
-            </div>
-
             <div class="card mb-4">
                 <div class="card-body">
-                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                        <table class="table table-striped table-hover">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th class="text-center">Incident/Disaster Type</th>
-                                    <th class="text-center">Location</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Date and Time</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($allReports as $index => $report)
+                    @if ($allReports->isEmpty())
+                        <p class="text-center text-muted">No reports available.</p>
+                    @else
+                        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                            <table class="table table-striped table-hover">
+                                <thead class="bg-primary text-white">
                                     <tr>
-                                        <td class="text-center">
-                                            {{ ($allReports->currentPage() - 1) * $allReports->perPage() + $index + 1 }}
-                                        </td>
-                                        <td class="text-center">{{ $report->subject_type }}</td>
-                                        <td class="text-center">{{ $report->location }}</td>
-                                        <td class="text-center">{{ $report->status }}</td>
-                                        <td class="text-center">
-                                            {{ $report->created_at->format('d M Y, h:i A') }}</td>
-                                        <td class="text-center">
-                                            <a href="#"
-                                                class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal{{ $report->id }}">View</a>
-                                        </td>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">Incident/Disaster Type</th>
+                                        <th class="text-center">Location</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Date and Time</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center mt-4">
-                            {{ $allReports->links('pagination::bootstrap-4') }}
+                                </thead>
+                                <tbody>
+                                    @foreach ($allReports as $index => $report)
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ ($allReports->currentPage() - 1) * $allReports->perPage() + $index + 1 }}
+                                            </td>
+                                            <td class="text-center">{{ $report->subject_type }}</td>
+                                            <td class="text-center">{{ $report->location }}</td>
+                                            <td class="text-center">{{ $report->status }}</td>
+                                            <td class="text-center">
+                                                {{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                            <td class="text-center">
+                                                <a href="#"
+                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $report->id }}">View</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center mt-4">
+                                {{ $allReports->links('pagination::bootstrap-4') }}
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
 
@@ -149,6 +155,6 @@
                 </div>
             @endforeach
 
-
         </div>
+    </div>
 </x-app-layout>

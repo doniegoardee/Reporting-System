@@ -374,17 +374,17 @@ return [
             ],
         ],
         [
-            'text' => 'Del Incident/Barangay',
-            'icon' => 'fa-solid fa-trash',
+            'text' => 'Archive Incident/Barangay',
+            'icon' => 'fa-solid fa-box-archive',
             'icon_color' => 'red',
             'submenu' => [
                 [
-                    'text' => 'Delete Incident',
+                    'text' => 'Archive Incident',
                     'url' => 'admin-2/del/incident',
                     // 'icon' => 'fa-solid fa-trash',
                 ],
                 [
-                    'text' => 'Delete Barangay',
+                    'text' => 'Archive Barangay',
                     'url' => 'admin-2/del/barangays',
                 ],
             ],

@@ -103,6 +103,16 @@
         background-color: #e0f2ff;
         text-decoration: none;
     }
+
+    .invisible {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.bg-lightblue {
+    background-color: #e0f7fa;
+}
+
 </style>
 
 <header class="header">
@@ -135,41 +145,49 @@
                 </button>
                 <div class="list-inline-item dropdown">
                     <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" class="nav-link messages-toggle">
-                        <i class="fa-solid fa-bell"></i>
-                        <span class="badge dashbg-1">{{ $user->notifications->where('read_at', null)->count() }}</span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1"
-                        style="max-height: 300px; overflow-y: auto;">
-                        @if ($user && $user->notifications->count())
-                            @php
-                                $unreadNotifications = $user->notifications->where('read_at', null);
-                            @endphp
-                            @if ($unreadNotifications->count())
-                                @foreach ($unreadNotifications as $notification)
-                                    <a class="dropdown-item notification-item" href="#"
-                                        onclick="markAsRead('{{ $notification->id }}')">
-                                        {{ $notification->data['name'] }}
-                                        <span class="text-danger">(Unread)</span>
-                                    </a>
-                                @endforeach
-                            @else
-                                <div class="dropdown-item border rounded my-2 p-2">
-                                    All notifications have been read.
-                                </div>
-                            @endif
-                        @else
-                            <div class="dropdown-item text-warning bg-dark border border-warning rounded my-2 p-2">
-                                No notifications
-                            </div>
+                    aria-expanded="false" class="nav-link messages-toggle" style="color: black">
+                     <i class="fa-solid fa-bell"></i>
+                     <span class="badge dashbg-1 {{ $user->notifications->where('read_at', null)->count() === 0 ? 'invisible' : '' }}">
+                         {{ $user->notifications->where('read_at', null)->count() }}
+                     </span>
+                 </a>
+                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1" style="max-height: 300px; overflow-y: auto;">
+                    @if ($user && $user->notifications->count())
+                        @php
+                            $unreadNotifications = $user->notifications->where('read_at', null);
+                        @endphp
+
+                        @if ($unreadNotifications->count())
+                            @foreach ($unreadNotifications as $notification)
+                                <a class="dropdown-item notification-item bg-lightblue" href="#"
+                                    onclick="markAsRead('{{ $notification->id }}')">
+                                    {{ $notification->data['name'] }}
+                                </a>
+                            @endforeach
+
                         @endif
-                    </div>
+
+                    @else
+                        <div class="dropdown-item rounded my-2 p-2">
+                            No notifications
+                        </div>
+                    @endif
+
+                    @foreach ($user->notifications->where('read_at', '!=', null) as $notification)
+                        <a class="dropdown-item bg-light notification-item" href="#">
+                            {{ $notification->data['name'] }}
+                        </a>
+                    @endforeach
+                </div>
+
 
                 </div>
 
                 <a href="{{ route('user.settings') }}">
-                    <img src="{{ asset($user->profile_image) }}" class="img-thumbnail" alt="Profile Image"
-                        style="width: 35px; height: 35px; border-radius:50%;">
+                    <img src="{{ asset($user->profile_image) }}"
+                         class="img-thumbnail"
+                         alt="Profile Image"
+                         style="width: 35px; height: 35px; border-radius:50%; max-width: 150px;">
                 </a>
             </div>
         </div>
@@ -182,7 +200,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modern-modal">
             <div class="modal-header">
-                <h5 class="modal-title" id="chatModalLabel">Chat Assistant</h5>
+                <h5 class="modal-title" id="chatModalLabel">Chat Bot</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -218,9 +236,8 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Refresh the notification count and update the UI
-                    location.reload(); // Reload the page to update notifications
-                } else {
+
+                    location.reload();                 } else {
                     alert(data.error || 'Error marking notification as read');
                 }
             })

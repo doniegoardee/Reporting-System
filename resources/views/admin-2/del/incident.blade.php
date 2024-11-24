@@ -2,14 +2,14 @@
     <div class="page-content scrollable-content bg-light">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">Delete Incident</h2>
+                <h2 class="h5 no-margin-bottom">Incident List</h2>
             </div>
         </div>
 
         <div class="container-fluid mt-4">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Add Incident</h4>
+                    <h4 class="card-title">Incident List</h4>
                 </div>
                 <div class="card-body">
                     @if (session('success'))
@@ -34,7 +34,7 @@
                                             class="delete-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger delete-btn">Delete</button>
+                                            <button type="submit" class="btn btn-danger delete-btn">Archive</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -44,6 +44,45 @@
                 </div>
             </div>
         </div>
+
+        <div class="container-fluid mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Archive Incident List</h4>
+                </div>
+                <div class="card-body">
+
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Incident Type</th>
+                                {{-- <th class="text-center">Actions</th> --}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($arcinc as $incidents)
+                                <tr>
+                                    <td class="text-center">{{ $incidents->id }}</td>
+                                    <td class="text-center">{{ $incidents->name }}</td>
+                                    {{-- <td class="text-center">
+                                        <form action="{{ route('admin-2.del-inc', $incident->id) }}" method="POST"
+                                            class="delete-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger delete-btn">Archive</button>
+                                        </form>
+                                    </td> --}}
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -58,7 +97,7 @@
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
                             cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, delete it!'
+                            confirmButtonText: 'Yes, archive it!'
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 form.submit();

@@ -16,7 +16,7 @@
         </li>
         <li class="{{ in_array(Route::currentRouteName(), ['user.create', 'user.incident']) ? 'active' : '' }}">
             <a href="{{ route('user.incident') }}">
-                <i class="fa-solid fa-pen-to-square"></i>Create Reports
+                <i class="fa-solid fa-pen-to-square"></i>Report Incident
             </a>
         </li>
         <li class="{{ Route::currentRouteName() === 'user.report' ? 'active' : '' }}">

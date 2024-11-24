@@ -48,8 +48,7 @@
                                                 {{ $report->location == $barangay->barangay ? 'selected' : '' }}>
                                                 {{ $barangay->barangay }}
                                             </option>
-                                            @endforeach" {{ $report->location == 'Leron' ? 'selected' : '' }}>
-                                            Leron</option>
+                                            @endforeach
                                     </select>
                                 </div>
                             </div>

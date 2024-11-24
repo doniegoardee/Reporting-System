@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('name')->nullable();
             $table->string('email')->nullable();
+            $table->text('contact');
             $table->text('severity');
             $table->text('num_affected');
             $table->text('needs');

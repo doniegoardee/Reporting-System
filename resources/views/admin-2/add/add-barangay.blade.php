@@ -12,6 +12,12 @@
                     <h4 class="card-title">Add Barangay</h4>
                 </div>
                 <div class="card-body">
+
+
+                        @if (session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+
                     <form action="{{ route('admin-2.add_barangay') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 

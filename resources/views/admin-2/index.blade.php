@@ -29,44 +29,48 @@
                     <h5>All Reports</h5>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                        <table class="table table-striped table-hover">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th class="text-center">Incident/Disaster Type</th>
-                                    <th class="text-center">Location</th>
-                                    <th class="text-center">Date and Time</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($allReports as $index => $report)
+                    @if ($allReports->isEmpty())
+                        <p class="text-center text-muted">No reports available.</p>
+                    @else
+                        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                            <table class="table table-striped table-hover">
+                                <thead class="bg-primary text-white">
                                     <tr>
-                                        <td class="text-center">
-                                            {{ ($allReports->currentPage() - 1) * $allReports->perPage() + $index + 1 }}
-                                        </td>
-                                        <td class="text-center">{{ $report->subject_type }}</td>
-                                        <td class="text-center">{{ $report->location }}</td>
-                                        <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center p-0">
-                                                <a href="#"
-                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal{{ $report->id }}">
-                                                    View
-                                                </a>
-                                            </div>
-                                        </td>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">Incident/Disaster Type</th>
+                                        <th class="text-center">Location</th>
+                                        <th class="text-center">Date and Time</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center mt-4">
-                            {{ $allReports->links() }}
+                                </thead>
+                                <tbody>
+                                    @foreach ($allReports as $index => $report)
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ ($allReports->currentPage() - 1) * $allReports->perPage() + $index + 1 }}
+                                            </td>
+                                            <td class="text-center">{{ $report->subject_type }}</td>
+                                            <td class="text-center">{{ $report->location }}</td>
+                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center p-0">
+                                                    <a href="#"
+                                                        class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal{{ $report->id }}">
+                                                        View
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center mt-4">
+                                {{ $allReports->links() }}
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
 
@@ -76,44 +80,48 @@
                     <h5>Pending Reports</h5>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                        <table class="table table-striped table-hover">
-                            <thead class="bg-warning text-dark">
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th class="text-center">Incident/Disaster Type</th>
-                                    <th class="text-center">Location</th>
-                                    <th class="text-center">Date and Time</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($pending as $index => $report)
+                    @if ($pending->isEmpty())
+                        <p class="text-center text-muted">No pending reports available.</p>
+                    @else
+                        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                            <table class="table table-striped table-hover">
+                                <thead class="bg-warning text-dark">
                                     <tr>
-                                        <td class="text-center">
-                                            {{ ($pending->currentPage() - 1) * $pending->perPage() + $index + 1 }}
-                                        </td>
-                                        <td class="text-center">{{ $report->subject_type }}</td>
-                                        <td class="text-center">{{ $report->location }}</td>
-                                        <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center p-0">
-                                                <a href="#"
-                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal{{ $report->id }}">
-                                                    View
-                                                </a>
-                                            </div>
-                                        </td>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">Incident/Disaster Type</th>
+                                        <th class="text-center">Location</th>
+                                        <th class="text-center">Date and Time</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center mt-4">
-                            {{ $pending->links() }}
+                                </thead>
+                                <tbody>
+                                    @foreach ($pending as $index => $report)
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ ($pending->currentPage() - 1) * $pending->perPage() + $index + 1 }}
+                                            </td>
+                                            <td class="text-center">{{ $report->subject_type }}</td>
+                                            <td class="text-center">{{ $report->location }}</td>
+                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center p-0">
+                                                    <a href="#"
+                                                        class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal{{ $report->id }}">
+                                                        View
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center mt-4">
+                                {{ $pending->links() }}
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
 
@@ -123,44 +131,48 @@
                     <h5>Resolved Reports</h5>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                        <table class="table table-striped table-hover">
-                            <thead class="bg-success text-white">
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th class="text-center">Incident/Disaster Type</th>
-                                    <th class="text-center">Location</th>
-                                    <th class="text-center">Date and Time</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($resolved as $index => $report)
+                    @if ($resolved->isEmpty())
+                        <p class="text-center text-muted">No resolved reports available.</p>
+                    @else
+                        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                            <table class="table table-striped table-hover">
+                                <thead class="bg-success text-white">
                                     <tr>
-                                        <td class="text-center">
-                                            {{ ($resolved->currentPage() - 1) * $resolved->perPage() + $index + 1 }}
-                                        </td>
-                                        <td class="text-center">{{ $report->subject_type }}</td>
-                                        <td class="text-center">{{ $report->location }}</td>
-                                        <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center p-0">
-                                                <a href="#"
-                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal{{ $report->id }}">
-                                                    View
-                                                </a>
-                                            </div>
-                                        </td>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">Incident/Disaster Type</th>
+                                        <th class="text-center">Location</th>
+                                        <th class="text-center">Date and Time</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center mt-4">
-                            {{ $resolved->links() }}
+                                </thead>
+                                <tbody>
+                                    @foreach ($resolved as $index => $report)
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ ($resolved->currentPage() - 1) * $resolved->perPage() + $index + 1 }}
+                                            </td>
+                                            <td class="text-center">{{ $report->subject_type }}</td>
+                                            <td class="text-center">{{ $report->location }}</td>
+                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center p-0">
+                                                    <a href="#"
+                                                        class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal{{ $report->id }}">
+                                                        View
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center mt-4">
+                                {{ $resolved->links() }}
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
 
@@ -170,133 +182,73 @@
                     <h5>Closed Reports</h5>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                        <table class="table table-striped table-hover">
-                            <thead class="bg-secondary text-white">
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th class="text-center">Incident/Disaster Type</th>
-                                    <th class="text-center">Location</th>
-                                    <th class="text-center">Date and Time</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($closed as $index => $report)
+                    @if ($closed->isEmpty())
+                        <p class="text-center text-muted">No closed reports available.</p>
+                    @else
+                        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                            <table class="table table-striped table-hover">
+                                <thead class="bg-secondary text-white">
                                     <tr>
-                                        <td class="text-center">
-                                            {{ ($closed->currentPage() - 1) * $closed->perPage() + $index + 1 }}
-                                        </td>
-                                        <td class="text-center">{{ $report->subject_type }}</td>
-                                        <td class="text-center">{{ $report->location }}</td>
-                                        <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center p-0">
-                                                <a href="#"
-                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal{{ $report->id }}">
-                                                    View
-                                                </a>
-                                            </div>
-                                        </td>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">Incident/Disaster Type</th>
+                                        <th class="text-center">Location</th>
+                                        <th class="text-center">Date and Time</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center mt-4">
-                            {{ $closed->links() }}
+                                </thead>
+                                <tbody>
+                                    @foreach ($closed as $index => $report)
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ ($closed->currentPage() - 1) * $closed->perPage() + $index + 1 }}
+                                            </td>
+                                            <td class="text-center">{{ $report->subject_type }}</td>
+                                            <td class="text-center">{{ $report->location }}</td>
+                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center p-0">
+                                                    <a href="#"
+                                                        class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal{{ $report->id }}">
+                                                        View
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center mt-4">
+                                {{ $closed->links() }}
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
-
-            <!-- Recent Reports -->
-            <div class="card mb-4">
-                <div class="card-header bg-info text-white">
-                    <h5>Recent Reports</h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                        <table class="table table-striped table-hover">
-                            <thead class="bg-info text-white">
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th class="text-center">Incident/Disaster Type</th>
-                                    <th class="text-center">Location</th>
-                                    <th class="text-center">Date and Time</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($recent as $index => $report)
-                                    <tr>
-                                        <td class="text-center">
-                                            {{ ($recent->currentPage() - 1) * $recent->perPage() + $index + 1 }}
-                                        </td>
-                                        <td class="text-center">{{ $report->subject_type }}</td>
-                                        <td class="text-center">{{ $report->location }}</td>
-                                        <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center p-0">
-                                                <a href="#"
-                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal{{ $report->id }}">
-                                                    View
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center mt-4">
-                            {{ $recent->links() }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            @php
-                $allReportsItems = $allReports->items();
-                $pendingItems = $pending->items();
-                $resolvedItems = $resolved->items();
-                $closedItems = $closed->items();
-                $recentItems = $recent->items();
-            @endphp
-
-            @foreach (array_merge($allReportsItems, $pendingItems, $resolvedItems, $closedItems, $recentItems) as $report)
-                <div class="modal fade" id="exampleModal{{ $report->id }}" tabindex="-1"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Report Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p><strong>Subject Type:</strong> {{ $report->subject_type }}</p>
-                                <p><strong>Location:</strong> {{ $report->location }}</p>
-                                <p><strong>Description:</strong> {{ $report->description }}</p>
-                                <p><strong>Date & Time:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
-
-
-                                @if ($report->image)
-                                    <div class="text-center mt-3">
-                                        <img src="{{ asset('image/' . $report->image) }}" class="img-fluid"
-                                            alt="Report Image">
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
         </div>
+
+        <!-- Modal for each report -->
+        @foreach ($allReports as $report)
+            <div class="modal fade" id="exampleModal{{ $report->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $report->id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel{{ $report->id }}">Report Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>Incident/Disaster Type:</strong> {{ $report->subject_type }}</p>
+                            <p><strong>Location:</strong> {{ $report->location }}</p>
+                            <p><strong>Date:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
+                            <p><strong>Status:</strong> {{ $report->status }}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 </x-app-layout>

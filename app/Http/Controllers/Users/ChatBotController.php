@@ -37,7 +37,19 @@ class ChatBotController extends Controller
         });
 
         $this->botman->hears('check report status', function (BotMan $bot) {
-            $bot->reply('Please ask me to show your reports.');
+            $reports = Reports::all();
+
+            if ($reports->isEmpty()) {
+                $bot->reply('You have no reports to display.');
+            } else {
+                $response = "Here are your reports and their statuses:\n\n <br></br>";
+                foreach ($reports as $report) {
+                    $response .= "- {$report->subject_type}:  {$report->status}\n <br></br>";
+                }
+
+                $bot->reply($response);
+            }
+
         });
 
         $this->botman->hears('show my reports', function (BotMan $bot) use ($user) {
@@ -46,7 +58,7 @@ class ChatBotController extends Controller
             if ($reports->isEmpty()) {
                 $bot->reply("You have no reports filed.");
             } else {
-                $response = "Here are your reports and their details:<br>";
+                $response = "Here are your reports and their details:<br></br>";
                 foreach ($reports as $report) {
                     $response .= "Report ID: " . $report->id . "<br>" .
                         "Location: " . $report->location . "<br>" .
@@ -72,7 +84,7 @@ class ChatBotController extends Controller
             if ($reports->isEmpty()) {
                 $bot->reply("You have no reports filed for \"$keyword\".");
             } else {
-                $response = "Here are your reports related to \"$keyword\" and their details:<br>";
+                $response = "Here are your reports related to \"$keyword\" and their details:<br></br>";
                 foreach ($reports as $report) {
                     $response .= "Report ID: " . $report->id . "<br>" .
                         "Location: " . $report->location . "<br>" .
@@ -94,11 +106,11 @@ class ChatBotController extends Controller
 
         $this->botman->fallback(function (BotMan $bot) {
             $bot->reply('Sorry, these are the available commands for the moment:<br><br>' .
-                '- "hi" or "hello": To greet the bot.<br>' .
-                '- "check report status": To check the status of your report.<br>' .
-                '- "show my reports": To see your filed reports.<br>' .
-                '- "show reports on {keyword}": To filter reports by specific keywords (e.g., "flood").<br>' .
-                '- "contact": To get our contact information.<br><br>' .
+                '- "hi" or "hello": To greet the bot.<br></br>' .
+                '- "check report status": To check the status of your report.<br></br>' .
+                '- "show my reports": To see your filed reports.<br></br>' .
+                '- "show reports on {keyword}": To filter reports by specific keywords (e.g., "flood").<br></br>' .
+                '- "contact": To get our contact information.<br></br>' .
                 'Please ask me!');
         });
 

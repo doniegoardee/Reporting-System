@@ -58,7 +58,7 @@
 
 
                             <div class="block mt-4">
-                                <div class="title"><strong>Change Password</strong></div>
+                                <div class="title"><strong>Change Password</strong></div><br>
                                 <div class="block-body">
                                     <form method="POST" action="{{ route('admin-2.change') }}">
                                         @csrf

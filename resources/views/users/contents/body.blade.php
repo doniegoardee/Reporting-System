@@ -16,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($allReports as $index => $report)
+                    @forelse ($allReports as $index => $report)
                         <tr>
                             <td class="text-center">
                                 {{ ($allReports->currentPage() - 1) * $allReports->perPage() + $index + 1 }}</td>
@@ -30,12 +30,18 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">No reports available.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
-                {{ $allReports->links() }}
-            </div>
+            @if ($allReports->isNotEmpty())
+                <div class="d-flex justify-content-center">
+                    {{ $allReports->links() }}
+                </div>
+            @endif
         </div>
 
         {{-- PENDING REPORTS --}}
@@ -52,11 +58,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pending as $index => $report)
+                    @forelse ($pending as $index => $report)
                         <tr>
                             <td class="text-center">
-                                {{ ($pending->currentPage() - 1) * $pending->perPage() + $index + 1 }}
-                            </td>
+                                {{ ($pending->currentPage() - 1) * $pending->perPage() + $index + 1 }}</td>
                             <td>{{ $report->subject_type }}</td>
                             <td>{{ $report->location }}</td>
                             <td>{{ $report->created_at->format('d M Y, h:i A') }}</td>
@@ -67,12 +72,18 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">No pending reports available.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
-                {{ $pending->links() }}
-            </div>
+            @if ($pending->isNotEmpty())
+                <div class="d-flex justify-content-center">
+                    {{ $pending->links() }}
+                </div>
+            @endif
         </div>
 
         {{-- RESOLVED REPORTS --}}
@@ -89,7 +100,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($resolved as $index => $report)
+                    @forelse ($resolved as $index => $report)
                         <tr>
                             <td class="text-center">
                                 {{ ($resolved->currentPage() - 1) * $resolved->perPage() + $index + 1 }}</td>
@@ -103,12 +114,18 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">No resolved reports available.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
-                {{ $resolved->links() }}
-            </div>
+            @if ($resolved->isNotEmpty())
+                <div class="d-flex justify-content-center">
+                    {{ $resolved->links() }}
+                </div>
+            @endif
         </div>
 
         {{-- CLOSED REPORTS --}}
@@ -125,11 +142,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($closed as $index => $report)
+                    @forelse ($closed as $index => $report)
                         <tr>
                             <td class="text-center">
-                                {{ ($closed->currentPage() - 1) * $closed->perPage() + $index + 1 }}
-                            </td>
+                                {{ ($closed->currentPage() - 1) * $closed->perPage() + $index + 1 }}</td>
                             <td>{{ $report->subject_type }}</td>
                             <td>{{ $report->location }}</td>
                             <td>{{ $report->created_at->format('d M Y, h:i A') }}</td>
@@ -140,12 +156,18 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">No closed reports available.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
-                {{ $closed->links() }}
-            </div>
+            @if ($closed->isNotEmpty())
+                <div class="d-flex justify-content-center">
+                    {{ $closed->links() }}
+                </div>
+            @endif
         </div>
 
     </div>

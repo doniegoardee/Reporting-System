@@ -17,37 +17,40 @@ class Setting extends Controller
     }
 
     public function update(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        $user = User::find(auth()->id());
+    $user = User::find(auth()->id());
 
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
 
-        if ($request->hasFile('profile_image')) {
-            if ($user->profile_image && $user->profile_image !== 'image/default-avatar.png') {
-                $oldImagePath = public_path('image/' . $user->profile_image);
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath);
-                }
+    if ($request->hasFile('profile_image')) {
+        // Delete old image if not the default
+        if ($user->profile_image && $user->profile_image !== 'image/default-avatar.png') {
+            if (file_exists(public_path($user->profile_image))) {
+                unlink(public_path($user->profile_image));
             }
-
-            $file = $request->file('profile_image');
-            $filename = $file->getClientOriginalName();
-            $file->move(public_path('image'), $filename);
-
-            $user->profile_image = 'image/' . $filename;
         }
 
-        $user->save();
+        // Save the new image with a unique name
+        $file = $request->file('profile_image');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('image'), $filename);
 
-        return redirect()->back()->with('success', 'Profile updated successfully!');
+        $user->profile_image = 'image/' . $filename;
     }
+
+    $user->save();
+
+    return redirect()->back()->with('success', 'Profile updated successfully!');
+}
+
+
 
     public function updatePassword(Request $request)
     {
@@ -68,15 +71,5 @@ class Setting extends Controller
         return redirect()->back()->with('success', 'Password changed successfully!');
     }
 
-    public function deleteAccount(Request $request)
-    {
-        $user = User::find(auth()->id());
 
-        $user->delete();
-
-        auth()->logout();
-
-
-        return redirect('/')->with('success', 'Your account has been deleted successfully.');
-    }
 }

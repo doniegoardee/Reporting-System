@@ -73,44 +73,47 @@
             </div>
 
             <div class="card mb-4">
-
                 <div class="card-body">
-                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                        <table class="table table-striped table-hover">
-                            <thead class="bg-secondary text-white">
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th class="text-center">Incident/Disaster Type</th>
-                                    <th class="text-center">Location</th>
-                                    <th class="text-center">Date and Time</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($closed as $index => $report)
+                    @if ($closed->isEmpty())
+                        <p class="text-center text-muted">No reports available.</p>
+                    @else
+                        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                            <table class="table table-striped table-hover">
+                                <thead class="bg-secondary text-white">
                                     <tr>
-                                        <td class="text-center">
-                                            {{ ($closed->currentPage() - 1) * $closed->perPage() + $index + 1 }}
-                                        </td>
-                                        <td class="text-center">{{ $report->subject_type }}</td>
-                                        <td class="text-center">{{ $report->location }}</td>
-                                        <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center p-0">
-                                                <a href="#" class="btn btn-secondary" data-bs-toggle="modal"
-                                                    data-bs-target="#reportModal{{ $report->id }}">
-                                                    View
-                                                </a>
-                                            </div>
-                                        </td>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">Incident/Disaster Type</th>
+                                        <th class="text-center">Location</th>
+                                        <th class="text-center">Date and Time</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-center mt-4">
-                            {{ $closed->links() }}
+                                </thead>
+                                <tbody>
+                                    @foreach ($closed as $index => $report)
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ ($closed->currentPage() - 1) * $closed->perPage() + $index + 1 }}
+                                            </td>
+                                            <td class="text-center">{{ $report->subject_type }}</td>
+                                            <td class="text-center">{{ $report->location }}</td>
+                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center p-0">
+                                                    <a href="#" class="btn btn-secondary" data-bs-toggle="modal"
+                                                        data-bs-target="#reportModal{{ $report->id }}">
+                                                        View
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center mt-4">
+                                {{ $closed->links() }}
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
 
