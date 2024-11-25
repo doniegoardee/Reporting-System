@@ -80,9 +80,14 @@
                         </table>
 
                         <div class="row mt-4">
-                            <div class="col-12">
+                            <div class="col-6">
                                 <div class="chart-container">
                                     <canvas id="incidentTypeChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="chart-container">
+                                    <canvas id="incidentTypeChart-pie"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -92,20 +97,18 @@
 
             <script>
                 var ctx = document.getElementById('incidentTypeChart').getContext('2d');
+
+                // Colors mapped to the labels for the legend
+                var backgroundColors = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff'];
+
                 var chart = new Chart(ctx, {
-                    type: 'pie',
+                    type: 'bar',
                     data: {
                         labels: @json($reportCountByType->pluck('subject_type')),
                         datasets: [{
                             label: 'Incident Types',
                             data: @json($reportCountByType->pluck('count')),
-                            backgroundColor: [
-                                '#ff6384',
-                                '#36a2eb',
-                                '#ffce56',
-                                '#4bc0c0',
-                                '#9966ff'
-                            ],
+                            backgroundColor: backgroundColors,
                             borderColor: '#ffffff',
                             borderWidth: 2
                         }]
@@ -114,25 +117,126 @@
                         responsive: true,
                         plugins: {
                             legend: {
-                                position: 'top',
+                                display: true,
+                                position: 'right',
+                                align: 'start',
                                 labels: {
-                                    boxWidth: 12,
+                                    generateLabels: function(chart) {
+                                        // Combine labels and values for the legend
+                                        var labels = chart.data.labels;
+                                        var data = chart.data.datasets[0].data;
+                                        return labels.map((label, index) => ({
+                                            text: `${label} = ${data[index]}`, // Combine label and value
+                                            fillStyle: backgroundColors[index],
+                                            strokeStyle: backgroundColors[index],
+                                            hidden: false,
+                                            index: index
+                                        }));
+                                    },
+                                    boxWidth: 15,
                                     font: {
-                                        size: 14
-                                    }
+                                        size: 14,
+                                        family: 'Arial'
+                                    },
+                                    color: '#333'
                                 }
                             },
                             tooltip: {
                                 callbacks: {
                                     label: function(tooltipItem) {
-                                        return tooltipItem.label + ': ' + tooltipItem.raw;
+                                        let value = tooltipItem.raw;
+                                        return `${tooltipItem.label}: ${value} incidents`;
                                     }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Incident Types',
+                                    font: { size: 14 }
+                                },
+                                ticks: {
+                                    font: { size: 12 }
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Number of Incidents',
+                                    font: { size: 14 }
+                                },
+                                ticks: {
+                                    font: { size: 12 },
+                                    beginAtZero: true
                                 }
                             }
                         }
                     }
                 });
             </script>
+
+<script>
+    var ctx = document.getElementById('incidentTypeChart-pie').getContext('2d');
+
+    // Colors mapped to the labels for the legend
+    var backgroundColors = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff'];
+
+    var chart = new Chart(ctx, {
+        type: 'pie', // Change chart type to 'pie'
+        data: {
+            labels: @json($reportCountByType->pluck('subject_type')),
+            datasets: [{
+                label: 'Incident Types',
+                data: @json($reportCountByType->pluck('count')),
+                backgroundColor: backgroundColors,
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'right', // Position the legend to the right of the chart
+                    align: 'start', // Align legend items to the start
+                    labels: {
+                        generateLabels: function(chart) {
+                            // Combine labels and values for the legend
+                            var labels = chart.data.labels;
+                            var data = chart.data.datasets[0].data;
+                            return labels.map((label, index) => ({
+                                text: `${label} = ${data[index]}`, // Combine label and value
+                                fillStyle: backgroundColors[index],
+                                strokeStyle: backgroundColors[index],
+                                hidden: false,
+                                index: index
+                            }));
+                        },
+                        boxWidth: 15,
+                        font: {
+                            size: 14,
+                            family: 'Arial'
+                        },
+                        color: '#333'
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            let value = tooltipItem.raw;
+                            return `${tooltipItem.label}: ${value} incidents`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
         </div>
 
 </x-app-layout>

@@ -20,6 +20,7 @@ class Reports extends Model
         'num_affected',
         'needs',
         'image',
+        'contact',
         'responding_agency',
         'resolved_time'
     ];

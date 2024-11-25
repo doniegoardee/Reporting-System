@@ -47,18 +47,22 @@
                         <div class="form-group">
                             <label for="image">Image (Optional)</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="image" name="image" accept="image/*">
-                                <label class="custom-file-label" for="image">
-                                    <i class="bi bi-upload"></i> Choose file
+
+                                <label class="custom-file" for="image">
+                                    <i class="bi bi-upload"></i>
                                 </label>
+                                <input type="file" class="" id="image" name="image"
+                                    accept="image/*">
                             </div>
-                            <img id="imagePreview" class="image-preview" src="#" alt="Image Preview" style="display: none;">
+                            <img id="imagePreview" class="image-preview" src="#" alt="Image Preview"
+                                style="display: none;">
                         </div>
 
                         <div class="form-group">
                             <label>Choose Color (Optional)</label>
                             <div class="color-picker-container">
-                                <input type="text" id="colorPicker" name="color" class="form-control spectrum">
+
+                                <input type="color" id="colorPicker" name="color" class="form-control spectrum">
                             </div>
                         </div>
 
