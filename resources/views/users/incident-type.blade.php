@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.user-layout')
 
-<head>
-    @include('users.contents.css')
+@section('content')
+    @include('layouts.navigation')
     <style>
         .incident-card {
             width: 200px;
@@ -39,18 +38,12 @@
             font-weight: bold;
         }
     </style>
-</head>
-
-<body>
-    @include('users.contents.header')
-
-    <div class="d-flex align-items-stretch">
-        @include('users.contents.sidebar')
-
+    <!-- Contact Section -->
+    <section id="contact" class="contact section mt-5">
         <div class="page-content scrollable-content">
             <div class="page-header">
                 <div class="container-fluid">
-                    <h2 class="h5 no-margin-bottom">Incident Types</h2>
+                    <h2 class="h5 no-margin-bottom text-center fw-600">Incident Types</h2>
                 </div>
             </div>
 
@@ -63,8 +56,8 @@
                     <div class="row">
                         @foreach ($incidentTypes as $incident)
                             <div class="col-md-3 mb-4">
-                                <a href="{{ route('user.create', ['subject_type' => $incident->name]) }}" class="incident-box"
-                                    style="text-decoration: none;">
+                                <a href="{{ route('user.create', ['subject_type' => $incident->name]) }}"
+                                    class="incident-box" style="text-decoration: none;">
                                     <div class="card incident-card text-center"
                                         style="background-color: {{ $incident->color }}; color: #fff;">
                                         <div class="card-body d-flex flex-column justify-content-between">
@@ -84,7 +77,5 @@
 
             @include('users.contents.footer')
         </div>
-    </div>
-</body>
-
-</html>
+    </section><!-- /Hero Section -->
+@endsection

@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.user-layout')
 
-<head>
-    @include('users.contents.css')
-</head>
+@section('content')
+    @include('layouts.navigation')
 
-<body>
-    @include('users.contents.header')
-
-    <div class="d-flex align-items-stretch">
-        <!-- Sidebar Navigation-->
-        @include('users.contents.sidebar')
-
+    <!-- Contact Section -->
+    <section id="contact" class="contact section mt-5">
         <div class="page-content">
             <div class="container mt-5">
                 <div class="card shadow-sm rounded">
@@ -82,9 +75,5 @@
             </div>
         </div>
 
-        <!-- Sidebar Navigation end-->
-        @include('users.contents.footer')
-    </div>
-</body>
-
-</html>
+    </section><!-- /Hero Section -->
+@endsection

@@ -114,37 +114,23 @@
     }
 </style>
 
-<header class="header">
-    <nav class="navbar navbar-expand-lg">
-        <div class="search-panel">
-            <div class="search-inner d-flex align-items-center justify-content-center">
-                <div class="close-btn">Close <i class="fa fa-close"></i></div>
-                <form id="searchForm" action="#">
-                    <div class="form-group">
-                        <input type="search" name="search" placeholder="What are you searching for...">
-                        <button type="submit" class="submit">Search</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="container-fluid d-flex align-items-center justify-content-between">
-            <div class="navbar-header">
-                <a href="{{ url('/') }}" class="navbar-brand">
-                    <div class="brand-text brand-big visible text-uppercase">
-                        <strong class="text-primary">Incident</strong><strong>Reporting</strong>
-                    </div>
-                    <div class="brand-text brand-sm"><strong class="text-primary">I</strong><strong>R</strong></div>
-                </a>
-                <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
-            </div>
-            <div class="right-menu list-inline no-margin-bottom">
-                <button type="button" style="border:none; background:transparent;" data-toggle="modal"
-                    data-target="#chatModal">
-                    <i class="fa-solid fa-comment"></i>
-                </button>
-                <div class="list-inline-item dropdown">
+<header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+        <a href="index.html" class="logo d-flex align-items-center me-auto">
+            <img src="{{ asset('image/logo.jpg') }}" style="border-radius: 50%" alt="">
+            <h1 class="sitename">Reporting System</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="{{ route('home.user') }}" class="active">Home</a></li>
+                <li><a href="{{ route('user.incident') }}">Make Report</a></li>
+                <li><a href="{{ route('user.report') }}">My Reports</a></li>
+                <li><a href=""></a></li>
+                <div class="d-flex align-items-center">
                     <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" class="nav-link messages-toggle" style="color: black">
+                        aria-expanded="false" class="nav-link messages-toggle" style="color: purple">
                         <i class="fa-solid fa-bell"></i>
                         <span
                             class="badge dashbg-1 {{ $user->notifications->where('read_at', null)->count() === 0 ? 'invisible' : '' }}">
@@ -157,7 +143,6 @@
                             @php
                                 $unreadNotifications = $user->notifications->where('read_at', null);
                             @endphp
-
                             @if ($unreadNotifications->count())
                                 @foreach ($unreadNotifications as $notification)
                                     <a class="dropdown-item notification-item bg-lightblue" href="#"
@@ -165,31 +150,36 @@
                                         {{ $notification->data['name'] }}
                                     </a>
                                 @endforeach
-
                             @endif
                         @else
-                            <div class="dropdown-item rounded my-2 p-2">
-                                No notifications
-                            </div>
+                            <div class="dropdown-item rounded my-2 p-2">No notifications</div>
                         @endif
-
                         @foreach ($user->notifications->where('read_at', '!=', null) as $notification)
-                            <a class="dropdown-item bg-light notification-item" href="#">
-                                {{ $notification->data['name'] }}
-                            </a>
+                            <a class="dropdown-item bg-light notification-item" style="color:black ;"
+                                href="#">{{ $notification->data['name'] }}</a>
                         @endforeach
                     </div>
 
+                    <button type="button"
+                        style="width: 25px; height: 25px;  border:none; color:purple; background:transparent;"
+                        data-toggle="modal" data-target="#chatModal">
+                        <i class="fa-solid fa-comment"></i>
+                    </button>
 
-                </div>
+                    <a href="{{ route('user.settings') }}">
+                        <img src="{{ asset($user->profile_image) }}" class="img-thumbnail" alt="Profile Image"
+                            style="width: 25px; height: 25px; border-radius:50%; max-width: 150px; margin-left:10px;">
+                    </a>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 
-                <a href="{{ route('user.settings') }}">
-                    <img src="{{ asset($user->profile_image) }}" class="img-thumbnail" alt="Profile Image"
-                        style="width: 35px; height: 35px; border-radius:50%; max-width: 150px;">
-                </a>
-            </div>
-        </div>
-    </nav>
+
+        </nav>
+
+
+    </div>
+
+    </div>
 </header>
 
 
@@ -217,6 +207,7 @@
         </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
