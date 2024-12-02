@@ -18,21 +18,29 @@ class IncidentTypeSeeder extends Seeder
                 'name' => 'Flood',
                 'image' => '1727670395.png',
                 'color' => '#33a7ff',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Earthquake',
                 'image' => '1727670880.png',
                 'color' => '#61511a',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Medical Emergency',
                 'image' => '1727670847.png',
                 'color' => '#1ce93e',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Fire Related',
                 'image' => 'fire.png',
                 'color' => '#d91212',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

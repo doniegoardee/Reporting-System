@@ -13,14 +13,33 @@ class BarangaySeeder extends Seeder
     public function run(): void
     {
         $barangays = [
-            ['barangay' => 'Centro'],
-            ['barangay' => 'Leron'],
-            ['barangay' => 'Santa Maria'],
-            ['barangay' => 'Cabaritan'],
-            ['barangay' => 'Centro West'],
+            [
+                'barangay' => 'Centro',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'barangay' => 'Leron',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'barangay' => 'Santa Maria',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'barangay' => 'Cabaritan',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'barangay' => 'Centro West',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         DB::table('barangays')->insert($barangays);
     }
 }
-
