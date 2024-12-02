@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - eBusiness Bootstrap Template</title>
+    <title>Reporting System</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -46,7 +46,7 @@
             <a href="index.html" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1 class="sitename">eBusiness</h1>
+                <h1 class="sitename">Reporting System</h1>
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -54,7 +54,7 @@
                     <li><a href="#hero" class="active">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#portfolio">Report Incident</a></li>
                     <li><a href="#team">Team</a></li>
                     <li class="dropdown"><a href="#"><span>Dropdown</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -80,9 +80,20 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="index.html#about">Get Started</a>
-
-        </div>
+            {{-- <a class="btn-getstarted" href="{{ route('login') }}">Get Started</a> --}}
+            @if (Route::has('login'))
+                <div>
+                    @auth
+                        @if (auth()->user()->role == 'user')
+                            <a href="{{ route('home.user') }}" class="btn-getstarted">Get Started</a>
+                        @elseif(auth()->user()->role == 'admin-2')
+                            <a href="{{ route('admin-2.index') }}" class="btn-getstarted">Get Started</a>
+                        @endif
+                    @else
+                        <a href="{{ route('login') }}" class="btn-getstarted">Get Started</a>
+                    @endauth
+                </div>
+            @endif
     </header>
 
     <main class="main">
@@ -397,264 +408,78 @@
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Portfolio</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                <h2>Report Incident</h2>
             </div><!-- End Section Title -->
 
             <div class="container">
 
-                <div class="isotope-layout" data-default-filter="*" data-layout="masonry"
-                    data-sort="original-order">
+                <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
 
-                    <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-                        <li data-filter="*" class="filter-active">All</li>
-                        <li data-filter=".filter-app">App</li>
-                        <li data-filter=".filter-product">Product</li>
-                        <li data-filter=".filter-branding">Branding</li>
-                        <li data-filter=".filter-books">Books</li>
-                    </ul><!-- End Portfolio Filters -->
+                    <div class="mb-3">
+                        <label for="incidenttype" class="form-label">Incident type</label>
+                        <select class="form-select" name="incidenttype" id="incidenttype" required>
+                            <option value="" disabled selected>Select an incident type</option>
+                            @foreach ($incident as $incidenttype)
+                                <option value="{{ $incidenttype->name }}">{{ $incidenttype->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                    <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <select class="form-select" name="location" id="location" required>
+                            <option value="" disabled selected>Select a location</option>
+                            @foreach ($barangay as $barangay)
+                                <option value="{{ $barangay->barangay }}">{{ $barangay->barangay }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/app-1.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid"
-                                        alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">App 1</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="severity" class="form-label">Severity</label>
+                            <select class="form-select" name="severity" id="severity" required>
+                                <option value="" disabled selected>Select severity</option>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/product-1.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid"
-                                        alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">Product 1</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
+                        <div class="col-md-6">
+                            <label for="affected_people" class="form-label">Number of People Affected</label>
+                            <input type="number" class="form-control" id="affected_people" name="num_affected"
+                                min="0">
+                        </div>
+                    </div>
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/branding-1.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/branding-1.jpg"
-                                        class="img-fluid" alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">Branding 1</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
+                    <div class="mb-3">
+                        <label for="details" class="form-label">Details</label>
+                        <textarea class="form-control" name="details" id="details" cols="30" rows="5" required></textarea>
+                    </div>
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/books-1.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/books-1.jpg" class="img-fluid"
-                                        alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">Books 1</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
+                    <div class="mb-3">
+                        <label for="urgent_needs" class="form-label">Urgent Needs</label>
+                        <textarea class="form-control" id="urgent_needs" name="needs" rows="3"></textarea>
+                    </div>
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/app-2.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/app-2.jpg" class="img-fluid"
-                                        alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">App 2</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control" name="image" id="image">
+                    </div>
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/product-2.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/product-2.jpg" class="img-fluid"
-                                        alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">Product 2</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
+                    <div class="mb-3">
+                        <label for="" class="form-label">Contact Info</label>
+                        <input type="tel" name="" class="form-control" id="" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary ms-auto">Submit</button>
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/branding-2.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/branding-2.jpg"
-                                        class="img-fluid" alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">Branding 2</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/books-2.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/books-2.jpg" class="img-fluid"
-                                        alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">Books 2</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/app-3.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/app-3.jpg" class="img-fluid"
-                                        alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">App 3</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/product-3.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/product-3.jpg" class="img-fluid"
-                                        alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">Product 3</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/branding-3.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/branding-3.jpg"
-                                        class="img-fluid" alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">Branding 3</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                            <div class="portfolio-content h-100">
-                                <a href="assets/img/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app"
-                                    class="glightbox"><img src="assets/img/portfolio/books-3.jpg" class="img-fluid"
-                                        alt=""></a>
-                                <div class="portfolio-info">
-                                    <h4><a href="portfolio-details.html" title="More Details">Books 3</a></h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur</p>
-                                </div>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                    </div><!-- End Portfolio Container -->
-
-                </div>
+                </form>
 
             </div>
 
         </section><!-- /Portfolio Section -->
-
-        <!-- Pricing Section -->
-        <section id="pricing" class="pricing section">
-
-            <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
-                <h2>Pricing</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-            </div><!-- End Section Title -->
-
-            <div class="container">
-
-                <div class="row gy-4">
-
-                    <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="pricing-item">
-                            <h3>Free Plan</h3>
-                            <p class="description">Ullam mollitia quasi nobis soluta in voluptatum et sint palora dex
-                                strater</p>
-                            <h4><sup>$</sup>0<span> / month</span></h4>
-                            <a href="#" class="cta-btn">Start a free trial</a>
-                            <p class="text-center small">No credit card required</p>
-                            <ul>
-                                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                                <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span>
-                                </li>
-                                <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis
-                                        hendrerit</span></li>
-                                <li class="na"><i class="bi bi-x"></i> <span>Voluptate id voluptas qui sed aperiam
-                                        rerum</span></li>
-                                <li class="na"><i class="bi bi-x"></i> <span>Iure nihil dolores recusandae odit
-                                        voluptatibus</span></li>
-                            </ul>
-                        </div>
-                    </div><!-- End Pricing Item -->
-
-                    <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="pricing-item featured">
-                            <p class="popular">Popular</p>
-                            <h3>Business Plan</h3>
-                            <p class="description">Ullam mollitia quasi nobis soluta in voluptatum et sint palora dex
-                                strater</p>
-                            <h4><sup>$</sup>29<span> / month</span></h4>
-                            <a href="#" class="cta-btn">Start a free trial</a>
-                            <p class="text-center small">No credit card required</p>
-                            <ul>
-                                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-                                <li><i class="bi bi-check"></i> <span>Voluptate id voluptas qui sed aperiam
-                                        rerum</span></li>
-                                <li class="na"><i class="bi bi-x"></i> <span>Iure nihil dolores recusandae odit
-                                        voluptatibus</span></li>
-                            </ul>
-                        </div>
-                    </div><!-- End Pricing Item -->
-
-                    <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="pricing-item">
-                            <h3>Developer Plan</h3>
-                            <p class="description">Ullam mollitia quasi nobis soluta in voluptatum et sint palora dex
-                                strater</p>
-                            <h4><sup>$</sup>49<span> / month</span></h4>
-                            <a href="#" class="cta-btn">Start a free trial</a>
-                            <p class="text-center small">No credit card required</p>
-                            <ul>
-                                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-                                <li><i class="bi bi-check"></i> <span>Voluptate id voluptas qui sed aperiam
-                                        rerum</span></li>
-                                <li><i class="bi bi-check"></i> <span>Iure nihil dolores recusandae odit
-                                        voluptatibus</span></li>
-                            </ul>
-                        </div>
-                    </div><!-- End Pricing Item -->
-
-                </div>
-
-            </div>
-
-        </section><!-- /Pricing Section -->
 
         <!-- Faq Section -->
         <section id="faq" class="faq section light-background">

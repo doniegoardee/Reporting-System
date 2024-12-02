@@ -16,6 +16,7 @@ use App\Http\Controllers\Users\Setting;
 use App\Http\Controllers\Users\ChatBotController;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LpageController;
 use App\Http\Controllers\Users\Notification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -30,9 +31,13 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get("/", [LpageController::class, 'index'])->name('Lpage');
+
+
 Route::get("/home", [HomeController::class, 'home'])->name('h');
 
 Auth::routes();
