@@ -15,50 +15,86 @@
             margin-bottom: 20px;
         }
 
-        .field {
-            margin-bottom: 10px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            table-layout: fixed; /* Fixed table layout */
+            margin-left: 20px; /* Move the table to the left */
         }
 
-        .label {
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+            word-wrap: break-word; /* Allow wrapping for long words */
+            overflow: hidden; /* Prevent overflow */
+            text-overflow: ellipsis; /* Display ellipsis for overflowed text */
+        }
+
+        th {
+            background-color: #f2f2f2;
             font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        @media screen and (max-width: 768px) {
+            table {
+                font-size: 14px;
+                margin-left: 10px; /* Reduce margin on smaller screens */
+            }
+
+            th,
+            td {
+                padding: 8px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    @foreach ($reports as $report)
-        <div class="title">Incident Report</div>
+    <div class="title">Incident Reports</div>
 
-        <div class="field">
-            <span class="label">Subject Type: </span> {{ $report->subject_type }}
-        </div>
-        <div class="field">
-            <span class="label">Location: </span> {{ $report->location }}
-        </div>
-        <div class="field">
-            <span class="label">Status: </span> {{ $report->status }}
-        </div>
-        <div class="field">
-            <span class="label">Description: </span> {{ $report->description }}
-        </div>
-        <div class="field">
-            <span class="label">Severity: </span> {{ $report->severity }}
-        </div>
-        <div class="field">
-            <span class="label">Number Affected: </span> {{ $report->num_affected }}
-        </div>
-        <div class="field">
-            <span class="label">Needs: </span> {{ $report->needs }}
-        </div>
-        <div class="field">
-            <span class="label">Responding Agency: </span> {{ $report->responding_agency }}
-        </div>
-        <div class="field">
-            <span class="label">Resolved Time: </span>
-            {{ $report->resolved_time ? $report->resolved_time->format('F j, Y, g:i a') : 'N/A' }}
-        </div>
-    @endforeach
+    <table>
+        <thead>
+            <tr>
+                <th>Subject Type</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Description</th>
+                <th>Severity</th>
+                <th>Number Affected</th>
+                <th>Needs</th>
+                <th>Responding Agency</th>
+                <th>Resolved Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($reports as $report)
+                <tr>
+                    <td>{{ $report->subject_type }}</td>
+                    <td>{{ $report->location }}</td>
+                    <td>{{ $report->status }}</td>
+                    <td>{{ $report->description }}</td>
+                    <td>{{ $report->severity }}</td>
+                    <td>{{ $report->num_affected }}</td>
+                    <td>{{ $report->needs }}</td>
+                    <td>{{ $report->responding_agency }}</td>
+                    <td>{{ $report->resolved_time ? $report->resolved_time->format('F j, Y, g:i a') : 'N/A' }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
 </body>
 
 </html>

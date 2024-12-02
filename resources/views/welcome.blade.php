@@ -105,7 +105,7 @@
                 data-bs-interval="5000">
 
                 <div class="carousel-item active">
-                    <img src="assets/img/hero-carousel/hero-carousel-1.jpg" alt="">
+                    <img src="image/sample.jpg" alt="">
                     <div class="carousel-container">
                         <h2>We are professional</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -413,12 +413,12 @@
 
             <div class="container">
 
-                <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('store') }}" method="post" style="border:.1px solid black; padding:15px 15px 15px; border-radius:5px" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">
-                        <label for="incidenttype" class="form-label">Incident type</label>
-                        <select class="form-select" name="incidenttype" id="incidenttype" required>
+                        <label for="incidenttype" class="form-label">Incident Type</label>
+                        <select class="form-select" name="subject_type" id="incidenttype" required>
                             <option value="" disabled selected>Select an incident type</option>
                             @foreach ($incident as $incidenttype)
                                 <option value="{{ $incidenttype->name }}">{{ $incidenttype->name }}</option>
@@ -448,9 +448,8 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label for="affected_people" class="form-label">Number of People Affected</label>
-                            <input type="number" class="form-control" id="affected_people" name="num_affected"
-                                min="0">
+                            <label for="num_affected" class="form-label">Number of People Affected</label>
+                            <input type="number" class="form-control" id="num_affected" name="num_affected" min="0">
                         </div>
                     </div>
 
@@ -460,8 +459,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="urgent_needs" class="form-label">Urgent Needs</label>
-                        <textarea class="form-control" id="urgent_needs" name="needs" rows="3"></textarea>
+                        <label for="needs" class="form-label">Urgent Needs</label>
+                        <textarea class="form-control" id="needs" name="needs" rows="3"></textarea>
                     </div>
 
                     <div class="mb-3">
@@ -470,12 +469,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="" class="form-label">Contact Info</label>
-                        <input type="tel" name="" class="form-control" id="" required>
+                        <label for="contact" class="form-label">Contact Info</label>
+                        <input type="tel" name="contact" class="form-control" id="contact" required>
                     </div>
-                    <button type="submit" class="btn btn-primary ms-auto">Submit</button>
 
+                    <button type="submit" class="btn btn-primary ms-auto">Submit</button>
                 </form>
+
 
             </div>
 

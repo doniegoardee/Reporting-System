@@ -11,7 +11,13 @@
                 height: 250px;
             }
         }
+
+        .chartjs-legend li.underline {
+        text-decoration: underline;
+    }
     </style>
+
+
     <div class="page-content scrollable-content bg-light">
         <div class="page-header">
             <div class="container-fluid">
@@ -79,18 +85,20 @@
                             </tbody>
                         </table>
 
-                        <div class="row mt-4">
-                            <div class="col-6">
-                                <div class="chart-container">
+                        <div class="row mt-4 d-flex align-items-start">
+                            <div class="col-md-8 col-12">
+                                <div class="chart-container" style="width: 100%; max-width: 100%; margin: auto; height: 600px;">
                                     <canvas id="incidentTypeChart"></canvas>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="chart-container">
+                            <div class="col-md-4 col-12">
+                                <div class="chart-container" style="width: 100%; max-width: 100%; margin: auto; height: 600px;">
                                     <canvas id="incidentTypeChart-pie"></canvas>
                                 </div>
                             </div>
                         </div>
+
+
                     @endif
                 </div>
             </div>
@@ -98,16 +106,27 @@
             <script>
                 var ctx = document.getElementById('incidentTypeChart').getContext('2d');
 
-                // Colors mapped to the labels for the legend
-                var backgroundColors = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff'];
+                var reportCountByType = @json($reportCountByType);
+
+                var labels = reportCountByType.map(function(report) {
+                    return report.subject_type;
+                });
+
+                var data = reportCountByType.map(function(report) {
+                    return report.count;
+                });
+
+                var backgroundColors = reportCountByType.map(function(report) {
+                    return report.color || '#ff6384';
+                });
 
                 var chart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: @json($reportCountByType->pluck('subject_type')),
+                        labels: labels,
                         datasets: [{
                             label: 'Incident Types',
-                            data: @json($reportCountByType->pluck('count')),
+                            data: data,
                             backgroundColor: backgroundColors,
                             borderColor: '#ffffff',
                             borderWidth: 2
@@ -122,11 +141,10 @@
                                 align: 'start',
                                 labels: {
                                     generateLabels: function(chart) {
-                                        // Combine labels and values for the legend
                                         var labels = chart.data.labels;
                                         var data = chart.data.datasets[0].data;
                                         return labels.map((label, index) => ({
-                                            text: `${label} = ${data[index]}`, // Combine label and value
+                                            text: `${label} = ${data[index]}`,
                                             fillStyle: backgroundColors[index],
                                             strokeStyle: backgroundColors[index],
                                             hidden: false,
@@ -177,64 +195,73 @@
                 });
             </script>
 
-<script>
-    var ctx = document.getElementById('incidentTypeChart-pie').getContext('2d');
+            <script>
+                var ctxPie = document.getElementById('incidentTypeChart-pie').getContext('2d');
 
-    // Colors mapped to the labels for the legend
-    var backgroundColors = ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff'];
+                var backgroundColorsPie = @json($reportCountByType->map(function($report) use ($colorMap) {
+                    return $colorMap[$report->subject_type] ?? '#ff6384'; // Fallback color
+                }));
 
-    var chart = new Chart(ctx, {
-        type: 'pie', // Change chart type to 'pie'
-        data: {
-            labels: @json($reportCountByType->pluck('subject_type')),
-            datasets: [{
-                label: 'Incident Types',
-                data: @json($reportCountByType->pluck('count')),
-                backgroundColor: backgroundColors,
-                borderColor: '#ffffff',
-                borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'right', // Position the legend to the right of the chart
-                    align: 'start', // Align legend items to the start
-                    labels: {
-                        generateLabels: function(chart) {
-                            // Combine labels and values for the legend
-                            var labels = chart.data.labels;
-                            var data = chart.data.datasets[0].data;
-                            return labels.map((label, index) => ({
-                                text: `${label} = ${data[index]}`, // Combine label and value
-                                fillStyle: backgroundColors[index],
-                                strokeStyle: backgroundColors[index],
-                                hidden: false,
-                                index: index
-                            }));
-                        },
-                        boxWidth: 15,
-                        font: {
-                            size: 14,
-                            family: 'Arial'
-                        },
-                        color: '#333'
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            let value = tooltipItem.raw;
-                            return `${tooltipItem.label}: ${value} incidents`;
+                var chartPie = new Chart(ctxPie, {
+                    type: 'pie',
+                    data: {
+                        labels: @json($reportCountByType->pluck('subject_type')),
+                        datasets: [{
+                            label: 'Incident Types',
+                            data: @json($reportCountByType->pluck('count')),
+                            backgroundColor: backgroundColorsPie,
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'right',
+                                align: 'start',
+                                labels: {
+                                    generateLabels: function(chart) {
+                                        var labels = chart.data.labels;
+                                        var data = chart.data.datasets[0].data;
+                                        return labels.map((label, index) => ({
+                                            text: `${label} = ${data[index]}`,
+                                            fillStyle: backgroundColorsPie[index],
+                                            strokeStyle: backgroundColorsPie[index],
+                                            hidden: false,
+                                            index: index
+                                        }));
+                                    },
+                                    boxWidth: 15,
+                                    font: {
+                                        size: 14,
+                                        family: 'Arial'
+                                    },
+                                    color: '#333',
+                                    onClick: function(event, legendItem) {
+                                        var index = legendItem.index;
+                                        var meta = chartPie.getDatasetMeta(0);
+                                        var item = meta.data[index];
+
+                                        var alreadyUnderlined = item._model.textDecoration === 'underline';
+                                        item._model.textDecoration = alreadyUnderlined ? '' : 'underline';
+                                        chartPie.update();
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        let value = tooltipItem.raw;
+                                        return `${tooltipItem.label}: ${value} incidents`;
+                                    }
+                                }
+                            }
                         }
                     }
-                }
-            }
-        }
-    });
-</script>
+                });
+            </script>
 
 
         </div>

@@ -36,6 +36,7 @@ use Illuminate\Support\Facades\Auth;
 // });
 
 Route::get("/", [LpageController::class, 'index'])->name('Lpage');
+Route::post('/store', [LpageController::class,'store'])->name('store');
 
 
 Route::get("/home", [HomeController::class, 'home'])->name('h');

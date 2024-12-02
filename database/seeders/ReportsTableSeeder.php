@@ -16,17 +16,15 @@ class ReportsTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // Iterate over each month of 2024
         for ($month = 1; $month <= 12; $month++) {
-            // Generate a random number of records for each month (between 5 and 10)
             $recordsPerMonth = rand(5, 10);
 
             for ($i = 0; $i < $recordsPerMonth; $i++) {
                 $date = Carbon::create(2024, $month, rand(1, 28), rand(0, 23), rand(0, 59), rand(0, 59));
 
                 Reports::create([
-                    'user_id' => 1, // Assuming 50 users exist
-                    'subject_type' => $faker->randomElement(['flood', 'earthquake', 'fire', 'medical emergency', 'landslide']), // Assuming 10 incident types
+                    'user_id' => 1,
+                    'subject_type' => $faker->randomElement(['Flood', 'Earthquake', 'Fire Related', 'Medical Emergency']),
                     'location' => $faker->address,
                     'status' => $faker->randomElement(['pending', 'closed', 'resolved']),
                     'description' => $faker->sentence(10),

@@ -44,7 +44,7 @@ class ChatBotController extends Controller
             } else {
                 $response = "Here are your reports and their statuses:\n\n <br></br>";
                 foreach ($reports as $report) {
-                    $response .= "- {$report->subject_type}:  {$report->status}\n <br></br>";
+                    $response .= " {$report->id}- {$report->subject_type}:  {$report->status}\n <br></br>";
                 }
 
                 $bot->reply($response);

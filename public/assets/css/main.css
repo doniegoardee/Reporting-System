@@ -18,7 +18,7 @@
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
+:root {
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #555555; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #0d3035; /* Color for headings, subheadings and title throughout the website */
@@ -143,7 +143,7 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: rgba(0, 0, 0, 0.5);
+  --background-color: rgba(59, 53, 53, 0.5);
   --default-color: #ffffff;
   --heading-color: #ffffff;
   color: var(--default-color);
@@ -172,7 +172,7 @@ h6 {
 .header .btn-getstarted,
 .header .btn-getstarted:focus {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  background:rgb(93, 93, 229);
   font-size: 14px;
   padding: 8px 25px;
   margin: 0 0 0 30px;
@@ -209,7 +209,7 @@ h6 {
 /* Global Header on Scroll
 ------------------------------*/
 .scrolled .header {
-  --background-color: #000000;
+  --background-color: rgb(29, 200, 243);
 }
 
 /*--------------------------------------------------------------
@@ -262,7 +262,7 @@ h6 {
   .navmenu li:hover>a,
   .navmenu .active,
   .navmenu .active:focus {
-    color: var(--nav-hover-color);
+    color:rgb(35, 30, 30);
   }
 
   .navmenu .dropdown ul {
