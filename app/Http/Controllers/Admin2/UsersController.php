@@ -96,8 +96,12 @@ class UsersController extends Controller
 
     public function activitylog()
     {
-        $activity = Activity::all();
+        $activity_types = [
+            'App\Models\User' => 'User Module',
+            'App\Models\Reports' => 'Reports Module',
+        ];
 
-        return view('admin-2.activity-log', compact('activity'));
+        $logs = Activity::with('subject', 'causer')->orderBy('created_at', 'desc')->paginate(10);
+        return view('admin-2.activity-log', compact('logs', 'activity_types'));
     }
 }

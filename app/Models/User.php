@@ -61,7 +61,6 @@ class User extends Authenticatable
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['name', 'email']);
-        // Chain fluent methods for configuration options
+            ->logOnly(['name', 'email', 'role']);
     }
 }

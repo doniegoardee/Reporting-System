@@ -16,7 +16,6 @@ class Status extends Controller
 
     public function updateStatus($id, $status, Request $request)
     {
-
         $data = Reports::find($id);
         if (!$data) {
             return redirect()->back()->withErrors(['Report not found.']);
@@ -45,6 +44,11 @@ class Status extends Controller
                     foreach ($admins as $admin) {
                         Notification::send($admin, new Notifications('A report has been resolved. Report ID: ' . $data->id));
                     }
+
+                    activity()
+                        ->causedBy(auth()->user())
+                        ->performedOn($data)
+                        ->log('Report Resolved');
                     break;
 
                 case 'closed':
@@ -57,6 +61,11 @@ class Status extends Controller
                     foreach ($admins as $admin) {
                         Notification::send($admin, new Notifications('A report has been closed. Report ID: ' . $data->id));
                     }
+
+                    activity()
+                        ->causedBy(auth()->user())
+                        ->performedOn($data)
+                        ->log('Report Closed');
                     break;
 
                 default:

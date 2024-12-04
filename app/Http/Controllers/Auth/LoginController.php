@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Spatie\Activitylog\Models\Activity;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -45,10 +48,21 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
         if (auth()->attempt(['email' => $input['email'], 'password' => $input['password']])) {
-            if (auth()->user()->role == 'user') {
+            $user = auth()->user();
+
+
+            if ($user instanceof User) {
+                activity()
+                    ->causedBy($user)
+                    ->performedOn($user)
+                    ->log('logged in');
+            }
+
+            if ($user->role == 'user') {
                 return redirect()->route('home.user');
-            } else if (auth()->user()->role == 'admin-2') {
+            } elseif ($user->role == 'admin-2') {
                 return redirect()->route('admin-2.index');
             }
         } else {

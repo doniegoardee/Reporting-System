@@ -11,4 +11,19 @@ class Activity extends Model
 
     protected $table = 'activity_log';
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'causer_id');
+    }
+
+    // Add the polymorphic relationship
+    public function subject()
+    {
+        return $this->morphTo();
+    }
+
+    public function causer()
+    {
+        return $this->morphTo();
+    }
 }

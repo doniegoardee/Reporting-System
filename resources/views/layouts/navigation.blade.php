@@ -114,14 +114,13 @@
     }
 
     .nav-link i {
-        font-size: 1.2rem; /* Ensures consistent icon size */
+        font-size: 1.2rem;
         width: 25px;
         height: 25px;
-        line-height: 25px; /* Centers the icon */
+        line-height: 25px;
         text-align: center;
         border-radius: 50%;
         background: transparent;
-        /* color: black; */
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -129,8 +128,8 @@
     }
 
     .nav-link i:hover {
-        background-color: rgba(13, 11, 13, 0.1); /* Light purple hover effect */
-        color: #130a19; /* Darker purple for hover */
+        background-color: rgba(13, 11, 13, 0.1);
+        color: #130a19;
     }
 
     .img-thumbnail {
@@ -138,8 +137,9 @@
         height: 25px;
         border-radius: 50%;
         margin-left: 10px;
-        }
+    }
 </style>
+
 
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
@@ -157,13 +157,14 @@
                 <li><a href=""></a></li>
                 <div class="d-flex align-items-center">
 
-                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    class="nav-link messages-toggle">
-                    <i style="font-size: 19px" class="fa-solid fa-bell"></i>
-                    <span class="badge dashbg-1 {{ $user->notifications->where('read_at', null)->count() === 0 ? 'invisible' : '' }}">
-                        {{ $user->notifications->where('read_at', null)->count() }}
-                    </span>
-                </a>
+                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" class="nav-link messages-toggle">
+                        <i style="font-size: 19px" class="fa-solid fa-bell"></i>
+                        <span
+                            class="badge dashbg-1 {{ $user->notifications->where('read_at', null)->count() === 0 ? 'invisible' : '' }}">
+                            {{ $user->notifications->where('read_at', null)->count() }}
+                        </span>
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1"
                         style="max-height: 300px; overflow-y: auto;">
                         @if ($user && $user->notifications->count())
@@ -172,8 +173,8 @@
                             @endphp
                             @if ($unreadNotifications->count())
                                 @foreach ($unreadNotifications as $notification)
-                                    <a class="dropdown-item notification-item bg-lightblue" href="#"
-                                        onclick="markAsRead('{{ $notification->id }}')">
+                                    <a class="dropdown-item notification-item bg-lightblue" style="color:black; "
+                                        href="#" onclick="markAsRead('{{ $notification->id }}')">
                                         {{ $notification->data['name'] }}
                                     </a>
                                 @endforeach
@@ -187,7 +188,8 @@
                         @endforeach
                     </div>
 
-                    <button type="button" class="nav-link" data-toggle="modal" data-target="#chatModal" style="border:none;">
+                    <button type="button" class="nav-link" data-toggle="modal" data-target="#chatModal"
+                        style="border:none;">
                         <i class="fa-solid fa-comment"></i>
                     </button>
                     <a href="{{ route('user.settings') }}">
