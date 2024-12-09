@@ -105,20 +105,31 @@
                                             <td class="text-center">{{ $report->location }}</td>
                                             <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
                                             <td class="text-center">
-                                                <div class="d-flex justify-content-center p-0">
+                                                <div class="d-flex justify-content-center align-items-center p-0">
+                                                    @foreach ($incident as $data)
+                                                        @if ($data->name === $report->subject_type)
+                                                            <a href="{{ route('admin-2.send.email', ['id' => $report->id]) }}" class="btn me-2" style="background-color: {{ $data->color }}; color: white;">
+                                                                {{ $data->agency }}
+                                                            </a>
+                                                        @endif
+                                                    @endforeach
+
                                                     <a href="#"
-                                                        class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2 me-2"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal{{ $report->id }}">
+                                                       class="btn btn-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2 me-2"
+                                                       data-bs-toggle="modal"
+                                                       data-bs-target="#exampleModal{{ $report->id }}">
                                                         View
                                                     </a>
 
-                                                    <a href="" class="btn btn-success" data-bs-toggle="modal"
-                                                        data-bs-target="#resolveModal{{ $report->id }}">
+                                                    <a href=""
+                                                       class="btn btn-success"
+                                                       data-bs-toggle="modal"
+                                                       data-bs-target="#resolveModal{{ $report->id }}">
                                                         Mark as Resolved
                                                     </a>
                                                 </div>
                                             </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -8,9 +8,6 @@ use Illuminate\Database\Seeder;
 
 class IncidentTypeSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $incidentTypes = [
@@ -18,6 +15,9 @@ class IncidentTypeSeeder extends Seeder
                 'name' => 'Flood',
                 'image' => '1727670395.png',
                 'color' => '#33a7ff',
+                'agency' => 'MDRRMO',
+                'contact' => '09123456789',
+                'email' => 'ceyojdan13@gmail.com',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -25,6 +25,9 @@ class IncidentTypeSeeder extends Seeder
                 'name' => 'Earthquake',
                 'image' => '1727670880.png',
                 'color' => '#61511a',
+                'agency' => 'MDRRMO',
+                'contact' => '09123456789',
+                'email' => 'ceyojdan13@gmail.com',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -32,6 +35,9 @@ class IncidentTypeSeeder extends Seeder
                 'name' => 'Medical Emergency',
                 'image' => '1727670847.png',
                 'color' => '#1ce93e',
+                'agency' => 'MDRRMO',
+                'contact' => '09123456789',
+                'email' => 'ceyojdan13@gmail.com',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -39,6 +45,9 @@ class IncidentTypeSeeder extends Seeder
                 'name' => 'Fire Related',
                 'image' => 'fire.png',
                 'color' => '#d91212',
+                'agency' => 'BFP',
+                'contact' => '09123456789',
+                'email' => 'ceyojdan13@gmail.com',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

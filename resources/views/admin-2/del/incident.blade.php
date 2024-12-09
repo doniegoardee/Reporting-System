@@ -22,6 +22,9 @@
                                 <th class="text-center">ID</th>
                                 <th class="text-center">Incident Type</th>
                                 <th class="text-center">Actions</th>
+                                <th class="text-center">Coresponding Agency</th>
+                                <th class="text-center">Contact Info</th>
+                                <th class="text-center">Email</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,6 +32,9 @@
                                 <tr>
                                     <td class="text-center">{{ $incident->id }}</td>
                                     <td class="text-center">{{ $incident->name }}</td>
+                                    <td class="text-center">{{ $incident->agency }}</td>
+                                    <td class="text-center">{{ $incident->contact }}</td>
+                                    <td class="text-center">{{ $incident->email }}</td>
                                     <td class="text-center">
                                         <form action="{{ route('admin-2.del-inc', $incident->id) }}" method="POST"
                                             class="delete-form">
@@ -58,6 +64,9 @@
                             <tr>
                                 <th class="text-center">ID</th>
                                 <th class="text-center">Incident Type</th>
+                                <th class="text-center">Coresponding Agency</th>
+                                <th class="text-center">Contact Info</th>
+                                <th class="text-center">Email</th>
                                 {{-- <th class="text-center">Actions</th> --}}
                             </tr>
                         </thead>
@@ -66,6 +75,9 @@
                                 <tr>
                                     <td class="text-center">{{ $incidents->id }}</td>
                                     <td class="text-center">{{ $incidents->name }}</td>
+                                    <td class="text-center">{{ $incidents->agency }}</td>
+                                    <td class="text-center">{{ $incidents->contact }}</td>
+                                    <td class="text-center">{{ $incidents->email }}</td>
                                     {{-- <td class="text-center">
                                         <form action="{{ route('admin-2.del-inc', $incident->id) }}" method="POST"
                                             class="delete-form">

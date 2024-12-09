@@ -23,6 +23,9 @@ class BarangayAndIncident extends Controller
             'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'color' => 'nullable|string|max:7',
+            'agency' => 'nullable|string|max:100',
+            'contact' => 'nullable|string|max:15',
+            'email' => 'nullable|email|max:255',
         ]);
 
         $imageName = null;
@@ -36,6 +39,9 @@ class BarangayAndIncident extends Controller
             'name' => $request->name,
             'image' => $imageName,
             'color' => $request->color,
+            'agency' => $request->agency,
+            'contact' => $request->contact,
+            'email' => $request->email,
         ]);
 
         return redirect()->route('admin-2.incident')->with('success', 'Incident added successfully!');

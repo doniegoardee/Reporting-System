@@ -7,6 +7,8 @@ use App\Models\Reports;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ReportMail;
 
 class HomeController extends Controller
 {
@@ -63,6 +65,10 @@ class HomeController extends Controller
         $reports = Reports::whereIn('status', ['pending', 'solved'])->paginate(10);
         $resolved = Reports::where('status', 'solved')->paginate(10);
         $pending = Reports::where('status', 'pending')->paginate(10);
+
+        Mail::to('reportingsystem39@gmail.com')->send(new ReportMail());
+        return 'Test email sent successfully!';
+
 
         $recent = Reports::where('status', 'pending')->latest()->take(5)->get();
         return view('admin.adminhome', compact(
