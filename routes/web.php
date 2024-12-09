@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 
 use App\Http\Controllers\Admin2\ExportFileController;
 use App\Http\Controllers\admin2\Adminreports;
+use App\Http\Controllers\admin2\MailController;
 use App\Http\Controllers\Admin2\Analysis;
 use App\Http\Controllers\Admin2\BarangayAndIncident;
 use App\Http\Controllers\Admin2\FilterController;
@@ -20,6 +21,9 @@ use App\Http\Controllers\LpageController;
 use App\Http\Controllers\Users\Notification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ReportMail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +46,10 @@ Route::post('/store', [LpageController::class,'store'])->name('store');
 Route::get("/home", [HomeController::class, 'home'])->name('h');
 
 Auth::routes();
+
+Route::get('/mail', function () {
+    Mail::to('smokefacebook02@gmail.com')->send(new ReportMail());
+});
 
 
 // user routes
@@ -140,7 +148,7 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
 
     Route::get('/profile', [UsersController::class, 'show'])->name('profile.show');
 
-
+    Route::get('/send-email/{id}', [MailController::class, 'response'])->name('send.email');
 
 
 

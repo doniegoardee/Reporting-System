@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->string('color')->nullable();
+            $table->string('agency')->nullable();
+            $table->string('contact')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

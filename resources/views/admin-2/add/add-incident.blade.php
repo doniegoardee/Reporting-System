@@ -43,8 +43,23 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="image">Image (Optional)</label>
-                            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            <label for="name">Coresponding Agency</label>
+                            <input type="text" class="form-control" id="name" name="agency" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Contact</label>
+                            <input type="tel" class="form-control" id="name" name="contact" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Email</label>
+                            <input type="email" class="form-control" id="name" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">Image (Optional)(transparent)</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*" placeholder="make sure its transparent">
                             <img id="imagePreview" class="image-preview" src="#" alt="Image Preview" style="display: none;">
                         </div>
 
