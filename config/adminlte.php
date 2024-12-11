@@ -113,11 +113,11 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'image/logo.jpg',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'width' => 100,
+            'height' => 100,
         ],
     ],
 
@@ -301,9 +301,14 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type' => 'navbar-search',
-            'text' => 'Search',
+            'type' => 'navbar-notification',
+            'text' => '',
             'topnav_right' => true,
+            'url' => '#',
+            'icon' => 'fa fa-bell',
+            'badge' => 5,
+            'badge_color' => 'warning',
+
         ],
         [
             'type' => 'fullscreen-widget',

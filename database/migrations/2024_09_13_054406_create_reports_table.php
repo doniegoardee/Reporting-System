@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('incident_type_id')->nullable();
             $table->string('subject_type');
             $table->string('location');
             $table->string('status');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->text('name')->nullable();
             $table->string('email')->nullable();
-            $table->text('contact');
-            $table->text('severity');
-            $table->text('num_affected');
-            $table->text('needs');
+            $table->text('contact')->nullable();
+            $table->text('severity')->nullable();
+            $table->text('num_affected')->nullable();
+            $table->text('needs')->nullable();
             $table->string('image')->nullable();
             $table->string('responding_agency')->nullable();
             $table->string('resolved_time')->nullable();

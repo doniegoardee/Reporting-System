@@ -1,4 +1,3 @@
-{{-- resources/views/admin-2/reportMailContent.blade.php --}}
 <!DOCTYPE html>
 <html>
 <head>

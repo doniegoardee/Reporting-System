@@ -74,10 +74,17 @@
             <div class="card mb-4">
                 <div class="card-body">
 
-                        @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
+                    @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
 
                     @if($pending->isEmpty())
                         <div class="alert  text-center" role="alert">
@@ -105,29 +112,44 @@
                                             <td class="text-center">{{ $report->location }}</td>
                                             <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
                                             <td class="text-center">
-                                                <div class="d-flex justify-content-center align-items-center p-0">
+                                                <div class="d-flex justify-content-between align-items-center" style="gap: 10px;">
                                                     @foreach ($incident as $data)
                                                         @if ($data->name === $report->subject_type)
-                                                            <a href="{{ route('admin-2.send.email', ['id' => $report->id]) }}" class="btn me-2" style="background-color: {{ $data->color }}; color: white;">
+                                                            <a href="{{ route('admin-2.send.email', ['id' => $report->id]) }}"
+                                                               class="btn"
+                                                               style="background-color: {{ $data->color }}; color: white; flex: 1; text-align: center;">
                                                                 {{ $data->agency }}
                                                             </a>
                                                         @endif
                                                     @endforeach
 
+                                                    @foreach ($archive as $datas)
+                                                    @if ($datas->name === $report->subject_type)
+                                                        <a href="{{ route('admin-2.send.email', ['id' => $report->id]) }}"
+                                                           class="btn"
+                                                           style="background-color: rgb(205, 8, 8); color: white; flex: 1; text-align: center;">
+                                                            'deleted'
+                                                        </a>
+                                                    @endif
+                                                @endforeach
+
                                                     <a href="#"
-                                                       class="btn btn-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2 me-2"
+                                                       class="btn btn-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
                                                        data-bs-toggle="modal"
-                                                       data-bs-target="#exampleModal{{ $report->id }}">
+                                                       data-bs-target="#exampleModal{{ $report->id }}"
+                                                       style="flex: 1; text-align: center;">
                                                         View
                                                     </a>
 
-                                                    <a href=""
+                                                    <a href="javascript:void(0)"
                                                        class="btn btn-success"
                                                        data-bs-toggle="modal"
-                                                       data-bs-target="#resolveModal{{ $report->id }}">
+                                                       data-bs-target="#resolveModal{{ $report->id }}"
+                                                       style="flex: 1; text-align: center;">
                                                         Mark as Resolved
                                                     </a>
                                                 </div>
+
                                             </td>
 
                                         </tr>
@@ -195,13 +217,6 @@
                                 <p><strong>Date & Time:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
 
                                 <div class="mb-3">
-                                    <label for="responding-agency{{ $report->id }}" class="form-label">Responding
-                                        Agency</label>
-                                    <input type="text" class="form-control"
-                                        id="responding-agency{{ $report->id }}" name="responding_agency" required>
-                                </div>
-
-                                <div class="mb-3">
                                     <label for="resolved-time{{ $report->id }}" class="form-label">Resolved
                                         Time</label>
                                     <input type="datetime-local" class="form-control"
@@ -232,10 +247,8 @@
 
     <script>
         function submitResolveForm(reportId) {
-            const agencyInput = document.getElementById('responding-agency' + reportId);
             const resolvedTimeInput = document.getElementById('resolved-time' + reportId);
 
-            document.getElementById('hidden-responding-agency' + reportId).value = agencyInput.value;
             document.getElementById('hidden-resolved-time' + reportId).value = resolvedTimeInput.value;
 
             document.getElementById('resolve-form' + reportId).submit();

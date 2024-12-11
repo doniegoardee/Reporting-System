@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin2;
 use App\Http\Controllers\Controller;
 use App\Models\Barangay;
 use App\Models\IncidentType;
+use App\Models\ArchiveIncident;
 use App\Models\Reports;
 use Illuminate\Http\Request;
 
@@ -26,14 +27,15 @@ class Adminreports extends Controller
     {
 
         $incident = IncidentType::all();
+        $archive = ArchiveIncident::all();
         $barangay = Barangay::all();
 
         $pending = Reports::where('status', 'pending')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
 
 
-        return view('admin-2.reports.pending', compact('pending', 'incident', 'barangay'));
+        return view('admin-2.reports.pending', compact('pending', 'incident','archive', 'barangay'));
     }
 
 
@@ -46,7 +48,7 @@ class Adminreports extends Controller
 
         $resolved = Reports::where('status', 'resolved')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
 
         return view('admin-2.reports.resolved', compact('resolved', 'incident', 'barangay'));
     }
@@ -61,7 +63,7 @@ class Adminreports extends Controller
 
         $closed = Reports::where('status', 'closed')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
 
         return view('admin-2.reports.closed', compact('closed', 'incident', 'barangay'));
     }

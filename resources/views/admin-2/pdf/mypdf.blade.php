@@ -62,6 +62,8 @@
 
 <body>
 
+<h1 style="text-align: center"><b>MUNICIPALITY OF BUGUEY</b></h1>
+
     <div class="title">Incident Reports</div>
 
     <table>

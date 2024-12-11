@@ -25,10 +25,8 @@ class LpageController extends Controller
         $request->validate([
             'subject_type' => 'required|string',
             'location' => 'required|string',
-            'severity' => 'required|string|in:low,medium,high',
+            'severity' => 'nullable|string|in:low,medium,high',
             'num_affected' => 'nullable|integer|min:0',
-            'details' => 'required|string',
-            'needs' => 'nullable|string',
             'contact' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -38,10 +36,8 @@ class LpageController extends Controller
             $reports->subject_type = $request->subject_type;
             $reports->status = 'pending';
             $reports->location = $request->location;
-            $reports->description = $request->details;
             $reports->severity = $request->severity;
             $reports->num_affected = $request->num_affected ?? 0;
-            $reports->needs = $request->needs ?? '';
             $reports->contact = $request->contact;
 
             if ($request->hasFile('image')) {

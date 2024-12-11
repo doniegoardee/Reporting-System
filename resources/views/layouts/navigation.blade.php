@@ -77,14 +77,6 @@
         background: #f1f1f1;
     }
 
-    .dropdown-menu {
-        max-height: 300px;
-        overflow-y: auto;
-        padding: 5px;
-        background-color: #fff;
-        border: 1px solid #d0e7ff;
-    }
-
     .notification-item {
         background-color: #f1f8ff;
         color: #333;
@@ -149,31 +141,35 @@
             <h1 class="sitename">Reporting System</h1>
         </a>
 
-        <nav id="navmenu" class="navmenu">
-            <ul>
-                <li><a href="{{ route('home.user') }}" class="active">Home</a></li>
-                <li><a href="{{ route('user.incident') }}">Make Report</a></li>
-                <li><a href="{{ route('user.report') }}">My Reports</a></li>
-                <li><a href=""></a></li>
-                <div class="d-flex align-items-center">
 
-                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" class="nav-link messages-toggle">
+        <nav id="navmenu" class="navmenu">
+            <div class="d-flex align-items-center justify-content-between">
+                <!-- Left Section: Navigation Links -->
+                <ul class="d-flex flex-row align-items-center m-0 p-0 list-unstyled">
+                    <li class="mx-3"><a href="{{ route('home.user') }}" class="active">Home</a></li>
+                    <li class="mx-3"><a href="{{ route('user.incident') }}">Make Report</a></li>
+                    <li class="mx-3"><a href="{{ route('user.report') }}">My Reports</a></li>
+                </ul>
+
+                <!-- Right Section: Icons -->
+                <div class="d-flex align-items-center">
+                    <!-- Notification Bell -->
+                    <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        class="nav-link messages-toggle mx-1"> <!-- Changed mx-2 to mx-1 -->
                         <i style="font-size: 19px" class="fa-solid fa-bell"></i>
                         <span
                             class="badge dashbg-1 {{ $user->notifications->where('read_at', null)->count() === 0 ? 'invisible' : '' }}">
                             {{ $user->notifications->where('read_at', null)->count() }}
                         </span>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1"
-                        style="max-height: 300px; overflow-y: auto;">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1" style="max-height: 300px; overflow-y: auto;">
                         @if ($user && $user->notifications->count())
                             @php
                                 $unreadNotifications = $user->notifications->where('read_at', null);
                             @endphp
                             @if ($unreadNotifications->count())
                                 @foreach ($unreadNotifications as $notification)
-                                    <a class="dropdown-item notification-item bg-lightblue" style="color:black; "
+                                    <a class="dropdown-item notification-item bg-lightblue" style="color:black;"
                                         href="#" onclick="markAsRead('{{ $notification->id }}')">
                                         {{ $notification->data['name'] }}
                                     </a>
@@ -183,29 +179,31 @@
                             <div class="dropdown-item rounded my-2 p-2">No notifications</div>
                         @endif
                         @foreach ($user->notifications->where('read_at', '!=', null) as $notification)
-                            <a class="dropdown-item bg-light notification-item" style="color:black ;"
+                            <a class="dropdown-item bg-light notification-item" style="color:black;"
                                 href="#">{{ $notification->data['name'] }}</a>
                         @endforeach
                     </div>
 
-                    <button type="button" class="nav-link" data-toggle="modal" data-target="#chatModal"
-                        style="border:none;">
+                    <!-- Chat Icon -->
+                    <button type="button" class="nav-link mx-1" data-toggle="modal" data-target="#chatModal" style="border:none;"> <!-- Changed mx-2 to mx-1 -->
                         <i class="fa-solid fa-comment"></i>
                     </button>
-                    <a href="{{ route('user.settings') }}">
-                        <img src="{{ asset($user->profile_image) }}" class="img-thumbnail" alt="Profile Image">
+
+                    <!-- Profile Image -->
+                    <a href="{{ route('user.settings') }}" class="mx-1"> <!-- Changed mx-2 to mx-1 -->
+                        <img src="{{ asset($user->profile_image) }}" class="img-thumbnail" alt="Profile Image"
+                        style="width: 25px; height: 25px; border-radius: 50%; object-fit: cover;">
+
                     </a>
                 </div>
-            </ul>
-            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 
-
+            </div>
         </nav>
 
 
-    </div>
 
     </div>
+
 </header>
 
 

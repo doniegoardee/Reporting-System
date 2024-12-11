@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin2;
 use App\Http\Controllers\Controller;
 use App\Models\Reports;
 use App\Models\User;
+use App\Models\IncidentType; // Added to fetch dynamic agency
 use App\Notifications\Notifications;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -28,6 +29,10 @@ class Status extends Controller
 
         $admins = User::where('role', 2)->get();
 
+        // Fetch the dynamic agency based on the subject_type
+        $incidentType = IncidentType::where('name', $data->subject_type)->first();
+        $agency = $incidentType ? $incidentType->agency : 'N/A'; // Default to 'N/A' if not found
+
         if (Auth::check()) {
             $message = '';
 
@@ -37,9 +42,11 @@ class Status extends Controller
                         return redirect()->back()->withErrors(['Report is already resolved.']);
                     }
                     $data->status = 'resolved';
-                    $data->responding_agency = $request->input('responding_agency');
+                    $data->responding_agency = $agency; // Set dynamic agency
                     $data->resolved_time = $request->input('resolved_time') ? Carbon::parse($request->input('resolved_time')) : null;
                     $message = 'Report marked as resolved successfully.';
+
+                    // Send notifications
                     Notification::send($user, new Notifications('Your report has been resolved. Responding agency: ' . $data->responding_agency));
                     foreach ($admins as $admin) {
                         Notification::send($admin, new Notifications('A report has been resolved. Report ID: ' . $data->id));
@@ -57,6 +64,8 @@ class Status extends Controller
                     }
                     $data->status = 'closed';
                     $message = 'Report closed.';
+
+                    // Send notifications
                     Notification::send($user, new Notifications('Your report has been closed.'));
                     foreach ($admins as $admin) {
                         Notification::send($admin, new Notifications('A report has been closed. Report ID: ' . $data->id));

@@ -25,7 +25,7 @@ class ReportsTableSeeder extends Seeder
                 Reports::create([
                     'user_id' => 1,
                     'subject_type' => $faker->randomElement(['Flood', 'Earthquake', 'Fire Related', 'Medical Emergency']),
-                    'location' => $faker->address,
+                    'location' => $faker->randomElement(['Centro', 'Cabaritan', 'Centro Weste','Leron','Santa Maria']),
                     'status' => $faker->randomElement(['pending', 'closed', 'resolved']),
                     'description' => $faker->sentence(10),
                     'severity' => $faker->randomElement(['Low', 'Medium', 'High']),

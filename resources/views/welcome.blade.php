@@ -436,10 +436,12 @@
                         </select>
                     </div>
 
+                    <p>Additional Details</p>
+
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="severity" class="form-label">Severity</label>
-                            <select class="form-select" name="severity" id="severity" required>
+                            <select class="form-select" name="severity" id="severity">
                                 <option value="" disabled selected>Select severity</option>
                                 <option value="low">Low</option>
                                 <option value="medium">Medium</option>
@@ -452,17 +454,6 @@
                             <input type="number" class="form-control" id="num_affected" name="num_affected" min="0">
                         </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="details" class="form-label">Details</label>
-                        <textarea class="form-control" name="details" id="details" cols="30" rows="5" required></textarea>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="needs" class="form-label">Urgent Needs</label>
-                        <textarea class="form-control" id="needs" name="needs" rows="3"></textarea>
-                    </div>
-
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" class="form-control" name="image" id="image">
