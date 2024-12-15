@@ -135,7 +135,6 @@
                                                     <div class="modal-body">
                                                         <p><strong>Incident Type:</strong> {{ $report->subject_type }}</p>
                                                         <p><strong>Location:</strong> {{ $report->location }}</p>
-                                                        <p><strong>Description:</strong> {{ $report->description }}</p>
                                                         <p><strong>Status:</strong> {{ $report->status }}</p>
                                                         <p><strong>Created At:</strong>
                                                             {{ \Carbon\Carbon::parse($report->created_at)->format('d M Y, h:i A') }}

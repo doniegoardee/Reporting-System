@@ -16,11 +16,6 @@ class ControllerReports extends Controller
 {
 
 
-    public function index()
-    {
-        $reports = Reports::where('status', 'requested')->paginate(10);
-        return view('admin.reports.manage-reports', compact('reports'));
-    }
 
     public function status(Request $request)
     {
@@ -93,6 +88,9 @@ class ControllerReports extends Controller
      */
     public function store(Request $request)
     {
+
+
+
         if (Auth::check()) {
             $user = Auth::user();
             $userid = $user->id;
@@ -132,7 +130,7 @@ class ControllerReports extends Controller
 
             $reports->save();
 
-            return redirect()->back()->with('message', 'Report added successfully');
+            return redirect()->back()->with('message', 'Report submitted successfully');
         }
     }
 
@@ -196,20 +194,16 @@ class ControllerReports extends Controller
         $validatedData = $request->validate([
             'subject_type' => 'required',
             'location' => 'required',
-            'description' => 'required',
-            'severity' => 'required',
-            'num_affected' => 'required|integer|min:0',
-            'needs' => 'nullable|string',
+            'severity' => 'nullable',
+            'num_affected' => 'nullable|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $report = Reports::findOrFail($id);
         $report->subject_type = $validatedData['subject_type'];
         $report->location = $validatedData['location'];
-        $report->description = $validatedData['description'];
         $report->severity = $validatedData['severity'];
         $report->num_affected = $validatedData['num_affected'];
-        $report->needs = $validatedData['needs'];
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

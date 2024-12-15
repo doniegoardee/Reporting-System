@@ -48,7 +48,7 @@
                             <div class="row mt-3">
                                 <div class="form-group col-md-6">
                                     <label for="severity">Severity</label>
-                                    <select class="form-select" name="severity" id="severity" required>
+                                    <select class="form-select" name="severity" id="severity">
                                         <option value="low" {{ $report->severity == 'low' ? 'selected' : '' }}>Low
                                         </option>
                                         <option value="medium" {{ $report->severity == 'medium' ? 'selected' : '' }}>
@@ -59,20 +59,10 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="affected_people">Number of People Affected</label>
+                                    <label for="affected_people">Number of Household Affected</label>
                                     <input type="number" class="form-control" id="affected_people" name="num_affected"
                                         min="0" value="{{ $report->num_affected }}">
                                 </div>
-                            </div>
-
-                            <div class="form-group mt-3">
-                                <label for="description">Details</label>
-                                <textarea class="form-control" name="description" id="description" cols="30" rows="5" required>{{ $report->description }}</textarea>
-                            </div>
-
-                            <div class="form-group mt-3">
-                                <label for="urgent_needs">Urgent Needs</label>
-                                <textarea class="form-control" id="urgent_needs" name="needs" rows="3">{{ $report->needs }}</textarea>
                             </div>
 
                             <div class="form-group mt-3">

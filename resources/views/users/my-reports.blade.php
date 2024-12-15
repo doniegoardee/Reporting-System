@@ -3,6 +3,15 @@
 @section('content')
     @include('layouts.navigation')
 
+    <style>
+        .disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+    </style>
+
     <!-- Contact Section -->
     <section id="contact" class="contact section mt-5">
         <div class="page-content flex-grow-1 scrollable-content">
@@ -18,8 +27,8 @@
                                     <tr>
                                         <th></th>
                                         <th>Issue Type</th>
+                                        <th>Location</th>
                                         <th>Status</th>
-                                        <th>Description</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -28,8 +37,8 @@
                                         <tr>
                                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $index + 1 }}</td>
                                             <td>{{ $report->subject_type }}</td>
+                                            <td>{{ $report->location }}</td>
                                             <td>{{ ucfirst($report->status) }}</td>
-                                            <td>{{ $report->description }}</td>
 
                                             <td>
 
@@ -65,7 +74,6 @@
                                                         </p>
                                                         <p><strong>Location:</strong> {{ $report->location }}</p>
                                                         <p><strong>Status:</strong> {{ ucfirst($report->status) }}</p>
-                                                        <p><strong>Description:</strong> {{ $report->description }}</p>
                                                         <p><strong>Severity:</strong> {{ $report->severity }}</p>
                                                         <p><strong>Number Affected:</strong>
                                                             {{ $report->num_affected }}

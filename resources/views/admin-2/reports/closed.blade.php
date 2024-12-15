@@ -132,7 +132,6 @@
                                 <p><strong>Location:</strong> {{ $report->location }}</p>
                                 <p><strong>Date and Time:</strong> {{ $report->created_at->format('d M Y, h:i A') }}
                                 </p>
-                                <p><strong>Description:</strong> {{ $report->description }}</p>
                                 <p><strong>Severity:</strong> {{ $report->severity }}</p>
                                 <p><strong>Number of Affected People:</strong> {{ $report->num_affected }}</p>
 
