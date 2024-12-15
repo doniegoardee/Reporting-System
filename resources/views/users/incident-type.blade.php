@@ -61,7 +61,7 @@
                                     <div class="card incident-card text-center"
                                         style="background-color: {{ $incident->color }}; color: #fff;">
                                         <div class="card-body d-flex flex-column justify-content-between">
-                                            <h5 class="incident-title">{{ $incident->name }}</h5>
+                                            <h5  style="color:white;  class="incident-title">{{ $incident->name }}</h5>
                                             @if (!empty($incident->image))
                                                 <img src="{{ asset('images/' . $incident->image) }}"
                                                     alt="{{ $incident->name }}" class="img-fluid incident-image">

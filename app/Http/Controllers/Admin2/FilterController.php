@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin2;
 use App\Http\Controllers\Controller;
 use App\Models\Barangay;
 use App\Models\IncidentType;
+use App\Models\ArchiveIncident;
 use App\Models\Reports;
 use Illuminate\Http\Request;
 
@@ -54,6 +55,7 @@ class FilterController extends Controller
 
         $incident = IncidentType::all();
         $barangay = Barangay::all();
+        $archive = ArchiveIncident::all();
 
         $query = Reports::query();
 
@@ -80,7 +82,7 @@ class FilterController extends Controller
 
         $pending = $query->where('status', 'pending')->paginate(5, ['*'], 'pending');
 
-        return view('admin-2.reports.pending', compact('pending', 'incident', 'barangay'));
+        return view('admin-2.reports.pending', compact('pending', 'incident','archive', 'barangay'));
     }
 
 

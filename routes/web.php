@@ -133,8 +133,10 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
     Route::prefix('del')->group(function () {
         Route::get('/barangays', [BarangayAndIncident::class, 'bar'])->name('bar');
         Route::delete('/barangays/{id}', [BarangayAndIncident::class, 'archive_bar'])->name('del-bar');
+        Route::delete('/unbarangays/{id}', [BarangayAndIncident::class, 'unarchive_bar'])->name('un-bar');
         Route::get('/incident', [BarangayAndIncident::class, 'inc'])->name('inc');
         Route::delete('/Incident/{id}', [BarangayAndIncident::class, 'archive_inc'])->name('del-inc');
+        Route::delete('/unIncident/{id}', [BarangayAndIncident::class, 'unarchive_inc'])->name('un-inc');
     });
 
 

@@ -7,9 +7,8 @@
 
         <div class="page-content scrollable-content bg-light">
 
-            <div class="container mt-4">
+            {{-- <div class="container mt-4">
 
-                {{-- ALL REPORTS --}}
                 <h3 class="mb-3">All Reports</h3>
                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                     <table class="table table-striped table-hover">
@@ -51,7 +50,6 @@
                     @endif
                 </div>
 
-                {{-- PENDING REPORTS --}}
                 <h3 class="mt-5 mb-3">Pending Reports</h3>
                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                     <table class="table table-striped table-hover">
@@ -93,7 +91,6 @@
                     @endif
                 </div>
 
-                {{-- RESOLVED REPORTS --}}
                 <h3 class="mt-5 mb-3">Resolved Reports</h3>
                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                     <table class="table table-striped table-hover">
@@ -135,7 +132,6 @@
                     @endif
                 </div>
 
-                {{-- CLOSED REPORTS --}}
                 <h3 class="mt-5 mb-3">Closed Reports</h3>
                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                     <table class="table table-striped table-hover">
@@ -179,7 +175,6 @@
 
             </div>
 
-            {{-- Modal --}}
             @php
                 $allReportsItems = $allReports->items();
                 $pendingItems = $pending->items();
@@ -200,7 +195,6 @@
                             <div class="modal-body">
                                 <p><strong>Subject Type:</strong> {{ $report->subject_type }}</p>
                                 <p><strong>Location:</strong> {{ $report->location }}</p>
-                                <p><strong>Description:</strong> {{ $report->description }}</p>
                                 <p><strong>Date & Time:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
 
                                 @if ($report->image)
@@ -216,7 +210,10 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @endforeach --}}
+
+
+
 
         </div>
 

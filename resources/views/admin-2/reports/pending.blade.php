@@ -178,7 +178,6 @@
                             <div class="modal-body">
                                 <p><strong>Subject Type:</strong> {{ $report->subject_type }}</p>
                                 <p><strong>Location:</strong> {{ $report->location }}</p>
-                                <p><strong>Description:</strong> {{ $report->description }}</p>
                                 <p><strong>Date & Time:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
                                 <p><strong>Responding Agency:</strong> {{ $report->responding_agency ?? 'N/A' }}</p>
                                 <p><strong>Resolved Time:</strong>

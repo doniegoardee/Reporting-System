@@ -6,7 +6,6 @@
             </div>
         </div>
 
-
         <div class="container-fluid mt-4">
             <div class="card">
                 <div class="card-header">
@@ -32,10 +31,10 @@
                                     <td class="text-center">{{ $barangay->barangay }}</td>
                                     <td class="text-center">
                                         <form action="{{ route('admin-2.del-bar', $barangay->id) }}" method="POST"
-                                            class="delete-form">
+                                            class="archive-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Archived</button>
+                                            <button type="submit" class="btn btn-danger">Archive</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -46,20 +45,18 @@
             </div>
         </div>
 
-
         <div class="container-fluid mt-4">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Archive Barangay List</h4>
                 </div>
                 <div class="card-body">
-
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th class="text-center">ID</th>
                                 <th class="text-center">Barangay Name</th>
-                                {{-- <th class="text-center">Actions</th> --}}
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,14 +64,13 @@
                                 <tr>
                                     <td class="text-center">{{ $barangays->id }}</td>
                                     <td class="text-center">{{ $barangays->barangay }}</td>
-                                        {{-- <td class="text-center">
-                                            <form action="{{ route('admin-2.del-bar', $barangay->id) }}" method="POST"
-                                                class="delete-form">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Archived</button>
-                                            </form>
-                                        </td> --}}
+                                    <td class="text-center">
+                                        <form action="{{ route('admin-2.un-bar', $barangays->id) }}" method="POST" class="unarchive-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-success">Unarchive</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -86,7 +82,8 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                document.querySelectorAll('.delete-form').forEach(function(form) {
+                // For Archive
+                document.querySelectorAll('.archive-form').forEach(function(form) {
                     form.addEventListener('submit', function(e) {
                         e.preventDefault();
                         Swal.fire({
@@ -104,10 +101,27 @@
                         });
                     });
                 });
+
+                // For Unarchive
+                document.querySelectorAll('.unarchive-form').forEach(function(form) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "Do you want to restore this barangay?",
+                            icon: 'info',
+                            showCancelButton: true,
+                            confirmButtonColor: '#28a745',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, unarchive it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });
+                    });
+                });
             });
         </script>
     </div>
-
-
-
 </x-app-layout>

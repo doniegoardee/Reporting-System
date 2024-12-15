@@ -29,6 +29,19 @@ class HomeController extends Controller
      */
     public function userHome()
     {
+
+
+
+        // $incident = IncidentType::where('name')
+        // ->latest()
+        // ->take(1)
+        // ->get();
+
+
+
+
+
+
         $user = Auth::user();
         $userid = $user->id;
 
@@ -65,9 +78,6 @@ class HomeController extends Controller
         $reports = Reports::whereIn('status', ['pending', 'solved'])->paginate(10);
         $resolved = Reports::where('status', 'solved')->paginate(10);
         $pending = Reports::where('status', 'pending')->paginate(10);
-
-        Mail::to('reportingsystem39@gmail.com')->send(new ReportMail());
-        return 'Test email sent successfully!';
 
 
         $recent = Reports::where('status', 'pending')->latest()->take(5)->get();

@@ -7,6 +7,18 @@
     <section id="contact" class="contact section mt-5">
         <div class="page-content">
             <div class="container mt-5">
+                @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
                 <div class="card shadow-sm rounded">
                     <div class="card-header">
                         <h1 class="h4 mb-0">Report an Incident</h1>

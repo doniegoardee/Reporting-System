@@ -8,7 +8,7 @@
         <div class="page-content scrollable-content">
             <div class="page-header">
                 <div class="container-fluid">
-                    <h2 class="h5 no-margin-bottom">Settings</h2>
+                    {{-- <h2 class="h5 no-margin-bottom">Settings</h2> --}}
                 </div>
             </div>
 

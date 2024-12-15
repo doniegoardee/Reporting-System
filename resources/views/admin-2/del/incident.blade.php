@@ -78,17 +78,17 @@
                                     <td class="text-center">{{ $incidents->agency }}</td>
                                     <td class="text-center">{{ $incidents->contact }}</td>
                                     <td class="text-center">{{ $incidents->email }}</td>
-                                    {{-- <td class="text-center">
-                                        <form action="{{ route('admin-2.del-inc', $incident->id) }}" method="POST"
-                                            class="delete-form">
+                                    <td class="text-center">
+                                        <form action="{{ route('admin-2.un-inc', $incidents->id) }}" method="POST" class="unarchive-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger delete-btn">Archive</button>
+                                            <button type="submit" class="btn btn-success unarchive-btn">Unarchive</button>
                                         </form>
-                                    </td> --}}
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -120,6 +120,28 @@
             });
         </script>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.unarchive-form').forEach(function(form) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "Do you want to restore this incident?",
+                            icon: 'info',
+                            showCancelButton: true,
+                            confirmButtonColor: '#28a745',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, unarchive it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
 
 
 </x-app-layout>

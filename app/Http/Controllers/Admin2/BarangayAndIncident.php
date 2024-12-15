@@ -88,6 +88,22 @@ class BarangayAndIncident extends Controller
         return redirect()->route('admin-2.bar')->with('success', 'Barangay archived successfully');
     }
 
+    public function unarchive_bar($id)
+{
+    $barangayarc = ArchiveBarangay::findOrFail($id);
+
+    $archiveData = $barangayarc->toArray();
+    $archiveData['created_at'] = $barangayarc->created_at->format('Y-m-d H:i:s');
+    $archiveData['updated_at'] = $barangayarc->updated_at->format('Y-m-d H:i:s');
+
+    DB::table('barangays')->insert($archiveData);
+
+    $barangayarc->delete();
+
+    return redirect()->route('admin-2.bar')->with('success', 'Barangay unarchived successfully');
+}
+
+
     public function inc()
     {
         $inc = IncidentType::all();
@@ -110,4 +126,23 @@ class BarangayAndIncident extends Controller
 
         return redirect()->route('admin-2.inc')->with('success', 'Incident archived successfully');
     }
+
+    public function unarchive_inc($id)
+    {
+        $incident = ArchiveIncident::findOrFail($id);
+
+        // Prepare data for insertion, including the original ID
+        $archiveData = $incident->toArray();
+        $archiveData['created_at'] = $incident->created_at->format('Y-m-d H:i:s');
+        $archiveData['updated_at'] = $incident->updated_at->format('Y-m-d H:i:s');
+
+        // Insert the data back into `incident_types` with the same ID
+        DB::table('incident_types')->insert($archiveData);
+
+        // Delete the record from `archive_incidents`
+        $incident->delete();
+
+        return redirect()->route('admin-2.inc')->with('success', 'Incident unarchived successfully with its original ID.');
+    }
+
 }

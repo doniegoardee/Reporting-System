@@ -300,16 +300,16 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-            'type' => 'navbar-notification',
-            'text' => '',
-            'topnav_right' => true,
-            'url' => '#',
-            'icon' => 'fa fa-bell',
-            'badge' => 5,
-            'badge_color' => 'warning',
+        // [
+        //     'type' => 'navbar-notification',
+        //     'text' => '',
+        //     'topnav_right' => true,
+        //     'url' => '#',
+        //     'icon' => 'fa fa-bell',
+        //     'badge' => 5,
+        //     'badge_color' => 'warning',
 
-        ],
+        // ],
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
