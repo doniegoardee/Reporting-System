@@ -43,7 +43,7 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-            <a href="index.html" class="logo d-flex align-items-center me-auto">
+            <a href="/image/logo.jpg" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">Reporting System</h1>
@@ -55,8 +55,8 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Report Incident</a></li>
-                    <li><a href="#team">Team</a></li>
-                    <li class="dropdown"><a href="#"><span>Dropdown</span> <i
+                    {{-- <li><a href="#team">Team</a></li> --}}
+                    {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="#">Dropdown 1</a></li>
@@ -74,14 +74,14 @@
                             <li><a href="#">Dropdown 3</a></li>
                             <li><a href="#">Dropdown 4</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
             {{-- <a class="btn-getstarted" href="{{ route('login') }}">Get Started</a> --}}
-            @if (Route::has('login'))
+            {{-- @if (Route::has('login'))
                 <div>
                     @auth
                         @if (auth()->user()->role == 'user')
@@ -93,7 +93,7 @@
                         <a href="{{ route('login') }}" class="btn-getstarted">Get Started</a>
                     @endauth
                 </div>
-            @endif
+            @endif --}}
     </header>
 
     <main class="main">
@@ -111,29 +111,65 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <a href="{{ route('login') }}" class="btn-get-started">Get Started</a>
+                            @if (Route::has('login'))
+                            <div>
+                                @auth
+                                    @if (auth()->user()->role == 'user')
+                                        <a href="{{ route('home.user') }}" class="btn-get-started">Get Started</a>
+                                    @elseif(auth()->user()->role == 'admin-2')
+                                        <a href="{{ route('admin-2.index') }}" class="btn-get-started">Get Started</a>
+                                    @endif
+                                @else
+                                    <a href="{{ route('login') }}" class="btn-get-started">Get Started</a>
+                                @endauth
+                            </div>
+                        @endif
                     </div>
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
-                    <img src="assets/img/hero-carousel/hero-carousel-2.jpg" alt="">
+                    <img src="image/sample3.jpg" alt="">
                     <div class="carousel-container">
                         <h2>At vero eos et accusamus</h2>
                         <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id
                             quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
                             Temporibus autem quibusdam et aut officiis debitis aut.</p>
-                        <a href="#featured-services" class="btn-get-started">Get Started</a>
+                            @if (Route::has('login'))
+                            <div>
+                                @auth
+                                    @if (auth()->user()->role == 'user')
+                                        <a href="{{ route('home.user') }}" class="btn-get-started">Get Started</a>
+                                    @elseif(auth()->user()->role == 'admin-2')
+                                        <a href="{{ route('admin-2.index') }}" class="btn-get-started">Get Started</a>
+                                    @endif
+                                @else
+                                    <a href="{{ route('login') }}" class="btn-get-started">Get Started</a>
+                                @endauth
+                            </div>
+                        @endif
                     </div>
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
-                    <img src="assets/img/hero-carousel/hero-carousel-3.jpg" alt="">
+                    <img src="image/sample2.jpg" alt="">
                     <div class="carousel-container">
                         <h2>Temporibus autem quibusdam</h2>
                         <p>Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur
                             aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
                             nesciunt omnis iste natus error sit voluptatem accusantium.</p>
-                        <a href="#featured-services" class="btn-get-started">Get Started</a>
+                     @if (Route::has('login'))
+                <div>
+                    @auth
+                        @if (auth()->user()->role == 'user')
+                            <a href="{{ route('home.user') }}" class="btn-get-started">Get Started</a>
+                        @elseif(auth()->user()->role == 'admin-2')
+                            <a href="{{ route('admin-2.index') }}" class="btn-get-started">Get Started</a>
+                        @endif
+                    @else
+                        <a href="{{ route('login') }}" class="btn-get-started">Get Started</a>
+                    @endauth
+                </div>
+            @endif
                     </div>
                 </div><!-- End Carousel Item -->
 

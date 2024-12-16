@@ -142,7 +142,7 @@ class BarangayAndIncident extends Controller
         // Delete the record from `archive_incidents`
         $incident->delete();
 
-        return redirect()->route('admin-2.inc')->with('success', 'Incident unarchived successfully with its original ID.');
+        return redirect()->route('admin-2.inc')->with('success', 'Incident unarchived successfully.');
     }
 
 }

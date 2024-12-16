@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin2\BarangayAndIncident;
 use App\Http\Controllers\Admin2\FilterController;
 use App\Http\Controllers\Admin2\Settings;
 use App\Http\Controllers\Admin2\Status;
+use App\Http\Controllers\Admin2\SeminarController;
 use App\Http\Controllers\admin2\UsersController;
 
 use App\Http\Controllers\Users\ControllerReports;
@@ -120,6 +121,13 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
     });
 
 
+
+    Route::prefix('/seminar')->group(function () {
+        Route::get('/', [SeminarController::class, 'index'])->name('seminar');
+        Route::get('/add', [SeminarController::class, 'add_seminar'])->name('add-seminar');
+        Route::post('/store', [SeminarController::class, 'store'])->name('seminar-store');
+
+    });
 
     Route::prefix('add/incident')->group(function () {
         Route::get('/', [BarangayAndIncident::class, 'incident'])->name('incident');

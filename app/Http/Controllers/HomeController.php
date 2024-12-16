@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Reports;
 use App\Models\User;
+use App\Models\IncidentType;
+use App\Models\Seminars;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -32,10 +34,15 @@ class HomeController extends Controller
 
 
 
-        // $incident = IncidentType::where('name')
-        // ->latest()
-        // ->take(1)
-        // ->get();
+        $incident = IncidentType::
+        latest()
+        ->take(3)
+        ->get();
+
+        $seminars = Seminars::
+        latest()
+        ->take(3)
+        ->get();
 
 
 
@@ -64,7 +71,7 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 
-        return view('users.user-home', compact('allReports', 'pending', 'resolved', 'closed'));
+        return view('users.user-home', compact('allReports', 'pending', 'resolved','incident','seminars', 'closed'));
     }
 
 

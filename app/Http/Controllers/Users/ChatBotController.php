@@ -43,14 +43,21 @@ class ChatBotController extends Controller
                 $bot->reply('You have no reports to display.');
             } else {
                 $response = "Here are your reports and their statuses:\n\n <br></br>";
-                foreach ($reports as $report) {
-                    $response .= " {$report->id}- {$report->subject_type}:  {$report->status}\n <br></br>";
+
+                $groupedReports = $reports->groupBy(function ($report) {
+                    return $report->subject_type . '-' . $report->status;
+                });
+
+                foreach ($groupedReports as $group => $groupReports) {
+                    $count = $groupReports->count();
+                    list($subjectType, $status) = explode('-', $group);
+                    $response .= "Subject: {$subjectType}, Status: {$status} - Count: {$count}\n <br></br>";
                 }
 
                 $bot->reply($response);
             }
-
         });
+
 
         $this->botman->hears('show my reports', function (BotMan $bot) use ($user) {
             $reports = Reports::where('user_id', $user->id)->get();
@@ -106,13 +113,14 @@ class ChatBotController extends Controller
 
         $this->botman->fallback(function (BotMan $bot) {
             $bot->reply('Sorry, these are the available commands for the moment:<br><br>' .
-                '- "hi" or "hello": To greet the bot.<br></br>' .
-                '- "check report status": To check the status of your report.<br></br>' .
-                '- "show my reports": To see your filed reports.<br></br>' .
-                '- "show reports on {keyword}": To filter reports by specific keywords (e.g., "flood").<br></br>' .
-                '- "contact": To get our contact information.<br></br>' .
+                '<b>hi</b> or <b>hello</b>:<br> To greet the bot.<br></br>' .
+                '<b>check report status</b>:<br> To check the status of your report.<br></br>' .
+                '<b>show my reports</b>:<br> To see your filed reports.<br></br>' .
+                '<b>show reports on {keyword}</b>:<br> To filter reports by specific keywords (e.g., "flood").<br></br>' .
+                '<b>contact</b>:<br> To get our contact information.<br></br>' .
                 'Please ask me!');
         });
+
 
         $this->botman->listen();
     }

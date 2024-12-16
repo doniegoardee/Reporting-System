@@ -14,6 +14,7 @@ class Reports extends Model
         'user_id',
         'subject_type',
         'location',
+        'zone',
         'status',
         'description',
         'severity',

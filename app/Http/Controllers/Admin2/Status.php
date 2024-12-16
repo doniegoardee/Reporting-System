@@ -47,9 +47,9 @@ class Status extends Controller
                     $message = 'Report marked as resolved successfully.';
 
                     // Send notifications
-                    Notification::send($user, new Notifications('Your report has been resolved. Responding agency: ' . $data->responding_agency));
+                    Notification::send($user, new Notifications('Your report has been resolved.'));
                     foreach ($admins as $admin) {
-                        Notification::send($admin, new Notifications('A report has been resolved. Report ID: ' . $data->id));
+                        Notification::send($admin, new Notifications('A report has been resolved.'));
                     }
 
                     activity()
@@ -68,7 +68,7 @@ class Status extends Controller
                     // Send notifications
                     Notification::send($user, new Notifications('Your report has been closed.'));
                     foreach ($admins as $admin) {
-                        Notification::send($admin, new Notifications('A report has been closed. Report ID: ' . $data->id));
+                        Notification::send($admin, new Notifications('A report has been closed.'));
                     }
 
                     activity()

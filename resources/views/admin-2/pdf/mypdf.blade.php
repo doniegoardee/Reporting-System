@@ -19,8 +19,8 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
-            table-layout: fixed; /* Fixed table layout */
-            margin-left: 20px; /* Move the table to the left */
+            table-layout: fixed;
+            margin-left: 20px;
         }
 
         th,
@@ -28,9 +28,9 @@
             border: 1px solid #ddd;
             padding: 10px;
             text-align: left;
-            word-wrap: break-word; /* Allow wrapping for long words */
-            overflow: hidden; /* Prevent overflow */
-            text-overflow: ellipsis; /* Display ellipsis for overflowed text */
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         th {
@@ -49,7 +49,7 @@
         @media screen and (max-width: 768px) {
             table {
                 font-size: 14px;
-                margin-left: 10px; /* Reduce margin on smaller screens */
+                margin-left: 10px;
             }
 
             th,
@@ -71,11 +71,10 @@
             <tr>
                 <th>Subject Type</th>
                 <th>Location</th>
+                <th>Zone</th>
                 <th>Status</th>
-                <th>Description</th>
                 <th>Severity</th>
-                <th>Number Affected</th>
-                <th>Needs</th>
+                <th>Number Household Affected</th>
                 <th>Responding Agency</th>
                 <th>Resolved Time</th>
             </tr>
@@ -85,11 +84,10 @@
                 <tr>
                     <td>{{ $report->subject_type }}</td>
                     <td>{{ $report->location }}</td>
+                    <td>{{ $report->zone }}</td>
                     <td>{{ $report->status }}</td>
-                    <td>{{ $report->description }}</td>
                     <td>{{ $report->severity }}</td>
                     <td>{{ $report->num_affected }}</td>
-                    <td>{{ $report->needs }}</td>
                     <td>{{ $report->responding_agency }}</td>
                     <td>{{ $report->resolved_time ? $report->resolved_time->format('F j, Y, g:i a') : 'N/A' }}</td>
                 </tr>
