@@ -42,7 +42,7 @@
 
                                             <td>
 
-                                                <a class="btn btn-sm btn-primary {{ $report->status === 'resolved' ? 'disabled-link' : '' }}"
+                                                <a class="btn btn-sm btn-primary {{ $report->status === 'resolved' | $report->status === 'closed' ? 'disabled-link' : '' }}"
                                                     href="{{ $report->status === 'pending' ? route('reports.edit', $report->id) : '#' }}">
                                                     Edit
                                                 </a>

@@ -135,6 +135,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-right: 10px;
 }
 
 .nav-links {
@@ -154,16 +155,12 @@
 }
 
 .nav-actions {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 15px;
-}
-
-.nav-actions .nav-link {
-    display: flex;
-    align-items: center;
-    color: inherit;
-    text-decoration: none;
+    right: 30px;
+    justify-content: flex-start; /* Ensure items align to the left */
 }
 
 .nav-actions img {
@@ -171,6 +168,14 @@
     height: 25px;
     border-radius: 50%;
     object-fit: cover;
+    margin-left: -15px;
+}
+
+.nav-actions .nav-link {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
 }
 
 .nav-actions .badge {
@@ -184,6 +189,110 @@
     padding: 2px 4px;
 }
 
+.nav-link .fa-bell {
+    font-size: 1.5rem;
+    position: relative;
+    margin-right: 5px;
+}
+
+.nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-link .fa-bell {
+    font-size: 1.5rem;
+    position: relative;
+    right: 10px;
+}
+
+.nav-link .badge {
+    position: absolute;
+    top: -px;
+    right: 15px;
+    font-size: 10px;
+    background-color:red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    line-height: 1;
+}
+
+.nav-actions .nav-link {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    padding: 0 8px;
+}
+.mobile-nav-toggle{
+    position: relative;
+    right: 50px;
+}
+
+.nav-actions .nav-link i {
+    font-size: 1.3rem;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    background: transparent;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-actions .badge {
+    font-size: 9px;
+    padding: 2px 4px;
+}
+
+#chatModal .modal-footer .input-group .form-control {
+    width: 200px;
+}
+
+#chatModal .modal-footer .input-group-append button {
+    padding: 5px 10px;
+}
+
+
+.nav-actions img {
+    max-width: 25px;
+    max-height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: -30px;
+}
+
+.dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+@media (max-width: 1024px) {
+    .dropdown-menu {
+        width: 80%;
+        max-height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+        width: 90%;
+        max-height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dropdown-menu {
+        width: 95%;
+        max-height: 150px;
+    }
+}
 </style>
 
 
@@ -203,17 +312,18 @@
                 <li><a href="{{ route('user.report') }}">My Reports</a></li>
             </ul>
 
-            <div class="nav-actions d-flex align-items-center">
-
+            <div class="dropdown position-relative">
                 <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                     class="nav-link messages-toggle mx-1">
-                    <i style="font-size: 19px" class="fa-solid fa-bell"></i>
+                    <i style="font-size: 18px; color:black;x" class="fa-solid fa-bell"></i>
                     <span
-                        class="badge dashbg-1 {{ $user->notifications->where('read_at', null)->count() === 0 ? 'invisible' : '' }}">
+                        class="badge dashbg-1 position-absolute translate-middle
+                            {{ $user->notifications->where('read_at', null)->count() === 0 ? 'invisible' : '' }}">
                         {{ $user->notifications->where('read_at', null)->count() }}
                     </span>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1" style="max-height: 300px; overflow-y: auto;">
+                <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdownMenuLink1"
+                     style="max-height: 300px; overflow-y: auto; z-index: 1050; min-width: 300px;">
                     @if ($user && $user->notifications->count())
                         @php
                             $unreadNotifications = $user->notifications->where('read_at', null);
@@ -227,23 +337,27 @@
                             @endforeach
                         @endif
                     @else
-                        <div class="dropdown-item rounded my-2 p-2">No notifications</div>
+                        <div class="dropdown-item text-center rounded my-2 p-2 bg-light">No notifications</div>
                     @endif
                     @foreach ($user->notifications->where('read_at', '!=', null) as $notification)
-                        <a class="dropdown-item bg-light notification-item" style="color:black;"
-                            href="#">{{ $notification->data['name'] }}</a>
+                        <a class="dropdown-item bg-light notification-item" style="color:black;" href="#">
+                            {{ $notification->data['name'] }}
+                        </a>
                     @endforeach
                 </div>
+            </div>
 
+            <div class="nav-actions">
                 <button type="button" class="nav-link mx-1" data-toggle="modal" data-target="#chatModal" style="border:none;">
                     <i class="fa-solid fa-comment"></i>
                 </button>
 
                 <a href="{{ route('user.settings') }}" class="mx-1">
                     <img src="{{ asset($user->profile_image) }}" class="img-thumbnail" alt="Profile Image"
-                    style="width: 25px; height: 25px; border-radius: 50%; object-fit: cover;">
+                        style="width: 25px; height: 25px; border-radius: 50%; object-fit: cover;">
                 </a>
             </div>
+
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 

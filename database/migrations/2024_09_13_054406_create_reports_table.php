@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('incident_type_id')->nullable();
             $table->string('subject_type');
             $table->string('location');
+            $table->string('zone');
             $table->string('status');
             $table->text('description')->nullable();
             $table->text('name')->nullable();

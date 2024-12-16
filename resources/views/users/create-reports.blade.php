@@ -37,6 +37,19 @@
                                         <option value="{{ $barangay->barangay }}">{{ $barangay->barangay }}</option>
                                     @endforeach
                                 </select>
+
+                                <label for="zone" class="form-label">Zone</label>
+                                <select class="form-select" name="zone" id="zone" required>
+                                    <option value="" disabled selected>Select a zone</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+
+                                </select>
                             </div>
 
 <p>Additional Details</p>

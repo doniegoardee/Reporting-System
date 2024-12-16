@@ -2,7 +2,7 @@
     <div class="page-content scrollable-content bg-light">
         <div class="page-header">
             <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">Add User</h2>
+                <h2 class="h5 no-margin-bottom">Add New Admin Account</h2>
             </div>
         </div>
 

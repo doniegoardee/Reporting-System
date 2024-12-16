@@ -316,10 +316,10 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'Search',
-        ],
+        // [
+        //     'type' => 'sidebar-menu-search',
+        //     'text' => 'Search',
+        // ],
         [
             'text' => 'Dashboard',
             'url' => 'admin-2/dashboard',
@@ -358,8 +358,22 @@ return [
                     'url' => 'admin-2/users/list',
                 ],
                 [
-                    'text' => 'Add Users',
+                    'text' => 'Add New Admin',
                     'url' => 'admin-2/users/add',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Seminars',
+            'icon' => 'fa-solid fa-chalkboard-user',
+            'submenu' => [
+                [
+                    'text' => 'Seminars',
+                    'url' => 'admin-2/seminar',
+                ],
+                [
+                    'text' => 'Add Seminar',
+                    'url' => 'admin-2/seminar/add',
                 ],
             ],
         ],

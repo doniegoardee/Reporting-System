@@ -70,7 +70,7 @@
                             </div>
 
                             <!-- Change Password Section -->
-                            <div class="row mb-4">
+                            <div class="row mb-5">
                                 <div class="col-12">
                                     <div class="block shadow-lg rounded-3 p-4">
                                         <div class="title"><strong>Change Password</strong></div>

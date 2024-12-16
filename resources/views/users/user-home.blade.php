@@ -213,6 +213,59 @@
             @endforeach --}}
 
 
+            <style>
+                .card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+            </style>
+            <div class="container card my-5">
+                <h1 class="text-center mb-4">New Update</h1>
+                <h3 class="text-center text-primary mb-5">New Incident Type Added</h3>
+
+
+                <div class="row">
+                    @foreach ($incident as $data)
+                        <div class="col-md-4 col-sm-6 mb-4">
+                            <a href="{{ route('user.incident') }}" class="text-decoration-none">
+                                <div class="card shadow h-100">
+                                    <div class="card-body rounded" style="background:{{ $data->color }}">
+                                        <h5 class="card-title text-center text-dark font-weight-bold">
+                                            {{ $data->name }}
+                                        </h5>
+                                        <p class="card-text text-center text-white">
+                                            <strong>Agency:</strong> {{ $data->agency }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="container card my-5">
+                <h1 class="text-center mb-4">Seminars</h1>  <!-- Title for the page -->
+
+                <div class="row">
+                    @foreach ($seminars as $seminar)
+                        <div class="col-md-4 mb-4"> <!-- Column for each seminar -->
+                            <div class="card shadow h-100"> <!-- Box for each seminar -->
+                                <div class="card-body">
+                                    <h2 class="card-title text-center">{{ $seminar->title }}</h2>
+                                    <p class="text-center text-muted">{{ \Carbon\Carbon::parse($seminar->date)->format('d M Y') }}</p>
+                                    <p class="text-center"><strong>Location:</strong> {{ $seminar->location }}</p>
+                                    <p class="mt-4">{{ $seminar->description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+
+
 
 
         </div>

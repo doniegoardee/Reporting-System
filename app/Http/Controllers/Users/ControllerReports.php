@@ -110,6 +110,7 @@ class ControllerReports extends Controller
             $reports->subject_type = $request->subject_type;
             $reports->status = 'pending';
             $reports->location = $request->location;
+            $reports->zone = $request->zone;
             $reports->description = $request->details;
             $reports->severity = $request->severity;
             $reports->num_affected = $request->num_affected;
@@ -194,6 +195,7 @@ class ControllerReports extends Controller
         $validatedData = $request->validate([
             'subject_type' => 'required',
             'location' => 'required',
+            'zone' => 'required',
             'severity' => 'nullable',
             'num_affected' => 'nullable|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -202,6 +204,7 @@ class ControllerReports extends Controller
         $report = Reports::findOrFail($id);
         $report->subject_type = $validatedData['subject_type'];
         $report->location = $validatedData['location'];
+        $report->zone = $validatedData['zone'];
         $report->severity = $validatedData['severity'];
         $report->num_affected = $validatedData['num_affected'];
 
