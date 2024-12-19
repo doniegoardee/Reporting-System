@@ -41,7 +41,7 @@ use App\Mail\ReportMail;
 // });
 
 Route::get("/", [LpageController::class, 'index'])->name('Lpage');
-Route::post('/store', [LpageController::class,'store'])->name('store');
+Route::post('/store', [LpageController::class, 'store'])->name('store');
 
 
 Route::get("/home", [HomeController::class, 'home'])->name('h');
@@ -49,7 +49,7 @@ Route::get("/home", [HomeController::class, 'home'])->name('h');
 Auth::routes();
 
 Route::get('/mail', function () {
-    Mail::to('smokefacebook02@gmail.com')->send(new ReportMail());
+    Mail::to('smokefacebook02@gmail.com')->send(new ReportMail(''));
 });
 
 
@@ -126,7 +126,6 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
         Route::get('/', [SeminarController::class, 'index'])->name('seminar');
         Route::get('/add', [SeminarController::class, 'add_seminar'])->name('add-seminar');
         Route::post('/store', [SeminarController::class, 'store'])->name('seminar-store');
-
     });
 
     Route::prefix('add/incident')->group(function () {
