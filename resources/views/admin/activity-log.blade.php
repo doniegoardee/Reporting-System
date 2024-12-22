@@ -1,56 +1,79 @@
-<!DOCTYPE html>
-<html>
+<x-app-layout>
+    <div class="page-content scrollable-content bg-light">
+        <div class="page-header">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">Activity Log</h2>
+            </div>
+        </div>
 
-<head>
+        <div class="container-fluid mt-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-danger">
+                            <tr class="text-center">
+                                <th>No.</th>
+                                <th>User</th>
+                                <th>Subject Type</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $perPage = $logs->perPage();
+                                $currentPage = $logs->currentPage();
+                                $counter = ($currentPage - 1) * $perPage + 1;
+                            @endphp
+                            @forelse ($logs as $log)
+                                @php
+                                    $description = '';
+                                    $subjectType = $log->subject_type;
+                                    $description = $log->description;
+                                    $module = isset($activity_types[$subjectType])
+                                        ? $activity_types[$subjectType]
+                                        : null;
 
-    @include('admin.contents.css')
+                                    if ($module == 'User Module' && $description == 'created') {
+                                        $description = 'New User Registered';
+                                    } elseif ($module == 'User Module' && $description == 'updated') {
+                                        $description = 'User updated his/her information';
+                                    } elseif ($module == 'Reports Module' && $description == 'updated') {
+                                        $report = $log->subject;
 
-</head>
-
-<body>
-
-    @include('admin.contents.header')
-
-
-    <div class="d-flex align-items-stretch">
-        <!-- Sidebar Navigation-->
-        @include('admin.contents.sidebar')
-
-        <!-- Sidebar Navigation end-->
-        <div class="page-content">
-
-            <div class="container mt-5">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="mb-0">Activity Log</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">Log Name</th>
-                                        <th class="text-center">Properties</th>
-                                        <th class="text-center">Event</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($activity as $log)
-                                        <tr>
-                                            <td class="text-center">{{ $log->log_name }}</td>
-                                            <td class="text-center">{{ $log->properties }}</td>
-                                            <td class="text-center">{{ $log->event }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                        if ($report && $report->status == 'resolved') {
+                                            $description = 'Report Resolved';
+                                        } elseif ($report && $report->status == 'closed') {
+                                            $description = 'Report Closed';
+                                        } else {
+                                            $description = 'Updated Report';
+                                        }
+                                    }
+                                    // Check for Login activity
+                                    elseif ($description == 'logged in') {
+                                        $description =
+                                            'User ' . optional($log->causer)->name . ' Logged in successfully';
+                                    }
+                                @endphp
+                                <tr class="text-center">
+                                    <td>{{ $counter++ }}</td>
+                                    <td>{{ optional($log->causer)->name }}</td>
+                                    <td>{{ $activity_types[$log->subject_type] }}</td>
+                                    <td>{{ $description }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($log->created_at)->format('F d, Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($log->created_at)->format('h:i A') }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td>No Activity</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    {{ $logs->links('pagination::bootstrap-5') }}
                 </div>
             </div>
-            @include('admin.contents.footer')
+        </div>
 
-
-</body>
-
-</html>
+</x-app-layout>

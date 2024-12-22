@@ -23,6 +23,16 @@ class CreateUserSeeder extends Seeder
                 'role' => 0,
                 'profile_image' => 'image/default-avatar.png',
             ],
+            [
+                'name' => 'agency',
+                'contact' => '09123456789',
+                'agency' => 'BFP',
+                'email' => 'agency@gmail.com',
+                'password' => bcrypt('password'),
+                'role' => 1,
+                'profile_image' => 'image/default-avatar.png',
+            ],
+
 
             [
                 'name' => 'admin',

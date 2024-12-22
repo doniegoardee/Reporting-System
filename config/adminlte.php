@@ -322,7 +322,7 @@ return [
         // ],
         [
             'text' => 'Dashboard',
-            'url' => 'admin-2/dashboard',
+            'url' => 'admin/dashboard',
             'icon' => 'fa-solid fa-house',
             // 'label' => 4,
             'label_color' => 'success',
@@ -333,19 +333,19 @@ return [
             'submenu' => [
                 [
                     'text' => 'All Reports',
-                    'url' => 'admin-2/reports/all',
+                    'url' => 'admin/reports/all',
                 ],
                 [
                     'text' => 'Pending Reports',
-                    'url' => 'admin-2/reports/pending',
+                    'url' => 'admin/reports/pending',
                 ],
                 [
                     'text' => 'Resolved Reports',
-                    'url' => 'admin-2/reports/resolved',
+                    'url' => 'admin/reports/resolved',
                 ],
                 [
                     'text' => 'Closed Reports',
-                    'url' => 'admin-2/reports/closed',
+                    'url' => 'admin/reports/closed',
                 ],
             ],
         ],
@@ -355,11 +355,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'All Users',
-                    'url' => 'admin-2/users/list',
+                    'url' => 'admin/users/list',
                 ],
                 [
-                    'text' => 'Add New Admin',
-                    'url' => 'admin-2/users/add',
+                    'text' => 'Add New Agency',
+                    'url' => 'admin/users/add',
                 ],
             ],
         ],
@@ -369,11 +369,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Seminars',
-                    'url' => 'admin-2/seminar',
+                    'url' => 'admin/seminar',
                 ],
                 [
                     'text' => 'Add Seminar',
-                    'url' => 'admin-2/seminar/add',
+                    'url' => 'admin/seminar/add',
                 ],
             ],
         ],
@@ -384,11 +384,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Add Incident',
-                    'url' => 'admin-2/add/incident',
+                    'url' => 'admin/add/incident',
                 ],
                 [
                     'text' => 'Add Barangay',
-                    'url' => 'admin-2/add/incident/barangay',
+                    'url' => 'admin/add/incident/barangay',
                 ],
             ],
         ],
@@ -399,24 +399,24 @@ return [
             'submenu' => [
                 [
                     'text' => 'Archive Incident',
-                    'url' => 'admin-2/del/incident',
+                    'url' => 'admin/del/incident',
                     // 'icon' => 'fa-solid fa-trash',
                 ],
                 [
                     'text' => 'Archive Barangay',
-                    'url' => 'admin-2/del/barangays',
+                    'url' => 'admin/del/barangays',
                 ],
             ],
         ],
 
         [
             'text' => 'Analysis',
-            'url' => 'admin-2/analysis',
+            'url' => 'admin/analysis',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Activity Log',
-            'url' => 'admin-2/activity-log',
+            'url' => 'admin/activity-log',
             'icon' => 'fa-solid fa-clock-rotate-left',
         ],
         //  ['header' => 'EXTRA'],
@@ -425,7 +425,7 @@ return [
             'text' => 'Setting',
             'icon' => 'fa-solid fa-gear',
             'icon_color' => 'yellow',
-            'url' => 'admin-2/settings/setting',
+            'url' => 'admin/settings/setting',
         ],
     ],
 

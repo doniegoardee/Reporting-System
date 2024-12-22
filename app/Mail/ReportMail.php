@@ -30,7 +30,7 @@ class ReportMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'admin-2.mailcontent',
+            view: 'admin.mailcontent',
         );
     }
 
