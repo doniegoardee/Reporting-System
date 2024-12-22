@@ -42,30 +42,40 @@
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="agency">Corresponding Agency</label>
-                            <select class="form-control" id="agency" name="agency" required>
-                                <option value="" disabled selected>Select an agency</option>
-                                @foreach($agencies as $agency)
-                                <option value="{{ $agency->agency }}">{{ $agency->agency }}</option>
-                            @endforeach
-                            </select>
-                        </div>
+                        <div class="form-section">
+                            <div class="form-group">
+                                <label for="agency">Corresponding Agency</label>
+                                <select class="form-control" id="agency" name="agency" required>
+                                    <option value="" disabled selected>Select an agency</option>
+                                    @foreach ($agencies as $agency)
+                                        <option value="{{ $agency->agency }}"
+                                            data-contact="{{ $agency->contact ?? 'N/A' }}"
+                                            data-email="{{ $agency->email ?? 'N/A' }}">
+                                            {{ $agency->agency }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="name">Contact</label>
-                            <input type="tel" class="form-control" id="name" name="contact" required>
-                        </div>
+                            <div class="form-group">
+                                <label for="contact">Contact</label>
+                                <input type="tel" class="form-control" id="contact" name="contact" required
+                                    readonly>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="name">Email</label>
-                            <input type="email" class="form-control" id="name" name="email" required>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required
+                                    readonly>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="image">Image (Optional)(transparent)</label>
-                            <input type="file" class="form-control" id="image" name="image" accept="image/*" placeholder="make sure its transparent">
-                            <img id="imagePreview" class="image-preview" src="#" alt="Image Preview" style="display: none;">
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*"
+                                placeholder="make sure its transparent">
+                            <img id="imagePreview" class="image-preview" src="#" alt="Image Preview"
+                                style="display: none;">
                         </div>
 
                         <div class="form-group">
@@ -107,6 +117,19 @@
                     };
                     reader.readAsDataURL(input.files[0]);
                 }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#agency').on('change', function() {
+                var contact = $(this).find('option:selected').data('contact');
+                var email = $(this).find('option:selected').data('email');
+
+                console.log(contact);
+                console.log(email);
+                $('#contact').val(contact);
+                $('#email').val(email);
             });
         });
     </script>

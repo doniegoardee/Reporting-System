@@ -1,57 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Incident Reporting System</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
-    <body>
-        <div class="d-flex" id="wrapper">
-            <!-- Sidebar-->
-            <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">
-              {{ $userAgency }}
-                </div>
-
-@include('agency.template.agency-nav')
-
-<div class="container-fluid">
+<x-agency-layout>
 
     @if ($reports->isEmpty())
-    <p>No reports found for this agency.</p>
-@else
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Incident Type</th>
-                <th>Location</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($reports as $report)
+        <p>No reports found for this agency.</p>
+    @else
+        <table class="table text-center">
+            <thead>
                 <tr>
-                    <td>{{ $report->id }}</td>
-                    <td>{{ $report->subject_type }}</td>
-                    <td>{{ $report->location }}</td>
-                    <td>{{ $report->status }}</td>
+                    <th>#</th>
+                    <th>Incident Type</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endif
+            </thead>
+            <tbody>
+                @foreach ($reports as $index => $report)
+                    <tr>
+                        <td class="text-center">
+                            {{ ($reports->currentPage() - 1) * $reports->perPage() + $index + 1 }}
+                        </td>
+                        <td>{{ $report->subject_type }}</td>
+                        <td>{{ $report->location }}</td>
+                        <td>{{ ucfirst($report->status) }}</td>
+                        <td>
+                            <!-- Button to trigger modal -->
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#viewReportModal-{{ $report->id }}">
+                                View
+                            </button>
+                            <a href="javascript:void(0)" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#resolveModal{{ $report->id }}" style="flex: 1; text-align: center;">
+                                Mark as Resolved
+                            </a>
+                        </td>
+                    </tr>
 
+                    <!-- Modal -->
+                    <div class="modal fade" id="viewReportModal-{{ $report->id }}" tabindex="-1"
+                        aria-labelledby="viewReportModalLabel-{{ $report->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="viewReportModalLabel-{{ $report->id }}">
+                                        Report Details
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Incident Type:</strong> {{ $report->subject_type }}</p>
+                                    <p><strong>Location:</strong> {{ $report->location }}</p>
+                                    <p><strong>Status:</strong> {{ ucfirst($report->status) }}</p>
+                                    <p><strong>Contact:</strong> {{ $report->contact }}</p>
+                                    <p><strong>Email:</strong> {{ $report->email }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-</div>
+                    <div class="modal fade" id="resolveModal{{ $report->id }}" tabindex="-1"
+                        aria-labelledby="resolveModalLabel{{ $report->id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="resolveModalLabel{{ $report->id }}">Mark Report as
+                                        Resolved</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to mark this report as resolved?</p>
+                                    <p><strong>Subject Type:</strong> {{ $report->subject_type }}</p>
+                                    <p><strong>Location:</strong> {{ $report->location }}</p>
+                                    <p><strong>Date & Time:</strong> {{ $report->created_at->format('d M Y, h:i A') }}
+                                    </p>
 
-@include('agency.template.agency-footer')
+                                    <div class="mb-3">
+                                        <label for="resolved-time{{ $report->id }}" class="form-label">Resolved
+                                            Time</label>
+                                        <input type="datetime-local" class="form-control"
+                                            id="resolved-time{{ $report->id }}" name="resolved_time" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <form id="resolve-form{{ $report->id }}"
+                                        action="{{ route('mark', ['id' => $report->id, 'status' => 'resolved']) }}"
+                                        method="POST" style="display: none;">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="responding_agency"
+                                            id="hidden-responding-agency{{ $report->id }}">
+                                        <input type="hidden" name="resolved_time"
+                                            id="hidden-resolved-time{{ $report->id }}">
+                                    </form>
+
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary"
+                                        onclick="submitResolveForm({{ $report->id }})">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center mt-4">
+            {{ $reports->links() }}
+        </div>
+    @endif
+
+    <script>
+        function submitResolveForm(reportId) {
+            const resolvedTimeInput = document.getElementById('resolved-time' + reportId);
+
+            document.getElementById('hidden-resolved-time' + reportId).value = resolvedTimeInput.value;
+
+            document.getElementById('resolve-form' + reportId).submit();
+        }
+    </script>
+
+</x-agency-layout>

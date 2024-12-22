@@ -1,27 +1,28 @@
 <?php
 
-use App\Http\Controllers\Admin\ExportFileController;
-use App\Http\Controllers\Admin\Adminreports;
-use App\Http\Controllers\Admin\MailController;
-use App\Http\Controllers\Admin\Analysis;
-use App\Http\Controllers\Admin\BarangayAndIncident;
-use App\Http\Controllers\Admin\FilterController;
-use App\Http\Controllers\Admin\Settings;
-use App\Http\Controllers\Admin\Status;
-use App\Http\Controllers\Admin\SeminarController;
-use App\Http\Controllers\Admin\UsersController;
-
-use App\Http\Controllers\Users\ControllerReports;
-use App\Http\Controllers\Users\Setting;
-use App\Http\Controllers\Users\ChatBotController;
-
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LpageController;
-use App\Http\Controllers\Users\Notification;
-use Illuminate\Support\Facades\Route;
+use App\Mail\ReportMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ReportMail;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Status;
+use App\Http\Controllers\Users\Setting;
+use App\Http\Controllers\Admin\Analysis;
+use App\Http\Controllers\Admin\Settings;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LpageController;
+
+use App\Http\Controllers\Admin\Adminreports;
+use App\Http\Controllers\Users\Notification;
+use App\Http\Controllers\Admin\MailController;
+
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\FilterController;
+use App\Http\Controllers\Admin\SeminarController;
+use App\Http\Controllers\Agency\ReportController;
+use App\Http\Controllers\Users\ChatBotController;
+use App\Http\Controllers\Users\ControllerReports;
+use App\Http\Controllers\Admin\BarangayAndIncident;
+use App\Http\Controllers\Admin\ExportFileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +65,6 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
             Route::get("/my", [ControllerReports::class, 'myreports'])->name('user.report');
             Route::put('/{id}', [ControllerReports::class, 'updateReports'])->name('reports.update');
             Route::get('/{id}/edit', [ControllerReports::class, 'editReport'])->name('reports.edit');
-
         });
 
         Route::post('/botman', [ChatBotController::class, 'handleBot']);
@@ -170,4 +170,6 @@ Route::middleware(['auth', 'user-role:admin'])->prefix('admin')->name('admin.')-
 // agency routes
 Route::middleware(['auth', 'user-role:agency'])->group(function () {
     Route::get("/agency/home", [HomeController::class, 'agency'])->name('agency.home');
+    Route::get("/agency/record", [ReportController::class, 'agency_record'])->name('agency.records');
+    Route::put('/update/{id}/{status}', [ReportController::class, 'markasresolved'])->name('mark');
 });

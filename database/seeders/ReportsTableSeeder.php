@@ -21,11 +21,9 @@ class ReportsTableSeeder extends Seeder
             $recordsPerMonth = rand(5, 10);
 
             for ($i = 0; $i < $recordsPerMonth; $i++) {
-                // Generate a random date in the specified month and ensure it doesn't exceed today
                 $date = Carbon::create(2024, $month, rand(1, 28), rand(0, 23), rand(0, 59), rand(0, 59));
                 $date = $date->greaterThan($now) ? $now->copy()->subSeconds(rand(0, 3600)) : $date;
 
-                // Set resolved_time only for "resolved" and "closed" statuses
                 $status = $faker->randomElement(['pending', 'closed', 'resolved']);
                 $resolvedTime = ($status === 'resolved' || $status === 'closed')
                     ? $date->copy()->addDays(rand(1, 7))->min($now)
@@ -43,6 +41,8 @@ class ReportsTableSeeder extends Seeder
                     'image' => $faker->imageUrl(640, 480, 'incident'),
                     'contact' => $faker->phoneNumber,
                     'responding_agency' => $faker->randomElement(['BFP', 'MDRRMO', 'PNP']),
+                    'email' => $faker->unique()->safeEmail,
+                    'name' => $faker->name,
                     'resolved_time' => $resolvedTime,
                     'created_at' => $date,
                     'updated_at' => $date,

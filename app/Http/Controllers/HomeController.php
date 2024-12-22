@@ -34,15 +34,13 @@ class HomeController extends Controller
 
 
 
-        $incident = IncidentType::
-        latest()
-        ->take(3)
-        ->get();
+        $incident = IncidentType::latest()
+            ->take(3)
+            ->get();
 
-        $seminars = Seminars::
-        latest()
-        ->take(3)
-        ->get();
+        $seminars = Seminars::latest()
+            ->take(3)
+            ->get();
 
 
 
@@ -71,7 +69,7 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 
-        return view('users.user-home', compact('allReports', 'pending', 'resolved','incident','seminars', 'closed'));
+        return view('users.user-home', compact('allReports', 'pending', 'resolved', 'incident', 'seminars', 'closed'));
     }
 
 
@@ -79,15 +77,16 @@ class HomeController extends Controller
     public function agency()
     {
 
-     $user = Auth::user();
+        $user = Auth::user();
 
-     $userAgency = $user->agency;
+        $userAgency = $user->agency;
 
-     $reports = Reports::where('responding_agency', $userAgency)
-     ->where('status','pending')->get();
+        $reports = Reports::where('responding_agency', $userAgency)
+            ->where('status', 'pending')->paginate(10);
 
-     return view('agency.index', compact('reports','userAgency'));
+        return view('agency.index', compact('reports', 'userAgency'));
     }
+
 
 
 
@@ -121,7 +120,7 @@ class HomeController extends Controller
 
 
         return view(
-            'admin-2.index',
+            'admin.index',
             compact(
                 'allReports',
                 'pending',

@@ -1,21 +1,35 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reports;
-use App\Models\User;
 use App\Models\IncidentType;
-use App\Notifications\Notifications;
-use Carbon\Carbon;
+use App\Models\Barangay;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Notifications\Notifications;
 use Illuminate\Support\Facades\Notification;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class Status extends Controller
-{
 
-    public function updateStatus($id, $status, Request $request)
+class ReportController extends Controller
+{
+    public function agency_record()
+    {
+        $user = Auth::user();
+        $userAgency = $user->agency;
+
+        $reports = Reports::where('responding_agency', $userAgency)
+            ->whereIn('status', ['resolved', 'closed'])
+            ->orderByRaw("FIELD(status, 'resolved', 'closed')")
+            ->paginate(10);
+
+        return view('agency.records', compact('reports', 'userAgency'));
+    }
+
+    public function markasresolved($id, $status, Request $request)
     {
         $data = Reports::find($id);
         if (!$data) {
@@ -28,7 +42,6 @@ class Status extends Controller
         }
 
         $admins = User::where('role', 2)->get();
-
 
         $incidentType = IncidentType::where('name', $data->subject_type)->first();
         $agency = $incidentType ? $incidentType->agency : 'N/A';
@@ -45,7 +58,6 @@ class Status extends Controller
                     $data->resolved_time = $request->input('resolved_time') ? Carbon::parse($request->input('resolved_time')) : null;
                     $message = 'Report marked as resolved successfully.';
 
-                    // Send notifications
                     Notification::send($user, new Notifications('Your report has been resolved.'));
                     foreach ($admins as $admin) {
                         Notification::send($admin, new Notifications('A report has been resolved.'));
@@ -55,25 +67,6 @@ class Status extends Controller
                         ->causedBy(auth()->user())
                         ->performedOn($data)
                         ->log('Report Resolved');
-                    break;
-
-                case 'closed':
-                    if ($data->status === 'closed') {
-                        return redirect()->back()->withErrors(['Report is already closed.']);
-                    }
-                    $data->status = 'closed';
-                    $message = 'Report closed.';
-
-                    // Send notifications
-                    Notification::send($user, new Notifications('Your report has been closed.'));
-                    foreach ($admins as $admin) {
-                        Notification::send($admin, new Notifications('A report has been closed.'));
-                    }
-
-                    activity()
-                        ->causedBy(auth()->user())
-                        ->performedOn($data)
-                        ->log('Report Closed');
                     break;
 
                 default:

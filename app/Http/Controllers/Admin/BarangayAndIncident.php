@@ -15,12 +15,14 @@ class BarangayAndIncident extends Controller
 {
     public function incident()
     {
-        $agencies = User::select('agency')
-            ->where('role', 1) // Add the condition for role
+        $types = User::all();
+
+        $agencies = User::select('agency', 'contact', 'email')
+            ->where('role', 1)
             ->distinct()
             ->get();
 
-        return view('admin.add.add-incident', compact('agencies'));
+        return view('admin.add.add-incident', compact('agencies', 'types'));
     }
 
 
@@ -96,19 +98,19 @@ class BarangayAndIncident extends Controller
     }
 
     public function unarchive_bar($id)
-{
-    $barangayarc = ArchiveBarangay::findOrFail($id);
+    {
+        $barangayarc = ArchiveBarangay::findOrFail($id);
 
-    $archiveData = $barangayarc->toArray();
-    $archiveData['created_at'] = $barangayarc->created_at->format('Y-m-d H:i:s');
-    $archiveData['updated_at'] = $barangayarc->updated_at->format('Y-m-d H:i:s');
+        $archiveData = $barangayarc->toArray();
+        $archiveData['created_at'] = $barangayarc->created_at->format('Y-m-d H:i:s');
+        $archiveData['updated_at'] = $barangayarc->updated_at->format('Y-m-d H:i:s');
 
-    DB::table('barangays')->insert($archiveData);
+        DB::table('barangays')->insert($archiveData);
 
-    $barangayarc->delete();
+        $barangayarc->delete();
 
-    return redirect()->route('admin.bar')->with('success', 'Barangay unarchived successfully');
-}
+        return redirect()->route('admin.bar')->with('success', 'Barangay unarchived successfully');
+    }
 
 
     public function inc()
@@ -149,5 +151,4 @@ class BarangayAndIncident extends Controller
 
         return redirect()->route('admin.inc')->with('success', 'Incident unarchived successfully.');
     }
-
 }
