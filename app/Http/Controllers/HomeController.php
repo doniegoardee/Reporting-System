@@ -76,30 +76,23 @@ class HomeController extends Controller
 
 
 
-    public function adminHome()
+    public function agency()
     {
-        $adminreport = Reports::whereIn('status', ['pending', 'solved'])->count();
-        $pendingreport = Reports::where('status', 'pending')->count();
-        $solvedreport = Reports::where('status', 'solved')->count();
 
-        $reports = Reports::whereIn('status', ['pending', 'solved'])->paginate(10);
-        $resolved = Reports::where('status', 'solved')->paginate(10);
-        $pending = Reports::where('status', 'pending')->paginate(10);
+     $user = Auth::user();
 
+     $userAgency = $user->agency;
 
-        $recent = Reports::where('status', 'pending')->latest()->take(5)->get();
-        return view('admin.adminhome', compact(
-            'adminreport',
-            'pendingreport',
-            'solvedreport',
-            'reports',
-            'resolved',
-            'pending',
-            'recent'
-        ));
+     $reports = Reports::where('responding_agency', $userAgency)
+     ->where('status','pending')->get();
+
+     return view('agency.index', compact('reports','userAgency'));
     }
 
-    public function admin_2()
+
+
+
+    public function admin()
     {
 
         $allReportsCount = Reports::count();

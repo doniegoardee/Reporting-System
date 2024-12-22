@@ -33,6 +33,6 @@ class Reports extends Model
 
     public function incidentType()
     {
-        return $this->belongsTo(IncidentType::class, 'subject_type');
+        return $this->belongsTo(IncidentType::class, 'incident_type_id');
     }
 }

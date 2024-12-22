@@ -13,6 +13,7 @@ class IncidentType extends Model
 
     public function reports()
     {
-        return $this->hasMany(Reports::class, 'subject_type');
+        return $this->hasMany(Reports::class, 'incident_type_id');
     }
+
 }

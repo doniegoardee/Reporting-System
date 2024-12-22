@@ -54,7 +54,7 @@
                     <li><a href="#hero" class="active">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Report Incident</a></li>
+                    {{-- <li><a href="#portfolio">Report Incident</a></li> --}}
                     {{-- <li><a href="#team">Team</a></li> --}}
                     {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -107,10 +107,8 @@
                 <div class="carousel-item active">
                     <img src="image/sample.jpg" alt="">
                     <div class="carousel-container">
-                        <h2>We are professional</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <h2>Incident Reporting Buguey Cagayan</h2>
+                        <p>Empowering Buguey, Cagayan with safer communities. Report incidents quickly, track progress seamlessly, and foster accountability. Together, we create a more secure tomorrow.</p>
                             @if (Route::has('login'))
                             <div>
                                 @auth
@@ -130,10 +128,8 @@
                 <div class="carousel-item">
                     <img src="image/sample3.jpg" alt="">
                     <div class="carousel-container">
-                        <h2>At vero eos et accusamus</h2>
-                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id
-                            quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
-                            Temporibus autem quibusdam et aut officiis debitis aut.</p>
+                        <h2>Incident Reporting Buguey Cagayan</h2>
+                        <p>Incident Reporting Buguey Cagayan – your voice for change and safety. Submit reports with ease and ensure swift resolutions. Building trust, one incident at a time.</p>
                             @if (Route::has('login'))
                             <div>
                                 @auth
@@ -153,10 +149,8 @@
                 <div class="carousel-item">
                     <img src="image/sample2.jpg" alt="">
                     <div class="carousel-container">
-                        <h2>Temporibus autem quibusdam</h2>
-                        <p>Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur
-                            aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
-                            nesciunt omnis iste natus error sit voluptatem accusantium.</p>
+                        <h2>Incident Reporting Buguey Cagayan</h2>
+                        <p>Your safety, our priority in Buguey, Cagayan. A simple platform to report, resolve, and improve. Strengthening communities through transparency and action.</p>
                      @if (Route::has('login'))
                 <div>
                     @auth
@@ -193,7 +187,13 @@
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>About</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                <p>Incident Reporting Buguey Cagayan is a dedicated platform designed to enhance the safety and
+                     security of the Buguey community. It empowers residents to report incidents efficiently, ensuring
+                     prompt attention and resolution by local authorities. With features like detailed reporting,
+                      progress tracking, and real-time notifications, the system fosters transparency and accountability.
+                       Our mission is to create a more secure and united community where every voice is heard and every concern is
+                       addressed. Together, we can make Buguey, Cagayan, a safer place for everyone.
+                </p>
             </div><!-- End Section Title -->
 
             <div class="container">
@@ -394,7 +394,7 @@
         </section><!-- /Features Section -->
 
         <!-- Why Us Section -->
-        <section id="why-us" class="why-us section">
+        {{-- <section id="why-us" class="why-us section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
@@ -437,10 +437,10 @@
 
             </div>
 
-        </section><!-- /Why Us Section -->
+        </section><!-- /Why Us Section --> --}}
 
         <!-- Portfolio Section -->
-        <section id="portfolio" class="portfolio section">
+        {{-- <section id="portfolio" class="portfolio section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
@@ -506,7 +506,7 @@
 
             </div>
 
-        </section><!-- /Portfolio Section -->
+        </section><!-- /Portfolio Section --> --}}
 
         <!-- Faq Section -->
         <section id="faq" class="faq section light-background">
@@ -603,7 +603,13 @@
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Contact</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                <p>Feel free to reach out to us for any inquiries, assistance, or feedback.
+                     Our team is here to help and ensure your questions are addressed promptly.
+                      Contact us through the form below or via the provided channels, and we'll
+                       respond as soon as possible.Feel free to reach out to us for any inquiries,
+                      assistance, or feedback. Our team is here to help and ensure your questions
+                    are addressed promptly. Contact us through the form below or via the provided channels,
+                     and we'll respond as soon as possible.</p>
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -617,8 +623,8 @@
                                 <div class="info-item" data-aos="fade" data-aos-delay="200">
                                     <i class="bi bi-geo-alt"></i>
                                     <h3>Address</h3>
-                                    <p>A108 Adam Street</p>
-                                    <p>New York, NY 535022</p>
+                                    <p>Centro pob. Municipality of Buguey</p>
+                                    <p>Cetro Buguey Cagayan</p>
                                 </div>
                             </div><!-- End Info Item -->
 
@@ -769,11 +775,7 @@
             <p>© <span>Copyright</span> <strong class="px-1 sitename">eBusiness</strong> <span>All Rights
                     Reserved</span></p>
             <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you've purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
             </div>
         </div>
 

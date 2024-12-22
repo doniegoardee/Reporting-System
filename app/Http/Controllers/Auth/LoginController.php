@@ -61,9 +61,11 @@ class LoginController extends Controller
             }
 
             if ($user->role == 'user') {
-                return redirect()->route('home.user');
-            } elseif ($user->role == 'admin-2') {
-                return redirect()->route('admin-2.index');
+                return redirect()->route('user.incident');
+            } elseif ($user->role == 'admin') {
+                return redirect()->route('admin.index');
+            } elseif ($user->role == 'agency') {
+                return redirect()->route('agency.home');
             }
         } else {
             return redirect()->route('login')->with("error", 'Login Error incorrect email or password');

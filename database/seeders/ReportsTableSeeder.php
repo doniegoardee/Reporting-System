@@ -42,7 +42,7 @@ class ReportsTableSeeder extends Seeder
                     'needs' => $faker->sentence(5),
                     'image' => $faker->imageUrl(640, 480, 'incident'),
                     'contact' => $faker->phoneNumber,
-                    'responding_agency' => $faker->company,
+                    'responding_agency' => $faker->randomElement(['BFP', 'MDRRMO', 'PNP']),
                     'resolved_time' => $resolvedTime,
                     'created_at' => $date,
                     'updated_at' => $date,

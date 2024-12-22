@@ -43,7 +43,7 @@
         <div class="page-content scrollable-content">
             <div class="page-header">
                 <div class="container-fluid">
-                    <h2 class="h5 no-margin-bottom text-center fw-600">Incident Types</h2>
+                    <h2 class="h5 no-margin-bottom text-center fw-600"></h2>
                 </div>
             </div>
 

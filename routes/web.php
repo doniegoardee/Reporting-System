@@ -1,17 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-
-use App\Http\Controllers\Admin2\ExportFileController;
-use App\Http\Controllers\admin2\Adminreports;
-use App\Http\Controllers\admin2\MailController;
-use App\Http\Controllers\Admin2\Analysis;
-use App\Http\Controllers\Admin2\BarangayAndIncident;
-use App\Http\Controllers\Admin2\FilterController;
-use App\Http\Controllers\Admin2\Settings;
-use App\Http\Controllers\Admin2\Status;
-use App\Http\Controllers\Admin2\SeminarController;
-use App\Http\Controllers\admin2\UsersController;
+use App\Http\Controllers\Admin\ExportFileController;
+use App\Http\Controllers\Admin\Adminreports;
+use App\Http\Controllers\Admin\MailController;
+use App\Http\Controllers\Admin\Analysis;
+use App\Http\Controllers\Admin\BarangayAndIncident;
+use App\Http\Controllers\Admin\FilterController;
+use App\Http\Controllers\Admin\Settings;
+use App\Http\Controllers\Admin\Status;
+use App\Http\Controllers\Admin\SeminarController;
+use App\Http\Controllers\Admin\UsersController;
 
 use App\Http\Controllers\Users\ControllerReports;
 use App\Http\Controllers\Users\Setting;
@@ -48,10 +46,9 @@ Route::get("/home", [HomeController::class, 'home'])->name('h');
 
 Auth::routes();
 
-Route::get('/mail', function () {
-    Mail::to('smokefacebook02@gmail.com')->send(new ReportMail(''));
-});
-
+// Route::get('/mail', function () {
+//     Mail::to('smokefacebook02@gmail.com')->send(new ReportMail(''));
+// });
 
 // user routes
 Route::middleware(['auth', 'user-role:user'])->group(function () {
@@ -67,7 +64,7 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
             Route::get("/my", [ControllerReports::class, 'myreports'])->name('user.report');
             Route::put('/{id}', [ControllerReports::class, 'updateReports'])->name('reports.update');
             Route::get('/{id}/edit', [ControllerReports::class, 'editReport'])->name('reports.edit');
-            // Route::get('/{id}', [ControllerReports::class, 'show'])->name('reports.show');
+
         });
 
         Route::post('/botman', [ChatBotController::class, 'handleBot']);
@@ -88,12 +85,11 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
 });
 
 
+// admin routes
+Route::middleware(['auth', 'user-role:admin'])->prefix('admin')->name('admin.')->group(function () {
 
-// admin-2 routes
-Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin-2.')->group(function () {
 
-
-    Route::get('/dashboard', [HomeController::class, 'admin_2'])->name('index');
+    Route::get('/dashboard', [HomeController::class, 'admin'])->name('index');
 
 
     Route::prefix('reports')->group(function () {
@@ -171,19 +167,7 @@ Route::middleware(['auth', 'user-role:admin-2'])->prefix('admin-2')->name('admin
 
 
 
-// admin routes
-Route::middleware(['auth', 'user-role:admin'])->group(function () {
-    Route::get("/admin/home", [HomeController::class, 'adminHome'])->name('home.admin');
-    Route::get("/admin/list-users", [AdminController::class, 'userindex'])->name('admin.user');
-
-    Route::get("/admin/activity-log", [AdminController::class, 'activitylog'])->name('admin.activity-log');
-
-    Route::get('/admin/update-status/{id}/{status}', [ControllerReports::class, 'updateStatus'])->name('admin.update-status');
-
-    Route::get("/admin/status", [ControllerReports::class, 'status'])->name('status');
-    Route::get("/admin/manage-reports", [ControllerReports::class, 'index'])->name('admin.reports');
-
-    Route::post("/admin/export-reports", [ExportFileController::class, 'exportExcel'])->name('export.reports');
-    Route::post("/admin/export-resolved-reports", [ExportFileController::class, 'ExportReportResolved'])->name('export.resolved.reports');
-    // Route::get('/pdf', [ExportFileController::class, 'generatePDF'])->name('export.pdf');
+// agency routes
+Route::middleware(['auth', 'user-role:agency'])->group(function () {
+    Route::get("/agency/home", [HomeController::class, 'agency'])->name('agency.home');
 });
