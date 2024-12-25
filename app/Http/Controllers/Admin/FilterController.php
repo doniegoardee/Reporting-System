@@ -11,12 +11,8 @@ use Illuminate\Http\Request;
 
 class FilterController extends Controller
 {
-
-
-
     public function filtering(Request $request)
     {
-
         $incidentTypes = IncidentType::all();
         $barangay = Barangay::all();
 
@@ -43,16 +39,13 @@ class FilterController extends Controller
             $query->whereDate('created_at', '<=', $request->input('end_date'));
         }
 
-        $allReports = $query->paginate(5);
+        $allReports = $query->paginate(5)->appends($request->all());
 
         return view('admin.reports.all-reports', compact('allReports', 'incidentTypes', 'barangay'));
     }
 
-
-
     public function filter_pending(Request $request)
     {
-
         $incident = IncidentType::all();
         $barangay = Barangay::all();
         $archive = ArchiveIncident::all();
@@ -80,17 +73,15 @@ class FilterController extends Controller
             $query->whereDate('created_at', '<=', $request->input('end_date'));
         }
 
-        $pending = $query->where('status', 'pending')->paginate(5, ['*'], 'pending');
+        $pending = $query->whereIn('status', ['pending', 'in-progress'])
+        ->paginate(5, ['*'], 'pending')
+        ->appends($request->all());
 
-        return view('admin.reports.pending', compact('pending', 'incident','archive', 'barangay'));
+        return view('admin.reports.pending', compact('pending', 'incident', 'archive', 'barangay'));
     }
-
-
-
 
     public function filter_resolved(Request $request)
     {
-
         $incident = IncidentType::all();
         $barangay = Barangay::all();
 
@@ -117,17 +108,13 @@ class FilterController extends Controller
             $query->whereDate('created_at', '<=', $request->input('end_date'));
         }
 
-        $resolved = $query->where('status', 'resolved')->paginate(5, ['*'], 'resolved');
+        $resolved = $query->where('status', 'resolved')->paginate(5, ['*'], 'resolved')->appends($request->all());
 
         return view('admin.reports.resolved', compact('resolved', 'incident', 'barangay'));
     }
 
-
-
-
     public function filter_closed(Request $request)
     {
-
         $incident = IncidentType::all();
         $barangay = Barangay::all();
 
@@ -154,7 +141,7 @@ class FilterController extends Controller
             $query->whereDate('created_at', '<=', $request->input('end_date'));
         }
 
-        $closed = $query->where('status', 'closed')->paginate(5, ['*'], 'closed');
+        $closed = $query->where('status', 'closed')->paginate(5, ['*'], 'closed')->appends($request->all());
 
         return view('admin.reports.closed', compact('closed', 'incident', 'barangay'));
     }

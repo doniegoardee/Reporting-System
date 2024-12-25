@@ -1,0 +1,163 @@
+phase at vendor>jeroennoten>resources>views>components>layout>navbar-notification
+
+<li class="{{ $makeListItemClass() }}" id="{{ $id }}">
+    <a class="nav-link" @if ($enableDropdownMode) data-toggle="dropdown" aria-expanded="false" @endif
+        {{ $attributes->merge($makeAnchorDefaultAttrs()) }}>
+        <i class="{{ $makeIconClass() }}"></i>
+
+        @php
+            $user = Auth::user();
+            $unreadCount = $user->notifications->whereNull('read_at')->count();
+        @endphp
+
+        @if ($id === 'my-notification' && $unreadCount > 0)
+            <span
+                class="badge badge-danger navbar-badge position-absolute rounded-circle d-flex align-items-center justify-content-center"
+                style="top: 0; right: -6px; width: 20px; height: 20px; font-size: 0.75rem;">
+                {{ $unreadCount }}
+            </span>
+        @endif
+    </a>
+
+    @if ($enableDropdownMode)
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="width: 30rem;">
+            <span class="dropdown-header bg-primary text-white">
+                Notifications
+            </span>
+            <div class="dropdown-divider"></div>
+
+            @if ($user->notifications->isNotEmpty())
+                @foreach ($user->notifications as $notification)
+                    <a class="notification-item mark-read" style="text-decoration: none" data-id="{{ $notification->id }}" href="javascript:void(0);" class="dropdown-item">
+
+                        <div class="media">
+                            <i class="fas fa-envelope mr-3 text-primary"></i>
+                            <div class="media-body">
+                                <h6 class="dropdown-item-title">
+                                    {{ $notification->data['title'] ?? 'Notification' }}
+                                    <span class="float-right text-sm text-muted">
+                                        <i class="far fa-clock"></i>
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    </span>
+                                </h6>
+                                <p class="text-sm text-muted">
+                                    {{ $notification->data['name'] ?? 'No message available' }}
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+                @endforeach
+            @else
+                <p class="text-center text-muted p-3 mb-0">No notifications available.</p>
+            @endif
+
+            <div class="dropdown-footer text-center p-2">
+                <a href="" class="btn btn-sm btn-primary">
+                    View All Notifications
+                </a>
+            </div>
+        </div>
+    @endif
+
+</li>
+
+@if (!is_null($makeUpdateUrl()) && $makeUpdatePeriod() > 0)
+    @push('js')
+        <script>
+            $(() => {
+
+                let updateNotification = (nLink) => {
+                    $.ajax({
+                            url: "{{ $makeUpdateUrl() }}",
+                        })
+                        .done((data) => {
+                            nLink.update(data);
+                        })
+                        .fail(function(jqXHR, textStatus, errorThrown) {
+                            console.log(jqXHR, textStatus, errorThrown);
+                        });
+                };
+
+                let nLink = new _AdminLTE_NavbarNotification("{{ $id }}");
+                updateNotification(nLink);
+
+                setInterval(updateNotification, {{ $makeUpdatePeriod() }}, nLink);
+            })
+        </script>
+    @endpush
+@endif
+
+@once
+    @push('js')
+        <script>
+            $(document).on('click', '.mark-read', function(e) {
+                e.preventDefault();
+
+                var notificationId = $(this).data('id');
+
+                $.ajax({
+                    url: '/admin/notifications/' + notificationId + '/read',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            console.log('Notification marked as read');
+                        } else {
+                            alert('Failed to mark as read');
+                        }
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error:", error);
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            class _AdminLTE_NavbarNotification {
+                constructor(target) {
+                    this.target = target;
+                }
+
+                update(data) {
+                    let t = $(`li#${this.target}`);
+
+                    if (t.length <= 0 || !data) {
+                        return;
+                    }
+
+                    let badge = t.find(".navbar-badge");
+                    let icon = t.find(".nav-link > i");
+                    let dropdown = t.find(".adminlte-dropdown-content");
+
+                    if (data.label && data.label > 0) {
+                        badge.html(data.label);
+                    } else {
+                        badge.empty();
+                    }
+
+                    if (data.label_color) {
+                        badge.removeClass((idx, classes) => {
+                            return (classes.match(/(^|\s)badge-\S+/g) || []).join(' ');
+                        }).addClass(`badge-${data.label_color} badge-pill`);
+                    }
+
+                    if (data.icon_color) {
+                        icon.removeClass((idx, classes) => {
+                            return (classes.match(/(^|\s)text-\S+/g) || []).join(' ');
+                        }).addClass(`text-${data.icon_color}`);
+                    }
+
+                    if (data.dropdown && dropdown.length > 0) {
+                        dropdown.html(data.dropdown);
+                    }
+                }
+            }
+        </script>
+    @endpush
+@endonce

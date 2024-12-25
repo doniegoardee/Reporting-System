@@ -30,9 +30,10 @@ class Adminreports extends Controller
         $archive = ArchiveIncident::all();
         $barangay = Barangay::all();
 
-        $pending = Reports::where('status', 'pending')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        $pending = Reports::whereIn('status', ['pending', 'in-progress'])
+        ->orderBy('created_at', 'desc')
+        ->paginate(10)
+        ->appends(request()->all());
 
 
         return view('admin.reports.pending', compact('pending', 'incident','archive', 'barangay'));

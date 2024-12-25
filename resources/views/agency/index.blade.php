@@ -10,6 +10,7 @@
                     <th>Incident Type</th>
                     <th>Location</th>
                     <th>Status</th>
+                    <th>Date</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -21,17 +22,19 @@
                         </td>
                         <td>{{ $report->subject_type }}</td>
                         <td>{{ $report->location }}</td>
-                        <td>{{ ucfirst($report->status) }}</td>
+                        <td>{{ $report->status }}</td>
+                        <td>{{ $report->created_at->format('d M Y, h:i A') }}</td>
+
                         <td>
                             <!-- Button to trigger modal -->
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#viewReportModal-{{ $report->id }}">
                                 View
                             </button>
-                            <a href="javascript:void(0)" class="btn btn-success" data-bs-toggle="modal"
+                            {{-- <a href="javascript:void(0)" class="btn btn-success" data-bs-toggle="modal"
                                 data-bs-target="#resolveModal{{ $report->id }}" style="flex: 1; text-align: center;">
                                 Mark as Resolved
-                            </a>
+                            </a> --}}
                         </td>
                     </tr>
 
@@ -62,7 +65,7 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="resolveModal{{ $report->id }}" tabindex="-1"
+                    {{-- <div class="modal fade" id="resolveModal{{ $report->id }}" tabindex="-1"
                         aria-labelledby="resolveModalLabel{{ $report->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -105,7 +108,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 @endforeach
             </tbody>
         </table>

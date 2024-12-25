@@ -300,16 +300,15 @@ return [
 
     'menu' => [
         // Navbar items:
-        // [
-        //     'type' => 'navbar-notification',
-        //     'text' => '',
-        //     'topnav_right' => true,
-        //     'url' => '#',
-        //     'icon' => 'fa fa-bell',
-        //     'badge' => 5,
-        //     'badge_color' => 'warning',
-
-        // ],
+        [
+            'type' => 'navbar-notification',
+            'id' => 'my-notification',
+            'icon' => 'fas fa-bell',
+            'icon_color' => 'blue',
+            'url' => 'notifications/show', // Adjust this to your desired route
+            'topnav_right' => true,
+            'dropdown_mode' => true,
+        ],
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,

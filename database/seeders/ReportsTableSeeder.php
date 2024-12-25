@@ -24,14 +24,23 @@ class ReportsTableSeeder extends Seeder
                 $date = Carbon::create(2024, $month, rand(1, 28), rand(0, 23), rand(0, 59), rand(0, 59));
                 $date = $date->greaterThan($now) ? $now->copy()->subSeconds(rand(0, 3600)) : $date;
 
-                $status = $faker->randomElement(['pending', 'closed', 'resolved']);
+                $status = $faker->randomElement(['pending', 'closed', 'resolved', 'in-progress']);
                 $resolvedTime = ($status === 'resolved' || $status === 'closed')
                     ? $date->copy()->addDays(rand(1, 7))->min($now)
                     : null;
 
+                // Define subject type and responding agency mapping
+                $subjectType = $faker->randomElement(['Flood', 'Earthquake', 'Fire Related', 'Medical Emergency', 'Robbery']);
+                $respondingAgency = match ($subjectType) {
+                    'Fire Related' => 'BFP',
+                    'Earthquake' => 'MDRRMO', // Example assignment; modify if needed
+                    'Robbery' => 'PNP',
+                    default => $faker->randomElement(['MDRRMO', 'PNP']), // Exclude BFP for other types
+                };
+
                 Reports::create([
                     'user_id' => 1,
-                    'subject_type' => $faker->randomElement(['Flood', 'Earthquake', 'Fire Related', 'Medical Emergency']),
+                    'subject_type' => $subjectType,
                     'location' => $faker->randomElement(['Centro', 'Cabaritan', 'Centro Weste', 'Leron', 'Santa Maria']),
                     'zone' => $faker->randomElement(['1', '2', '3', '4', '5', '6', '7']),
                     'status' => $status,
@@ -40,7 +49,7 @@ class ReportsTableSeeder extends Seeder
                     'needs' => $faker->sentence(5),
                     'image' => $faker->imageUrl(640, 480, 'incident'),
                     'contact' => $faker->phoneNumber,
-                    'responding_agency' => $faker->randomElement(['BFP', 'MDRRMO', 'PNP']),
+                    'responding_agency' => $respondingAgency,
                     'email' => $faker->unique()->safeEmail,
                     'name' => $faker->name,
                     'resolved_time' => $resolvedTime,

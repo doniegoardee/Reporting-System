@@ -82,7 +82,15 @@ class HomeController extends Controller
         $userAgency = $user->agency;
 
         $reports = Reports::where('responding_agency', $userAgency)
-            ->where('status', 'pending')->paginate(10);
+        ->where('status', 'in-progress')
+        ->paginate(10);
+
+        \Log::info(Reports::where('responding_agency', $userAgency)
+    ->where('status', 'in-progress')
+    ->toSql());
+
+
+
 
         return view('agency.index', compact('reports', 'userAgency'));
     }

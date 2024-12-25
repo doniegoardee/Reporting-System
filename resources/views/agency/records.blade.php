@@ -22,7 +22,11 @@
                         </td>
                         <td>{{ $report->subject_type }}</td>
                         <td>{{ $report->location }}</td>
-                        <td>{{ ucfirst($report->status) }}</td>
+                        <td> @if($report->status === 'resolved' || $report->status === 'closed')
+                            Completed
+                        @else
+                            {{ ucfirst($report->status) }}
+                        @endif</td>
                         <td>
                             <!-- Button to trigger modal -->
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
@@ -47,7 +51,13 @@
                                 <div class="modal-body">
                                     <p><strong>Incident Type:</strong> {{ $report->subject_type }}</p>
                                     <p><strong>Location:</strong> {{ $report->location }}</p>
-                                    <p><strong>Status:</strong> {{ ucfirst($report->status) }}</p>
+                                    <p><strong>Status:</strong>
+                                        @if($report->status === 'resolved' || $report->status === 'closed')
+                                            Completed
+                                        @else
+                                            {{ ucfirst($report->status) }}
+                                        @endif
+                                    </p>
                                     <p><strong>Contact:</strong> {{ $report->contact }}</p>
                                     <p><strong>Email:</strong> {{ $report->email }}</p>
                                 </div>

@@ -4,25 +4,29 @@ use App\Mail\ReportMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\LpageController;
+use App\Http\Controllers\HomeController;
+
 use App\Http\Controllers\Admin\Status;
-use App\Http\Controllers\Users\Setting;
 use App\Http\Controllers\Admin\Analysis;
 use App\Http\Controllers\Admin\Settings;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LpageController;
-
+use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\SeminarController;
 use App\Http\Controllers\Admin\Adminreports;
-use App\Http\Controllers\Users\Notification;
-use App\Http\Controllers\Admin\MailController;
-
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\FilterController;
-use App\Http\Controllers\Admin\SeminarController;
-use App\Http\Controllers\Agency\ReportController;
-use App\Http\Controllers\Users\ChatBotController;
-use App\Http\Controllers\Users\ControllerReports;
-use App\Http\Controllers\Admin\BarangayAndIncident;
+use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\ExportFileController;
+use App\Http\Controllers\Admin\BarangayAndIncident;
+
+use App\Http\Controllers\Agency\ReportController;
+use App\Http\Controllers\Agency\Profile;
+
+use App\Http\Controllers\Users\ChatBotController;
+use App\Http\Controllers\Users\Setting;
+use App\Http\Controllers\Users\Notification;
+use App\Http\Controllers\Users\ControllerReports;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,13 +71,6 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
             Route::get('/{id}/edit', [ControllerReports::class, 'editReport'])->name('reports.edit');
         });
 
-        Route::post('/botman', [ChatBotController::class, 'handleBot']);
-
-        Route::post('/notifications/{id}/read', [Notification::class, 'markNotificationAsRead']);
-
-        Route::get('/profile', [UsersController::class, 'profile'])->name('user.profile');
-
-
 
         Route::prefix('settings')->group(function () {
             Route::get('/setting', [Setting::class, 'user_settings'])->name('user.settings');
@@ -81,13 +78,19 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
             Route::post('/change-password', [Setting::class, 'updatePassword'])->name('user.change');
             Route::delete('/delete-account', [Setting::class, 'deleteAccount'])->name('user.delete');
         });
+
+        Route::post('/botman', [ChatBotController::class, 'handleBot']);
+
+        Route::post('/notifications/{id}/read', [Notification::class, 'markNotificationAsRead']);
+
+        Route::get('/profile', [UsersController::class, 'profile'])->name('user.profile');
+
     });
 });
 
 
 // admin routes
 Route::middleware(['auth', 'user-role:admin'])->prefix('admin')->name('admin.')->group(function () {
-
 
     Route::get('/dashboard', [HomeController::class, 'admin'])->name('index');
 
@@ -148,14 +151,6 @@ Route::middleware(['auth', 'user-role:admin'])->prefix('admin')->name('admin.')-
     Route::get('/analysis', [Analysis::class, 'analysis'])->name('analysis');
 
 
-    Route::put('/update/{id}/{status}', [Status::class, 'updateStatus'])->name('update');
-
-
-    Route::get('/profile', [UsersController::class, 'show'])->name('profile.show');
-
-    Route::get('/send-email/{id}', [MailController::class, 'response'])->name('send.email');
-
-
 
     Route::prefix('settings')->group(function () {
         Route::get('/setting', [Settings::class, 'settings'])->name('settings');
@@ -163,6 +158,19 @@ Route::middleware(['auth', 'user-role:admin'])->prefix('admin')->name('admin.')-
         Route::post('/change-password', [Settings::class, 'updatePassword'])->name('change');
         Route::delete('/delete-account', [Settings::class, 'deleteAccount'])->name('delete');
     });
+
+    Route::post('/notifications/{id}/read', [NotificationController::class, 'markNotificationAsRead'])
+    ->name('notif');
+    Route::get('/notifications/unread-count', [NotificationController::class, 'getUnreadCount'])
+    ->name('notifications.unread-count');
+
+    Route::put('/update/{id}/{status}', [Status::class, 'updateStatus'])->name('update');
+
+    Route::get('/profile', [UsersController::class, 'show'])->name('profile.show');
+
+    Route::get('/send-email/{id}', [MailController::class, 'response'])->name('send.email');
+
+
 });
 
 
@@ -172,4 +180,7 @@ Route::middleware(['auth', 'user-role:agency'])->group(function () {
     Route::get("/agency/home", [HomeController::class, 'agency'])->name('agency.home');
     Route::get("/agency/record", [ReportController::class, 'agency_record'])->name('agency.records');
     Route::put('/update/{id}/{status}', [ReportController::class, 'markasresolved'])->name('mark');
+    Route::get('agency/setting', [Profile::class, 'agency_profile'])->name('agency.settings');
+    Route::put('agency/profile', [Profile::class, 'update'])->name('agency.profile-update');
+    Route::post('agency/change-password', [Profile::class, 'updatePassword'])->name('agency.change');
 });
