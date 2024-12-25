@@ -30,10 +30,14 @@
         <li class="nav-item"><a class="nav-link" href="#!">Link</a></li> --}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                style="font-size: 20px" class="fa-regular fa-circle-user"></i></a>
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i style="font-size: 20px" class="fa-regular fa-circle-user"></i>
+                            {{-- <img src="{{ asset($user->profile_image) }}" alt="Profile Image"
+                            class="img-fluid mt-2 rounded-circle"
+                            style="max-width: 20px;"> --}}
+                        </a>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#!"><i class="fa-solid fa-pen"></i> Edit
+                            <a class="dropdown-item" href="{{ route('agency.settings') }}"><i class="fa-solid fa-pen"></i> Edit
                                 Profile</a>
                             <a class="dropdown-item d-flex align-items-center" href="#!"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

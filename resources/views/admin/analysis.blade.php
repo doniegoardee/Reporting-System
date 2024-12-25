@@ -13,10 +13,9 @@
         }
 
         .chartjs-legend li.underline {
-        text-decoration: underline;
-    }
+            text-decoration: underline;
+        }
     </style>
-
 
     <div class="page-content scrollable-content bg-light">
         <div class="page-header">
@@ -31,15 +30,13 @@
                     <h5 class="mb-0">Incident Report Summary</h5>
                 </div>
                 <div class="card-body">
-                    <!-- Filter Form -->
                     <form method="GET" action="{{ route('admin.analysis') }}" class="mb-4">
                         <div class="row">
                             <div class="col-md-4">
                                 <select name="month" class="form-control">
                                     <option value="">All Months</option>
                                     @foreach (range(1, 12) as $m)
-                                        <option value="{{ $m }}"
-                                            {{ request('month') == $m ? 'selected' : '' }}>
+                                        <option value="{{ $m }}" {{ request('month') == $m ? 'selected' : '' }}>
                                             {{ date('F', mktime(0, 0, 0, $m, 1)) }}
                                         </option>
                                     @endforeach
@@ -49,8 +46,7 @@
                                 <select name="year" class="form-control">
                                     <option value="">All Years</option>
                                     @foreach (range(date('Y'), date('Y') - 10) as $y)
-                                        <option value="{{ $y }}"
-                                            {{ request('year') == $y ? 'selected' : '' }}>
+                                        <option value="{{ $y }}" {{ request('year') == $y ? 'selected' : '' }}>
                                             {{ $y }}
                                         </option>
                                     @endforeach
@@ -67,7 +63,6 @@
                             No analysis for {{ $selectedMonth }} {{ $selectedYear }}.
                         </div>
                     @else
-                        <!-- Table showing the report analysis -->
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -80,6 +75,25 @@
                                     <tr>
                                         <td>{{ $report->subject_type }}</td>
                                         <td>{{ $report->count }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                        <!-- Table for Status Counts (Pending, Resolved, Closed) -->
+                        <h5 class="mt-4">Report Status Summary</h5>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (['pending', 'resolved', 'closed'] as $status)
+                                    <tr>
+                                        <td>{{ ucfirst($status) }}</td>
+                                        <td>{{ $reportCountByStatus->where('status', $status)->count() }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -98,14 +112,104 @@
                             </div>
                         </div>
 
-
+                        <div class="row mt-4 d-flex align-items-start">
+                            <div class="col-md-8 col-12">
+                                <div class="chart-container" style="width: 100%; max-width: 100%; margin: auto; height: 600px;">
+                                    <canvas id="incidentStatusChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>
 
             <script>
-                var ctx = document.getElementById('incidentTypeChart').getContext('2d');
+                var ctxStatus = document.getElementById('incidentStatusChart').getContext('2d');
+                var reportCountByStatus = @json($reportCountByStatus);
+                var statusLabels = ['Pending', 'Resolved', 'Closed'];
+                var statusData = [
+                    reportCountByStatus.filter(report => report.status === 'pending').length,
+                    reportCountByStatus.filter(report => report.status === 'resolved').length,
+                    reportCountByStatus.filter(report => report.status === 'closed').length
+                ];
+                var statusColors = ['#ffcc00', '#36a2eb', '#4caf50'];
 
+                var statusChart = new Chart(ctxStatus, {
+                    type: 'bar',
+                    data: {
+                        labels: statusLabels,
+                        datasets: [{
+                            label: 'Incident Statuses',
+                            data: statusData,
+                            backgroundColor: statusColors,
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'right',
+                                align: 'start',
+                                labels: {
+                                    generateLabels: function(chart) {
+                                        return chart.data.labels.map((label, index) => ({
+                                            text: `${label} - ${statusData[index]} `,
+                                            fillStyle: statusColors[index],
+                                            strokeStyle: statusColors[index],
+                                            hidden: false,
+                                            index: index
+                                        }));
+                                    },
+                                    boxWidth: 15,
+                                    font: {
+                                        size: 14,
+                                        family: 'Arial'
+                                    },
+                                    color: '#333'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        let value = tooltipItem.raw;
+                                        return `${tooltipItem.label}: ${value} incidents `;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Status',
+                                    font: { size: 14 }
+                                },
+                                ticks: {
+                                    font: { size: 12 }
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Number of Incidents',
+                                    font: { size: 14 }
+                                },
+                                ticks: {
+                                    font: { size: 12 },
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    }
+                });
+
+            </script>
+
+            <script>
+                var ctx = document.getElementById('incidentTypeChart').getContext('2d');
                 var reportCountByType = @json($reportCountByType);
 
                 var labels = reportCountByType.map(function(report) {
@@ -197,9 +301,8 @@
 
             <script>
                 var ctxPie = document.getElementById('incidentTypeChart-pie').getContext('2d');
-
                 var backgroundColorsPie = @json($reportCountByType->map(function($report) use ($colorMap) {
-                    return $colorMap[$report->subject_type] ?? '#ff6384'; // Fallback color
+                    return $colorMap[$report->subject_type] ?? '#ff6384';
                 }));
 
                 var chartPie = new Chart(ctxPie, {
@@ -226,7 +329,7 @@
                                         var labels = chart.data.labels;
                                         var data = chart.data.datasets[0].data;
                                         return labels.map((label, index) => ({
-                                            text: `${label} = ${data[index]}`,
+                                            text: `${label} - ${data[index]} incidents`,
                                             fillStyle: backgroundColorsPie[index],
                                             strokeStyle: backgroundColorsPie[index],
                                             hidden: false,
@@ -238,16 +341,7 @@
                                         size: 14,
                                         family: 'Arial'
                                     },
-                                    color: '#333',
-                                    onClick: function(event, legendItem) {
-                                        var index = legendItem.index;
-                                        var meta = chartPie.getDatasetMeta(0);
-                                        var item = meta.data[index];
-
-                                        var alreadyUnderlined = item._model.textDecoration === 'underline';
-                                        item._model.textDecoration = alreadyUnderlined ? '' : 'underline';
-                                        chartPie.update();
-                                    }
+                                    color: '#333'
                                 }
                             },
                             tooltip: {
@@ -262,8 +356,6 @@
                     }
                 });
             </script>
-
-
         </div>
-
+    </div>
 </x-app-layout>

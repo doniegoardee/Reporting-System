@@ -25,9 +25,15 @@ class Analysis extends Controller
             $query->whereYear('reports.created_at', $year);
         }
 
+        // Fetching report count by type
         $reportCountByType = $query->select('reports.subject_type', DB::raw('count(*) as count'), 'incident_types.color')
             ->join('incident_types', 'incident_types.name', '=', 'reports.subject_type')
             ->groupBy('reports.subject_type', 'incident_types.color')
+            ->get();
+
+        // Fetching report count by status
+        $reportCountByStatus = $query->select('reports.status', DB::raw('count(*) as count'))
+            ->groupBy('reports.status')
             ->get();
 
         $selectedMonth = $month ? date('F', mktime(0, 0, 0, $month, 10)) : 'All Months';
@@ -35,6 +41,7 @@ class Analysis extends Controller
 
         $colorMap = $reportCountByType->pluck('color', 'subject_type')->toArray();
 
-        return view('admin.analysis', compact('reportCountByType', 'selectedMonth', 'selectedYear', 'colorMap'));
+        return view('admin.analysis', compact('reportCountByType', 'selectedMonth', 'selectedYear', 'colorMap', 'reportCountByStatus'));
     }
+
 }

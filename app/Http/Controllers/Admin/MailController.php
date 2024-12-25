@@ -32,6 +32,9 @@ class MailController extends Controller
             return redirect()->route('admin.pending')->with('error', 'Email address not found for this incident type.');
         }
 
+        $report->status = 'in-progress';
+        $report->save();
+
         try {
             Mail::to($email)->send(new ReportMail($report));
 

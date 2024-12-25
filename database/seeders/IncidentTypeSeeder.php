@@ -41,6 +41,16 @@ class IncidentTypeSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+             [
+                'name' => 'Robbery',
+                'image' => 'thief.png',
+                'color' => 'grey',
+                'agency' => 'PNP',
+                'contact' => '09123456789',
+                'email' => 'ceyojdan13@gmail.com',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             [
                 'name' => 'Fire Related',
                 'image' => 'fire.png',
