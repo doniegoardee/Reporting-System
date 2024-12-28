@@ -35,4 +35,9 @@ class Reports extends Model
     {
         return $this->belongsTo(IncidentType::class, 'incident_type_id');
     }
+
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
 }

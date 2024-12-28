@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
+
+
     public function agency_record()
     {
         $user = Auth::user();
@@ -28,6 +30,8 @@ class ReportController extends Controller
 
         return view('agency.records', compact('reports', 'userAgency'));
     }
+
+
 
     public function markasresolved($id, $status, Request $request)
     {
@@ -79,4 +83,27 @@ class ReportController extends Controller
 
         return redirect()->back()->withErrors(['Unauthorized action.']);
     }
+
+
+    public function analysis()
+    {
+        $user = auth()->user();
+        $userAgency = $user->agency;
+
+        $inProgressCount = Reports::where('responding_agency', $userAgency)
+            ->where('status', 'in-progress')
+            ->count();
+
+        $resolvedCount = Reports::where('responding_agency', $userAgency)
+            ->where('status', 'resolved')
+            ->count();
+
+        $closedCount = Reports::where('responding_agency', $userAgency)
+            ->where('status', 'closed')
+            ->count();
+
+        return view('agency.analysis', compact('inProgressCount', 'resolvedCount', 'closedCount'));
+    }
+
+
 }

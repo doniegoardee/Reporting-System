@@ -1,4 +1,4 @@
-phase at vendor>jeroennoten>resources>views>components>layout>navbar-notification
+paste at vendor>jeroennoten>resources>views>components>layout>navbar-notification
 
 <li class="{{ $makeListItemClass() }}" id="{{ $id }}">
     <a class="nav-link" @if ($enableDropdownMode) data-toggle="dropdown" aria-expanded="false" @endif

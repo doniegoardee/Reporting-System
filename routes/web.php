@@ -177,10 +177,21 @@ Route::middleware(['auth', 'user-role:admin'])->prefix('admin')->name('admin.')-
 
 // agency routes
 Route::middleware(['auth', 'user-role:agency'])->group(function () {
+
     Route::get("/agency/home", [HomeController::class, 'agency'])->name('agency.home');
-    Route::get("/agency/record", [ReportController::class, 'agency_record'])->name('agency.records');
-    Route::put('/update/{id}/{status}', [ReportController::class, 'markasresolved'])->name('mark');
-    Route::get('agency/setting', [Profile::class, 'agency_profile'])->name('agency.settings');
-    Route::put('agency/profile', [Profile::class, 'update'])->name('agency.profile-update');
-    Route::post('agency/change-password', [Profile::class, 'updatePassword'])->name('agency.change');
+
+
+    Route::prefix('reports')->group(function () {
+        Route::get("/agency/record", [ReportController::class, 'agency_record'])->name('agency.records');
+        Route::get("/agency/analysis", [ReportController::class, 'analysis'])->name('agency.analysis');
+        Route::put('/update/{id}/{status}', [ReportController::class, 'markasresolved'])->name('mark');
+    });
+
+
+    Route::prefix('settings')->group(function () {
+        Route::get('agency/setting', [Profile::class, 'agency_profile'])->name('agency.settings');
+        Route::put('agency/profile', [Profile::class, 'update'])->name('agency.profile-update');
+        Route::post('agency/change-password', [Profile::class, 'updatePassword'])->name('agency.change');
+    });
+
 });

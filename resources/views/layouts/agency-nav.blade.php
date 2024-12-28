@@ -11,8 +11,9 @@
         <a class="list-group-item list-group-item-action list-group-item-light p-3 {{ request()->routeIs('agency.records') ? 'active' : '' }}"
             href="{{ route('agency.records') }}">Records</a>
 
-        <a class="list-group-item list-group-item-action list-group-item-light p-3 {{ request()->routeIs('agency.logs') ? 'active' : '' }}"
-            href="">Activity Logs</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3 {{ request()->routeIs('agency.analysis') ? 'active' : '' }}"
+            href="{{ route('agency.analysis') }}">Analysis</a>
+
     </div>
 </div>
 <!-- Page content wrapper-->
