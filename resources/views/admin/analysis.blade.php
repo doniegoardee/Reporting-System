@@ -89,14 +89,26 @@
                                     <th>Count</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach (['pending', 'resolved', 'closed'] as $status)
+                            @php
+                            $pendingCount = $reportCountByStatus->where('status', 'pending')->sum('count') +
+                                            $reportCountByStatus->where('status', 'in-progress')->sum('count');
+                        @endphp
+
+                        <tbody>
+                            <tr>
+                                <td>Pending</td>
+                                <td>{{ $pendingCount }}</td>
+                            </tr>
+                            @foreach ($reportCountByStatus as $statusData)
+                                @if ($statusData->status !== 'pending' && $statusData->status !== 'in-progress')
                                     <tr>
-                                        <td>{{ ucfirst($status) }}</td>
-                                        <td>{{ $reportCountByStatus->where('status', $status)->count() }}</td>
+                                        <td>{{ ucfirst($statusData->status) }}</td>
+                                        <td>{{ $statusData->count }}</td>
                                     </tr>
-                                @endforeach
-                            </tbody>
+                                @endif
+                            @endforeach
+                        </tbody>
+
                         </table>
 
                         <div class="row mt-4 d-flex align-items-start">
@@ -126,13 +138,24 @@
             <script>
                 var ctxStatus = document.getElementById('incidentStatusChart').getContext('2d');
                 var reportCountByStatus = @json($reportCountByStatus);
+
                 var statusLabels = ['Pending', 'Resolved', 'Closed'];
-                var statusData = [
-                    reportCountByStatus.filter(report => report.status === 'pending').length,
-                    reportCountByStatus.filter(report => report.status === 'resolved').length,
-                    reportCountByStatus.filter(report => report.status === 'closed').length
-                ];
                 var statusColors = ['#ffcc00', '#36a2eb', '#4caf50'];
+
+                var statusData = [0, 0, 0];
+
+                reportCountByStatus.forEach(report => {
+                    if (report.status === 'pending' || report.status === 'in-progress') {
+                        statusData[0] += report.count;
+                    } else if (report.status === 'resolved') {
+                        statusData[1] += report.count;
+                    } else if (report.status === 'closed') {
+                        statusData[2] += report.count;
+                    }
+                });
+
+                console.log('Report Count By Status:', reportCountByStatus);
+                console.log('Status Data:', statusData);
 
                 var statusChart = new Chart(ctxStatus, {
                     type: 'bar',
@@ -156,7 +179,7 @@
                                 labels: {
                                     generateLabels: function(chart) {
                                         return chart.data.labels.map((label, index) => ({
-                                            text: `${label} - ${statusData[index]} `,
+                                            text: `${label} - ${statusData[index]}`,
                                             fillStyle: statusColors[index],
                                             strokeStyle: statusColors[index],
                                             hidden: false,
@@ -175,7 +198,7 @@
                                 callbacks: {
                                     label: function(tooltipItem) {
                                         let value = tooltipItem.raw;
-                                        return `${tooltipItem.label}: ${value} incidents `;
+                                        return `${tooltipItem.label}: ${value} incidents`;
                                     }
                                 }
                             }
@@ -205,8 +228,8 @@
                         }
                     }
                 });
-
             </script>
+
 
             <script>
                 var ctx = document.getElementById('incidentTypeChart').getContext('2d');
