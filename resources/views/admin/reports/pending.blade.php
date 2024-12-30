@@ -1,8 +1,9 @@
 <x-app-layout>
-    <div class="page-content scrollable-content bg-light">
+    <div class="content">
         <div class="page-header">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom">Pending Reports</h2>
+                <hr class="mt-0">
             </div>
         </div>
 
@@ -75,27 +76,59 @@
                 <div class="card-body">
 
                     @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    iconColor: 'white',
+                                    customClass: {
+                                        popup: 'colored-toast',
+                                    },
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: 'Report marked as resolved'
+                                });
+                            });
+                        </script>
+                    @endif
 
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
+                    @if (session('error'))
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    iconColor: 'white',
+                                    customClass: {
+                                        popup: 'colored-toast',
+                                    },
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                Toast.fire({
+                                    icon: 'warning',
+                                    title: 'Failed to send the message'
+                                });
+                            });
+                        </script>
+                    @endif
 
-                    @if($pending->isEmpty())
+                    @if ($pending->isEmpty())
                         <div class="alert  text-center" role="alert">
                             No reports available.
                         </div>
                     @else
                         <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-bordered table-hover">
                                 <thead class="bg-warning text-dark">
                                     <tr>
-                                        <th class="text-center"></th>
+                                        <th class="text-center">No.</th>
                                         <th class="text-center">Incident/Disaster Type</th>
                                         <th class="text-center">Location</th>
                                         <th class="text-center">Date and Time</th>
@@ -110,45 +143,41 @@
                                             </td>
                                             <td class="text-center">{{ $report->subject_type }}</td>
                                             <td class="text-center">{{ $report->location }}</td>
-                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
-                                            <td class="text-center">
-                                                <div class="d-flex justify-content-between align-items-center" style="gap: 10px;">
-                                                    @foreach ($incident as $data)
-                                                        @if ($data->name === $report->subject_type)
-                                                            <a href="{{ route('admin.send.email', ['id' => $report->id]) }}"
-                                                               class="btn"
-                                                               style="background-color: {{ $data->color }}; color: white; flex: 1; text-align: center;">
-                                                                {{ $data->agency }}
-                                                            </a>
-                                                        @endif
-                                                    @endforeach
+                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}
+                                            </td>
+                                            <td class="text-center p-0">
+                                                @foreach ($incident as $data)
+                                                    @if ($data->name === $report->subject_type)
+                                                        <a href="{{ route('admin.send.email', ['id' => $report->id]) }}"
+                                                            class="btn text-white mt-1"
+                                                            style="background-color: {{ $data->color }};">
+                                                            {{ $data->agency }}
+                                                        </a>
+                                                    @endif
+                                                @endforeach
 
-                                                    @foreach ($archive as $datas)
+                                                @foreach ($archive as $datas)
                                                     @if ($datas->name === $report->subject_type)
                                                         <a href="{{ route('admin.send.email', ['id' => $report->id]) }}"
-                                                           class="btn"
-                                                           style="background-color: rgb(205, 8, 8); color: white; flex: 1; text-align: center;">
+                                                            class="btn text-white mt-1"
+                                                            style="background-color: rgb(205, 8, 8); ">
                                                             'deleted'
                                                         </a>
                                                     @endif
                                                 @endforeach
 
-                                                    <a href="#"
-                                                       class="btn btn-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                       data-bs-toggle="modal"
-                                                       data-bs-target="#exampleModal{{ $report->id }}"
-                                                       style="flex: 1; text-align: center;">
-                                                        View
-                                                    </a>
+                                                <a href="#"
+                                                    class="btn btn-secondary mt-1 text-light fw-semibold text-decoration-none rounded-1"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $report->id }}">
+                                                    View
+                                                </a>
 
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-success"
-                                                       data-bs-toggle="modal"
-                                                       data-bs-target="#resolveModal{{ $report->id }}"
-                                                       style="flex: 1; text-align: center;">
-                                                        Mark as Resolved
-                                                    </a>
-                                                </div>
+                                                <a href="javascript:void(0)" class="btn btn-success mt-1"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#resolveModal{{ $report->id }}">
+                                                    Mark as Resolved
+                                                </a>
 
                                             </td>
 
@@ -192,7 +221,8 @@
                                 @endif
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
@@ -230,10 +260,12 @@
                                     @method('PUT')
                                     <input type="hidden" name="responding_agency"
                                         id="hidden-responding-agency{{ $report->id }}">
-                                    <input type="hidden" name="resolved_time" id="hidden-resolved-time{{ $report->id }}">
+                                    <input type="hidden" name="resolved_time"
+                                        id="hidden-resolved-time{{ $report->id }}">
                                 </form>
 
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-primary"
                                     onclick="submitResolveForm({{ $report->id }})">Confirm</button>
                             </div>
