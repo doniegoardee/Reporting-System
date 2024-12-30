@@ -5,11 +5,10 @@
 
     <style>
         .disabled-link {
-    pointer-events: none;
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
+            pointer-events: none;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     </style>
 
     <!-- Contact Section -->
@@ -24,8 +23,8 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="table-light">
-                                    <tr>
-                                        <th></th>
+                                    <tr class="text-center">
+                                        <th>No.</th>
                                         <th>Issue Type</th>
                                         <th>Location</th>
                                         <th>Status</th>
@@ -34,15 +33,15 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($data as $index => $report)
-                                        <tr>
+                                        <tr class="text-center">
                                             <td>{{ ($data->currentPage() - 1) * $data->perPage() + $index + 1 }}</td>
                                             <td>{{ $report->subject_type }}</td>
                                             <td>{{ $report->location }}</td>
                                             <td>{{ ucfirst($report->status) }}</td>
 
-                                            <td>
+                                            <td class="">
 
-                                                <a class="btn btn-sm btn-primary {{ $report->status === 'resolved' | $report->status === 'closed' ? 'disabled-link' : '' }}"
+                                                <a class="btn btn-sm btn-primary {{ ($report->status === 'resolved') | ($report->status === 'closed') ? 'disabled-link' : '' }}"
                                                     href="{{ $report->status === 'pending' ? route('reports.edit', $report->id) : '#' }}">
                                                     Edit
                                                 </a>
