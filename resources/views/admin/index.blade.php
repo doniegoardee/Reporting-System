@@ -3,22 +3,29 @@
         <div class="page-header">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom">Dashboard</h2>
+                <hr class="mt-0">
             </div>
         </div>
         <div class="container-fluid mt-4">
             <div class="d-flex justify-content-center mb-4">
                 <div class="btn-group" role="group" aria-label="Report Filters">
                     <a href="{{ route('admin.all-reports') }}" class="btn btn-outline-primary">
-                        All Reports ({{ $allReportsCount }})
+                        All Reports
+                        <span class="badge bg-primary rounded-1 p-2 text-white">{{ $allReportsCount }}</span>
                     </a>
+
                     <a href="{{ route('admin.pending') }}" class="btn btn-outline-warning">
-                        Pending Reports ({{ $pendingCount }})
+                        Pending Reports
+                        <span class="badge bg-warning rounded-1 p-2 text-white">{{ $pendingCount }}</span>
                     </a>
                     <a href="{{ route('admin.resolved') }}" class="btn btn-outline-success">
-                        Resolved Reports ({{ $resolvedCount }})
+                        Resolved Reports
+                        <span class="badge bg-success rounded-1 p-2 text-white"> {{ $resolvedCount }}
+                        </span>
                     </a>
                     <a href="{{ route('admin.closed') }}" class="btn btn-outline-secondary">
-                        Closed Reports ({{ $closedCount }})
+                        Closed Reports
+                        <span class="badge bg-secondary rounded-1 p-2 text-white">{{ $closedCount }}</span>
                     </a>
                 </div>
             </div>
@@ -33,10 +40,10 @@
                         <p class="text-center text-muted">No reports available.</p>
                     @else
                         <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-bordered table-hover">
                                 <thead class="bg-primary text-white">
                                     <tr>
-                                        <th class="text-center"></th>
+                                        <th class="text-center">No.</th>
                                         <th class="text-center">Incident/Disaster Type</th>
                                         <th class="text-center">Location</th>
                                         <th class="text-center">Date and Time</th>
@@ -51,16 +58,15 @@
                                             </td>
                                             <td class="text-center">{{ $report->subject_type }}</td>
                                             <td class="text-center">{{ $report->location }}</td>
-                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}
+                                            </td>
                                             <td class="text-center">
-                                                <div class="d-flex justify-content-center p-0">
-                                                    <a href="#"
-                                                        class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal{{ $report->id }}">
-                                                        View
-                                                    </a>
-                                                </div>
+                                                <a href="#"
+                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $report->id }}">
+                                                    View
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -84,10 +90,10 @@
                         <p class="text-center text-muted">No pending reports available.</p>
                     @else
                         <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover table-bordered">
                                 <thead class="bg-warning text-dark">
                                     <tr>
-                                        <th class="text-center"></th>
+                                        <th class="text-center">No.</th>
                                         <th class="text-center">Incident/Disaster Type</th>
                                         <th class="text-center">Location</th>
                                         <th class="text-center">Date and Time</th>
@@ -102,16 +108,15 @@
                                             </td>
                                             <td class="text-center">{{ $report->subject_type }}</td>
                                             <td class="text-center">{{ $report->location }}</td>
-                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}
+                                            </td>
                                             <td class="text-center">
-                                                <div class="d-flex justify-content-center p-0">
-                                                    <a href="#"
-                                                        class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal{{ $report->id }}">
-                                                        View
-                                                    </a>
-                                                </div>
+                                                <a href="#"
+                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $report->id }}">
+                                                    View
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -135,10 +140,10 @@
                         <p class="text-center text-muted">No resolved reports available.</p>
                     @else
                         <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-bordered table-hover">
                                 <thead class="bg-success text-white">
                                     <tr>
-                                        <th class="text-center"></th>
+                                        <th class="text-center">No.</th>
                                         <th class="text-center">Incident/Disaster Type</th>
                                         <th class="text-center">Location</th>
                                         <th class="text-center">Date and Time</th>
@@ -153,16 +158,15 @@
                                             </td>
                                             <td class="text-center">{{ $report->subject_type }}</td>
                                             <td class="text-center">{{ $report->location }}</td>
-                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}
+                                            </td>
                                             <td class="text-center">
-                                                <div class="d-flex justify-content-center p-0">
-                                                    <a href="#"
-                                                        class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal{{ $report->id }}">
-                                                        View
-                                                    </a>
-                                                </div>
+                                                <a href="#"
+                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $report->id }}">
+                                                    View
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -186,10 +190,10 @@
                         <p class="text-center text-muted">No closed reports available.</p>
                     @else
                         <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-bordered table-hover">
                                 <thead class="bg-secondary text-white">
                                     <tr>
-                                        <th class="text-center"></th>
+                                        <th class="text-center">No.</th>
                                         <th class="text-center">Incident/Disaster Type</th>
                                         <th class="text-center">Location</th>
                                         <th class="text-center">Date and Time</th>
@@ -204,16 +208,15 @@
                                             </td>
                                             <td class="text-center">{{ $report->subject_type }}</td>
                                             <td class="text-center">{{ $report->location }}</td>
-                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}
+                                            </td>
                                             <td class="text-center">
-                                                <div class="d-flex justify-content-center p-0">
-                                                    <a href="#"
-                                                        class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal{{ $report->id }}">
-                                                        View
-                                                    </a>
-                                                </div>
+                                                <a href="#"
+                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $report->id }}">
+                                                    View
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -230,12 +233,14 @@
 
         <!-- Modal for each report -->
         @foreach ($allReports as $report)
-            <div class="modal fade" id="exampleModal{{ $report->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $report->id }}" aria-hidden="true">
+            <div class="modal fade" id="exampleModal{{ $report->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel{{ $report->id }}" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel{{ $report->id }}">Report Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <p><strong>Incident/Disaster Type:</strong> {{ $report->subject_type }}</p>
