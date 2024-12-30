@@ -110,7 +110,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'mode' => 'fullscreen',
         'img' => [
             'path' => 'image/logo.jpg',
@@ -196,7 +196,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-primary elevation-1',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -319,6 +319,7 @@ return [
         //     'type' => 'sidebar-menu-search',
         //     'text' => 'Search',
         // ],
+        ['header' => 'NAVIGATION'],
         [
             'text' => 'Dashboard',
             'url' => 'admin/dashboard',
@@ -379,15 +380,17 @@ return [
         [
             'text' => 'Add Incident/Barangay',
             'icon' => 'fa-solid fa-plus',
-            'icon_color' => 'success',
+            // 'icon_color' => 'success',
             'submenu' => [
                 [
                     'text' => 'Add Incident',
                     'url' => 'admin/add/incident',
+                    'icon' => 'fa-solid fa-folder-plus',
                 ],
                 [
                     'text' => 'Add Barangay',
                     'url' => 'admin/add/incident/barangay',
+                    'icon' => 'fa-regular fa-square-plus'
                 ],
             ],
         ],
