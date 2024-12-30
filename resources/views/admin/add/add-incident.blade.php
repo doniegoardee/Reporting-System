@@ -3,11 +3,24 @@
         .spectrum {
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 5px
         }
 
         .color-picker-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #colorPicker {
             width: 100%;
+            /* Adjust the size to fit */
+            height: 40px;
+            /* Ensure it matches the design */
+            border-radius: 5px;
+            /* Optional for rounded corners */
+            padding: 0;
+            cursor: pointer;
         }
 
         .image-preview {
@@ -16,33 +29,51 @@
         }
     </style>
 
-    <div class="page-content scrollable-content bg-light">
-        <div class="page-header">
-            <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">Add Incident</h2>
+    <div class="container_header">
+        <h5 class="fw-semibold">Add Incident</h5>
+        <hr class="mt-0 text-dark" />
+    </div>
+
+    @if (session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    iconColor: 'white',
+                    customClass: {
+                        popup: 'colored-toast',
+                    },
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Incident Added'
+                });
+            });
+        </script>
+    @endif
+
+    <div class="container-fluid mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title fw-bold">Incident Details</h4>
             </div>
-        </div>
+            <div class="card-body">
 
-        <div class="container-fluid mt-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Incident Details</h4>
-                </div>
-                <div class="card-body">
-
-                    @if (session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
-                    @endif
-
-                    <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-
-                        <div class="form-group">
-                            <label for="name">Incident Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="name">Incident Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
                         </div>
 
-                        <div class="form-section">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="agency">Corresponding Agency</label>
                                 <select class="form-control" id="agency" name="agency" required>
@@ -56,13 +87,17 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
 
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="contact">Contact</label>
                                 <input type="tel" class="form-control" id="contact" name="contact" required
                                     readonly>
                             </div>
+                        </div>
 
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" required
@@ -70,27 +105,39 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="image">Image (Optional)(transparent)</label>
-                            <input type="file" class="form-control" id="image" name="image" accept="image/*"
-                                placeholder="make sure its transparent">
-                            <img id="imagePreview" class="image-preview" src="#" alt="Image Preview"
-                                style="display: none;">
-                        </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label>Choose Color (Optional)</label>
-                            <div class="color-picker-container">
-                                <input type="color" id="colorPicker" name="color" class="form-control spectrum">
+                    <div class="row ">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="image">Image <span
+                                        class="text-muted">(Optional)(transparent)</span></label>
+                                <input type="file" class="form-control" id="image" name="image"
+                                    accept="image/*" placeholder="make sure its transparent">
+                                <img id="imagePreview" class="image-preview" src="#" alt="Image Preview"
+                                    style="display: none;">
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Add Incident</button>
-                    </form>
-                </div>
+                        <div class="col-md-3 col-12">
+                            <div class="form-group">
+                                <label>Choose Color <span class="text-muted">(Optional)</span></label>
+                                <div class="color-picker-container">
+                                    <input type="color" id="colorPicker" name="color" class="form-control spectrum"
+                                        value="#FA4032">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-primary">Add Incident</button>
+                </form>
             </div>
         </div>
     </div>
+    {{-- </div> --}}
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum-colorpicker/1.8.1/spectrum.min.js"></script>
