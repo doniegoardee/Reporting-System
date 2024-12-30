@@ -81,36 +81,38 @@
             });
         </script>
     @endif
-    <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
-        <div class="row w-100 shadow-lg rounded p-4"
-            style="max-width: 900px; min-height: 500px; background-color: white;">
+
+    <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light position-relative"
+        style="background: url('{{ asset('image/sample3.jpg') }}') no-repeat center center / cover;">
+        <!-- Overlay -->
+        <div class="position-absolute top-0 start-0 w-100 h-100"
+            style="background-color: rgba(37, 35, 35, 0.562); z-index: 1;"></div>
+
+        <!-- Content -->
+        <div class="row w-100 shadow-lg rounded p-4 bg-white position-relative"
+            style="max-width: 900px; min-height: 500px; z-index: 2;">
             <!-- Left Side: Logo Section -->
-            <div class="col-md-6 mb-4 mb-md-0 border rounded-1">
+            <div class="col-md-6 mb-4 mb-md-0 border rounded-1 bg-secondary bg-opacity-25">
                 <div class="row">
                     <div class="col-12 d-flex justify-content-start mt-1">
-                        <img src="{{ asset('image/logo.jpg') }}" alt="Logo" class="img-fluid rounded rounded-circle"
+                        <img src="{{ asset('image/logo.jpg') }}" alt="Logo" class="img-fluid rounded-circle"
                             style="max-width: 50px; height: auto; max-height: 300px;">
                     </div>
                 </div>
-                <div class="row" style="height: 80%;"> <!-- Ensuring the row takes full height -->
+                <div class="row" style="height: 80%;">
                     <div class="col-12 d-flex justify-content-center align-items-center" style="height: 100%;">
-                        <!-- Centering vertically -->
-                        <h1 class="text-center">Reporting System of Buguey Municipal</h1>
+                        <h1 class="text-center">Reporting System <br> of <br> Buguey Municipal</h1>
                     </div>
                 </div>
             </div>
-
 
             <!-- Right Side: Login Form -->
             <div class="col-md-6">
                 <h4 class="text-center">{{ __('Login to Your Account') }}</h4>
                 <hr class="mt-0 mb-3">
-
                 <div class="mt-4">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
-                        <!-- Email Field -->
                         <div class="mb-3">
                             <label for="email" class="form-label fw-bold">{{ __('Email Address') }}</label>
                             <input id="email" type="email"
@@ -124,7 +126,6 @@
                             @enderror
                         </div>
 
-                        <!-- Password Field -->
                         <div class="mb-3">
                             <label for="password" class="form-label fw-bold">{{ __('Password') }}</label>
                             <input id="password" type="password"
@@ -137,7 +138,6 @@
                             @enderror
                         </div>
 
-                        <!-- Remember Me Checkbox -->
                         <div class="mb-3 form-check">
                             <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                 {{ old('remember') ? 'checked' : '' }}>
@@ -146,7 +146,6 @@
                             </label>
                         </div>
 
-                        <!-- Login Button and Forgot Password -->
                         <div class="row">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary w-100">{{ __('Login') }}</button>
@@ -163,7 +162,6 @@
                             </div>
                         </div>
 
-                        <!-- Register Link -->
                         <div class="row mt-3">
                             <div class="col-12 text-center">
                                 <a href="{{ route('register') }}"
@@ -175,6 +173,8 @@
             </div>
         </div>
     </div>
+
+
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
