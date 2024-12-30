@@ -76,10 +76,28 @@
                 <div class="card-body">
 
                     @if (session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
-                @endif
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    iconColor: 'white',
+                                    customClass: {
+                                        popup: 'colored-toast',
+                                    },
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: 'Report closed'
+                                });
+                            });
+                        </script>
+                    @endif
 
-                    @if($resolved->isEmpty())
+                    @if ($resolved->isEmpty())
                         <div class="alert text-center" role="alert">
                             No reports available.
                         </div>
@@ -88,7 +106,7 @@
                             <table class="table table-striped table-hover">
                                 <thead class="bg-success text-white">
                                     <tr>
-                                        <th class="text-center"></th>
+                                        <th class="text-center">No.</th>
                                         <th class="text-center">Incident/Disaster Type</th>
                                         <th class="text-center">Location</th>
                                         <th class="text-center">Date and Time</th>
@@ -103,21 +121,20 @@
                                             </td>
                                             <td class="text-center">{{ $report->subject_type }}</td>
                                             <td class="text-center">{{ $report->location }}</td>
-                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
-                                            <td class="text-center">
-                                                <div class="d-flex justify-content-center p-0">
-                                                    <a href="#"
-                                                        class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2 me-2"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#viewModal{{ $report->id }}">
-                                                        View
-                                                    </a>
+                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}
+                                            </td>
+                                            <td class="text-center p-0">
+                                                <a href="#"
+                                                    class="btn btn-secondary mt-1 fw-semibold text-decoration-none rounded-1 me-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#viewModal{{ $report->id }}">
+                                                    View
+                                                </a>
 
-                                                    <a href="#" class="btn btn-success" data-bs-toggle="modal"
-                                                        data-bs-target="#confirmModal{{ $report->id }}">
-                                                        Mark as Closed
-                                                    </a>
-                                                </div>
+                                                <a href="#" class="btn btn-success mt-1" data-bs-toggle="modal"
+                                                    data-bs-target="#confirmModal{{ $report->id }}">
+                                                    Mark as Closed
+                                                </a>
                                             </td>
                                         </tr>
 
@@ -133,7 +150,8 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p><strong>Incident Type:</strong> {{ $report->subject_type }}</p>
+                                                        <p><strong>Incident Type:</strong> {{ $report->subject_type }}
+                                                        </p>
                                                         <p><strong>Location:</strong> {{ $report->location }}</p>
                                                         <p><strong>Status:</strong> {{ $report->status }}</p>
                                                         <p><strong>Created At:</strong>
@@ -155,15 +173,16 @@
 
                                         <!-- Confirmation Modal -->
                                         <div class="modal fade" id="confirmModal{{ $report->id }}" tabindex="-1"
-                                            aria-labelledby="confirmModalLabel{{ $report->id }}" aria-hidden="true">
+                                            aria-labelledby="confirmModalLabel{{ $report->id }}"
+                                            aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title"
                                                             id="confirmModalLabel{{ $report->id }}">
                                                             Confirm Action</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         Are you sure you want to mark this report as closed?
