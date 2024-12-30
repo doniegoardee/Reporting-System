@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('Reporting System','Reporting System') }}</title>
+    <title>{{ config('Reporting System', 'Reporting System') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -20,21 +20,56 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css">
+    {{-- SweetAlert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        .body {
+            font-family: "Nunito", sans-serif;
+        }
 
+        .colored-toast.swal2-icon-success {
+            background-color: #5CB338 !important;
+        }
 
+        .colored-toast.swal2-icon-error {
+            background-color: #f27474 !important;
+        }
 
+        .colored-toast.swal2-icon-warning {
+            background-color: #DC3545 !important;
+        }
 
+        .colored-toast.swal2-icon-info {
+            background-color: #3fc3ee !important;
+        }
+
+        .colored-toast.swal2-icon-question {
+            background-color: #87adbd !important;
+        }
+
+        .colored-toast .swal2-title {
+            color: white;
+        }
+
+        .colored-toast .swal2-close {
+            color: white;
+        }
+
+        .colored-toast .swal2-html-container {
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-
-
-
     <div id="app">
         @extends('adminlte::page')
         @section('content')
-            <main class="py-4">
+            <main class="py-2 body">
                 {{ $slot }}
             </main>
         @stop
