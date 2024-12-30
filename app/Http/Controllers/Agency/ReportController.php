@@ -104,6 +104,4 @@ class ReportController extends Controller
 
         return view('agency.analysis', compact('inProgressCount', 'resolvedCount', 'closedCount'));
     }
-
-
 }
