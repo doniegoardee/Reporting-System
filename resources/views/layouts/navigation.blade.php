@@ -121,7 +121,7 @@
 
     .nav-link i:hover {
         background-color: rgba(13, 11, 13, 0.1);
-        color: #130a19;
+        color: #FFF574;
     }
 
     .img-thumbnail {
@@ -131,172 +131,174 @@
         margin-left: 10px;
     }
 
-.navmenu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 10px;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.nav-links li {
-    margin: 0 10px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.nav-actions {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    right: 30px;
-    justify-content: flex-start; /* Ensure items align to the left */
-}
-
-.nav-actions img {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-left: -15px;
-}
-
-.nav-actions .nav-link {
-    display: flex;
-    align-items: center;
-    color: inherit;
-    text-decoration: none;
-}
-
-.nav-actions .badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    font-size: 10px;
-    background-color: red;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 4px;
-}
-
-.nav-link .fa-bell {
-    font-size: 1.5rem;
-    position: relative;
-    margin-right: 5px;
-}
-
-.nav-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav-link .fa-bell {
-    font-size: 1.5rem;
-    position: relative;
-    right: 10px;
-}
-
-.nav-link .badge {
-    position: absolute;
-    top: -px;
-    right: 15px;
-    font-size: 10px;
-    background-color:red;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    line-height: 1;
-}
-
-.nav-actions .nav-link {
-    display: flex;
-    align-items: center;
-    color: inherit;
-    text-decoration: none;
-    padding: 0 8px;
-}
-.mobile-nav-toggle{
-    position: relative;
-    right: 50px;
-}
-
-.nav-actions .nav-link i {
-    font-size: 1.3rem;
-    width: 22px;
-    height: 22px;
-    line-height: 22px;
-    text-align: center;
-    border-radius: 50%;
-    background: transparent;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.nav-actions .badge {
-    font-size: 9px;
-    padding: 2px 4px;
-}
-
-#chatModal .modal-footer .input-group .form-control {
-    width: 200px;
-}
-
-#chatModal .modal-footer .input-group-append button {
-    padding: 5px 10px;
-}
-
-
-.nav-actions img {
-    max-width: 25px;
-    max-height: 25px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-left: -30px;
-}
-
-.dropdown-menu {
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-@media (max-width: 1024px) {
-    .dropdown-menu {
-        width: 80%;
-        max-height: 250px;
+    .navmenu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 10px;
     }
-}
 
-@media (max-width: 768px) {
-    .dropdown-menu {
-        width: 90%;
-        max-height: 200px;
+    .nav-links {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
-}
 
-@media (max-width: 480px) {
-    .dropdown-menu {
-        width: 95%;
-        max-height: 150px;
+    .nav-links li {
+        margin: 0 10px;
     }
-}
+
+    .nav-links a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .nav-actions {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        right: 30px;
+        justify-content: flex-start;
+        /* Ensure items align to the left */
+    }
+
+    .nav-actions img {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-left: -15px;
+    }
+
+    .nav-actions .nav-link {
+        display: flex;
+        align-items: center;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .nav-actions .badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        font-size: 10px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 4px;
+    }
+
+    .nav-link .fa-bell {
+        font-size: 1.5rem;
+        position: relative;
+        margin-right: 5px;
+    }
+
+    .nav-link {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-link .fa-bell {
+        font-size: 1.5rem;
+        position: relative;
+        right: 10px;
+    }
+
+    .nav-link .badge {
+        position: absolute;
+        top: -px;
+        right: 15px;
+        font-size: 10px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        line-height: 1;
+    }
+
+    .nav-actions .nav-link {
+        display: flex;
+        align-items: center;
+        color: inherit;
+        text-decoration: none;
+        padding: 0 8px;
+    }
+
+    .mobile-nav-toggle {
+        position: relative;
+        right: 50px;
+    }
+
+    .nav-actions .nav-link i {
+        font-size: 1.3rem;
+        width: 22px;
+        height: 22px;
+        line-height: 22px;
+        text-align: center;
+        border-radius: 50%;
+        background: transparent;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-actions .badge {
+        font-size: 9px;
+        padding: 2px 4px;
+    }
+
+    #chatModal .modal-footer .input-group .form-control {
+        width: 200px;
+    }
+
+    #chatModal .modal-footer .input-group-append button {
+        padding: 5px 10px;
+    }
+
+
+    .nav-actions img {
+        max-width: 25px;
+        max-height: 25px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-left: -30px;
+    }
+
+    .dropdown-menu {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    @media (max-width: 1024px) {
+        .dropdown-menu {
+            width: 80%;
+            max-height: 250px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .dropdown-menu {
+            width: 90%;
+            max-height: 200px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .dropdown-menu {
+            width: 95%;
+            max-height: 150px;
+        }
+    }
 </style>
 
 
-<header id="header" class="header d-flex align-items-center fixed-top">
+<header id="header" class="header d-flex align-items-center fixed-top bg-dark p-2">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
         <a href="{{ url('/') }}" class="logo d-flex align-items-center me-auto">
@@ -313,9 +315,9 @@
             </ul>
 
             <div class="dropdown position-relative">
-                <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    class="nav-link messages-toggle mx-1">
-                    <i style="font-size: 18px; color:black;x" class="fa-solid fa-bell"></i>
+                <a id="navbarDropdownMenuLink1" href="#" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" class="nav-link messages-toggle mx-1 text-primary">
+                    <i style="font-size: 18px;" class="fa-solid fa-bell"></i>
                     <span
                         class="badge dashbg-1 position-absolute translate-middle
                             {{ $user->notifications->where('read_at', null)->count() === 0 ? 'invisible' : '' }}">
@@ -323,7 +325,7 @@
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdownMenuLink1"
-                     style="max-height: 300px; overflow-y: auto; z-index: 1050; min-width: 300px;">
+                    style="max-height: 300px; overflow-y: auto; z-index: 1050; min-width: 300px;">
                     @if ($user && $user->notifications->count())
                         @php
                             $unreadNotifications = $user->notifications->where('read_at', null);
@@ -348,7 +350,8 @@
             </div>
 
             <div class="nav-actions">
-                <button type="button" class="nav-link mx-1" data-toggle="modal" data-target="#chatModal" style="border:none;">
+                <button type="button" class="nav-link mx-1" data-toggle="modal" data-target="#chatModal"
+                    style="border:none;">
                     <i class="fa-solid fa-comment"></i>
                 </button>
 
