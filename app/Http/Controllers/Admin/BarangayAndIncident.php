@@ -94,7 +94,7 @@ class BarangayAndIncident extends Controller
 
         $barangay->delete();
 
-        return redirect()->route('admin.bar')->with('success', 'Barangay archived successfully');
+        return redirect()->route('admin.bar')->with('archive', 'Barangay Archived');
     }
 
     public function unarchive_bar($id)
@@ -109,7 +109,7 @@ class BarangayAndIncident extends Controller
 
         $barangayarc->delete();
 
-        return redirect()->route('admin.bar')->with('success', 'Barangay unarchived successfully');
+        return redirect()->route('admin.bar')->with('unarchive', 'Barangay unarchived successfully');
     }
 
 
@@ -133,7 +133,7 @@ class BarangayAndIncident extends Controller
 
         $incident->delete();
 
-        return redirect()->route('admin.inc')->with('success', 'Incident archived successfully');
+        return redirect()->route('admin.inc')->with('success', 'Incident Archived');
     }
 
     public function unarchive_inc($id)
@@ -149,6 +149,6 @@ class BarangayAndIncident extends Controller
 
         $incident->delete();
 
-        return redirect()->route('admin.inc')->with('success', 'Incident unarchived successfully.');
+        return redirect()->route('admin.inc')->with('success2', 'Incident unarchived.');
     }
 }
