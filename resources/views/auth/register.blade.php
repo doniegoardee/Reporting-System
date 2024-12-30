@@ -86,28 +86,31 @@
 </head>
 
 <body>
+    <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 position-relative"
+        style="background: url('{{ asset('image/sample3.jpg') }}') no-repeat center center / cover;">
+        <!-- Overlay -->
+        <div class="position-absolute top-0 start-0 w-100 h-100"
+            style="background-color: rgba(37, 35, 35, 0.562); z-index: 1;"></div>
 
-    <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
-        <div class="row w-100 shadow-lg rounded p-4"
-            style="max-width: 1000px; min-height: 550px; background-color: white;">
+        <!-- Content -->
+        <div class="row w-100 shadow-lg rounded p-4 bg-white position-relative"
+            style="max-width: 1000px; min-height: 550px; z-index: 2;">
             <!-- Left Side: Logo Section -->
-            <div class="col-md-5 mb-4 mb-md-0 border rounded-1">
+            <div class="col-md-5 mb-4 mb-md-0 border rounded-1 bg-secondary bg-opacity-25">
                 <div class="row">
                     <div class="col-12 d-flex justify-content-start mt-1">
-                        <img src="{{ asset('image/logo.jpg') }}" alt="Logo" class="img-fluid rounded rounded-circle"
+                        <img src="{{ asset('image/logo.jpg') }}" alt="Logo" class="img-fluid rounded-circle"
                             style="max-width: 50px; height: auto; max-height: 300px;">
                     </div>
                 </div>
-                <div class="row" style="height: 80%;"> <!-- Ensuring the row takes full height -->
+                <div class="row" style="height: 80%;">
                     <div class="col-12 d-flex justify-content-center align-items-center" style="height: 100%;">
-                        <!-- Centering vertically -->
-                        <h1 class="text-center">Reporting System of Buguey Municipal</h1>
+                        <h1 class="text-center">Reporting System <br> of <br> Buguey Municipal</h1>
                     </div>
                 </div>
             </div>
 
-
-            <!-- Right Side: Login Form -->
+            <!-- Right Side: Register Form -->
             <div class="col-md-7">
                 <h4 class="text-center">Register your Account</h4>
                 <hr class="mt-0 mb-3">
@@ -173,14 +176,13 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="profile_image" class="form-label fw-bold">Profile Picture</label>
-                                    <input id="profile_image" type="file" name="profile_image" class="form-control">
+                                    <input id="profile_image" type="file" name="profile_image"
+                                        class="form-control">
                                 </div>
-
                             </div>
                         </div>
 
-
-                        <!-- Login Button and Forgot Password -->
+                        <!-- Register Button -->
                         <div class="row">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary w-100">{{ __('Register') }}</button>
@@ -197,6 +199,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
