@@ -21,19 +21,20 @@
         <div class="page-header">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom">User List</h2>
+                <hr class="mt-0 bg-black">
             </div>
         </div>
 
         <div class="container-fluid">
 
-            <div class="page-content">
-                <div class="container mt-5">
-                    <div class="card">
-                        <div class="card-header text-center">
-                            <h2 class="mb-0">Users</h2>
-                        </div>
+            <div class="card">
+                <div class="card-header bg-gradient-light text-center">
+                    <h4 class="mb-0">Users</h4>
+                </div>
 
-                        <div class="card-body">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-end">
                             <form action="{{ route('admin.user') }}" method="GET" class="mb-4">
                                 <div class="input-group position-relative">
                                     <input type="text" name="query" id="user-search" class="form-control"
@@ -44,31 +45,30 @@
                                 </div>
                                 <div id="suggestions" class="position-absolute"></div>
                             </form>
-
-
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered">
-                                    <thead class="table-light text-center">
-                                        <tr>
-                                            <th></th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>User ID</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($users as $index => $user)
-                                            <tr class="text-center">
-                                                <td>{{ $index + 1 }}</td>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->id }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
+                    </div>
+                    <hr class="mt-0 bg-black">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead class="table-light text-center">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>User ID</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($users as $index => $user)
+                                    <tr class="text-center">
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->id }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
