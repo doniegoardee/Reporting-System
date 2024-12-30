@@ -3,6 +3,7 @@
         <div class="page-header">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom">Barangay List</h2>
+                <hr class="mt-0 bg-dark">
             </div>
         </div>
 
@@ -12,8 +13,48 @@
                     <h4 class="card-title">Barangay List</h4>
                 </div>
                 <div class="card-body">
-                    @if (session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @if (session('archive'))
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    iconColor: 'white',
+                                    customClass: {
+                                        popup: 'colored-toast',
+                                    },
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: 'Barangay Archived'
+                                });
+                            });
+                        </script>
+                    @endif
+
+                    @if (session('unarchive'))
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    iconColor: 'white',
+                                    customClass: {
+                                        popup: 'colored-toast',
+                                    },
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: 'Barangay Unarchived'
+                                });
+                            });
+                        </script>
                     @endif
 
                     <table class="table table-bordered">
@@ -29,12 +70,12 @@
                                 <tr>
                                     <td class="text-center">{{ $barangay->id }}</td>
                                     <td class="text-center">{{ $barangay->barangay }}</td>
-                                    <td class="text-center">
+                                    <td class="text-center p-0">
                                         <form action="{{ route('admin.del-bar', $barangay->id) }}" method="POST"
                                             class="archive-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Archive</button>
+                                            <button type="submit" class="btn btn-danger mt-1">Archive</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -64,11 +105,12 @@
                                 <tr>
                                     <td class="text-center">{{ $barangays->id }}</td>
                                     <td class="text-center">{{ $barangays->barangay }}</td>
-                                    <td class="text-center">
-                                        <form action="{{ route('admin.un-bar', $barangays->id) }}" method="POST" class="unarchive-form">
+                                    <td class="text-center p-0">
+                                        <form action="{{ route('admin.un-bar', $barangays->id) }}" method="POST"
+                                            class="unarchive-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-success">Unarchive</button>
+                                            <button type="submit" class="btn btn-success mt-1">Unarchive</button>
                                         </form>
                                     </td>
                                 </tr>
