@@ -6,20 +6,59 @@
             </div>
         </div>
 
+        @if (session('success'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast',
+                        },
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Incident Archived'
+                    });
+                });
+            </script>
+        @endif
+        @if (session('success2'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast',
+                        },
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Incident Unarchived'
+                    });
+                });
+            </script>
+        @endif
+
         <div class="container-fluid mt-4">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Incident List</h4>
                 </div>
                 <div class="card-body">
-                    @if (session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
-                    @endif
-
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="text-center">ID</th>
+                                <th class="text-center">Id</th>
                                 <th class="text-center">Incident Type</th>
                                 <th class="text-center">Actions</th>
                                 <th class="text-center">Coresponding Agency</th>
@@ -35,12 +74,13 @@
                                     <td class="text-center">{{ $incident->agency }}</td>
                                     <td class="text-center">{{ $incident->contact }}</td>
                                     <td class="text-center">{{ $incident->email }}</td>
-                                    <td class="text-center">
+                                    <td class="text-center p-0">
                                         <form action="{{ route('admin.del-inc', $incident->id) }}" method="POST"
                                             class="delete-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger delete-btn">Archive</button>
+                                            <button type="submit"
+                                                class="btn btn-danger delete-btn mt-1">Archive</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -78,11 +118,13 @@
                                     <td class="text-center">{{ $incidents->agency }}</td>
                                     <td class="text-center">{{ $incidents->contact }}</td>
                                     <td class="text-center">{{ $incidents->email }}</td>
-                                    <td class="text-center">
-                                        <form action="{{ route('admin.un-inc', $incidents->id) }}" method="POST" class="unarchive-form">
+                                    <td class="text-center p-0">
+                                        <form action="{{ route('admin.un-inc', $incidents->id) }}" method="POST"
+                                            class="unarchive-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-success unarchive-btn">Unarchive</button>
+                                            <button type="submit"
+                                                class="btn btn-success unarchive-btn mt-1">Unarchive</button>
                                         </form>
                                     </td>
                                 </tr>
