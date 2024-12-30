@@ -9,8 +9,8 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <link rel="shortcut icon" href="{{ asset('image/logo.jpg') }}" type="image/x-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -29,24 +29,18 @@
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
 
-    <!-- =======================================================
-  * Template Name: eBusiness
-  * Template URL: https://bootstrapmade.com/ebusiness-bootstrap-corporate-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
 <body class="index-page">
 
-    <header id="header" class="header d-flex align-items-center fixed-top">
+    <header id="header" class="header d-flex align-items-center fixed-top p-2">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
             <a href="/image/logo.jpg" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1 class="sitename">Reporting System</h1>
+                <h2 class="sitename">Reporting System</h2>
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -54,27 +48,7 @@
                     <li><a href="#hero" class="active">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
-                    {{-- <li><a href="#portfolio">Report Incident</a></li> --}}
-                    {{-- <li><a href="#team">Team</a></li> --}}
-                    {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i
-                                class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
-                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                                    <li><a href="#">Deep Dropdown 2</a></li>
-                                    <li><a href="#">Deep Dropdown 3</a></li>
-                                    <li><a href="#">Deep Dropdown 4</a></li>
-                                    <li><a href="#">Deep Dropdown 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                            <li><a href="#">Dropdown 4</a></li>
-                        </ul>
-                    </li> --}}
+
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -107,9 +81,11 @@
                 <div class="carousel-item active">
                     <img src="image/sample.jpg" alt="">
                     <div class="carousel-container">
-                        <h2>Incident Reporting Buguey Cagayan</h2>
-                        <p>Empowering Buguey, Cagayan with safer communities. Report incidents quickly, track progress seamlessly, and foster accountability. Together, we create a more secure tomorrow.</p>
-                            @if (Route::has('login'))
+                        <h2 class="text-center">Incident Reporting Buguey Cagayan</h2>
+                        <p class="text-center">Empowering Buguey, Cagayan with safer communities. Report incidents
+                            quickly, track progress
+                            seamlessly, and foster accountability. Together, we create a more secure tomorrow.</p>
+                        @if (Route::has('login'))
                             <div>
                                 @auth
                                     @if (auth()->user()->role == 'user')
@@ -129,8 +105,9 @@
                     <img src="image/sample3.jpg" alt="">
                     <div class="carousel-container">
                         <h2>Incident Reporting Buguey Cagayan</h2>
-                        <p>Incident Reporting Buguey Cagayan – your voice for change and safety. Submit reports with ease and ensure swift resolutions. Building trust, one incident at a time.</p>
-                            @if (Route::has('login'))
+                        <p>Incident Reporting Buguey Cagayan – your voice for change and safety. Submit reports with
+                            ease and ensure swift resolutions. Building trust, one incident at a time.</p>
+                        @if (Route::has('login'))
                             <div>
                                 @auth
                                     @if (auth()->user()->role == 'user')
@@ -150,20 +127,21 @@
                     <img src="image/sample2.jpg" alt="">
                     <div class="carousel-container">
                         <h2>Incident Reporting Buguey Cagayan</h2>
-                        <p>Your safety, our priority in Buguey, Cagayan. A simple platform to report, resolve, and improve. Strengthening communities through transparency and action.</p>
-                     @if (Route::has('login'))
-                <div>
-                    @auth
-                        @if (auth()->user()->role == 'user')
-                            <a href="{{ route('home.user') }}" class="btn-get-started">Get Started</a>
-                        @elseif(auth()->user()->role == 'admin-2')
-                            <a href="{{ route('admin-2.index') }}" class="btn-get-started">Get Started</a>
+                        <p>Your safety, our priority in Buguey, Cagayan. A simple platform to report, resolve, and
+                            improve. Strengthening communities through transparency and action.</p>
+                        @if (Route::has('login'))
+                            <div>
+                                @auth
+                                    @if (auth()->user()->role == 'user')
+                                        <a href="{{ route('home.user') }}" class="btn-get-started">Get Started</a>
+                                    @elseif(auth()->user()->role == 'admin-2')
+                                        <a href="{{ route('admin-2.index') }}" class="btn-get-started">Get Started</a>
+                                    @endif
+                                @else
+                                    <a href="{{ route('login') }}" class="btn-get-started">Get Started</a>
+                                @endauth
+                            </div>
                         @endif
-                    @else
-                        <a href="{{ route('login') }}" class="btn-get-started">Get Started</a>
-                    @endauth
-                </div>
-            @endif
                     </div>
                 </div><!-- End Carousel Item -->
 
@@ -188,11 +166,12 @@
             <div class="container section-title" data-aos="fade-up">
                 <h2>About</h2>
                 <p>Incident Reporting Buguey Cagayan is a dedicated platform designed to enhance the safety and
-                     security of the Buguey community. It empowers residents to report incidents efficiently, ensuring
-                     prompt attention and resolution by local authorities. With features like detailed reporting,
-                      progress tracking, and real-time notifications, the system fosters transparency and accountability.
-                       Our mission is to create a more secure and united community where every voice is heard and every concern is
-                       addressed. Together, we can make Buguey, Cagayan, a safer place for everyone.
+                    security of the Buguey community. It empowers residents to report incidents efficiently, ensuring
+                    prompt attention and resolution by local authorities. With features like detailed reporting,
+                    progress tracking, and real-time notifications, the system fosters transparency and accountability.
+                    Our mission is to create a more secure and united community where every voice is heard and every
+                    concern is
+                    addressed. Together, we can make Buguey, Cagayan, a safer place for everyone.
                 </p>
             </div><!-- End Section Title -->
 
@@ -604,12 +583,12 @@
             <div class="container section-title" data-aos="fade-up">
                 <h2>Contact</h2>
                 <p>Feel free to reach out to us for any inquiries, assistance, or feedback.
-                     Our team is here to help and ensure your questions are addressed promptly.
-                      Contact us through the form below or via the provided channels, and we'll
-                       respond as soon as possible.Feel free to reach out to us for any inquiries,
-                      assistance, or feedback. Our team is here to help and ensure your questions
+                    Our team is here to help and ensure your questions are addressed promptly.
+                    Contact us through the form below or via the provided channels, and we'll
+                    respond as soon as possible.Feel free to reach out to us for any inquiries,
+                    assistance, or feedback. Our team is here to help and ensure your questions
                     are addressed promptly. Contact us through the form below or via the provided channels,
-                     and we'll respond as soon as possible.</p>
+                    and we'll respond as soon as possible.</p>
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -772,7 +751,7 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">eBusiness</strong> <span>All Rights
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">Buguey Reporting System</strong> <span>All Rights
                     Reserved</span></p>
             <div class="credits">
 
