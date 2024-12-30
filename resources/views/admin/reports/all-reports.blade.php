@@ -59,13 +59,15 @@
                         <div class="row mt-4">
                             <div class="col-md-12 text-end">
                                 <button type="submit" class="btn btn-primary px-4">Filter</button>
-                                <a href="{{ route('admin.filter') }}" class="btn btn-secondary ms-2 px-4">Clear Filter</a>
+                                <a href="{{ route('admin.filter') }}" class="btn btn-secondary ms-2 px-4">Clear
+                                    Filter</a>
                                 <a href="{{ route('admin.export.pdf', [
                                     'report' => request('report'),
                                     'location' => request('location'),
                                     'start_date' => request('start_date'),
-                                    'end_date' => request('end_date')
-                                ]) }}" class="btn btn-success ms-2">Export PDF</a>
+                                    'end_date' => request('end_date'),
+                                ]) }}"
+                                    class="btn btn-success ms-2">Export PDF</a>
                             </div>
                         </div>
 
@@ -83,7 +85,7 @@
                             <table class="table table-striped table-hover">
                                 <thead class="bg-primary text-white">
                                     <tr>
-                                        <th class="text-center"></th>
+                                        <th class="text-center">No.</th>
                                         <th class="text-center">Incident/Disaster Type</th>
                                         <th class="text-center">Location</th>
                                         <th class="text-center">Status</th>
@@ -102,9 +104,9 @@
                                             <td class="text-center">{{ $report->status }}</td>
                                             <td class="text-center">
                                                 {{ $report->created_at->format('d M Y, h:i A') }}</td>
-                                            <td class="text-center">
+                                            <td class="text-center p-0">
                                                 <a href="#"
-                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
+                                                    class="btn btn-secondary text-light fw-semibold text-decoration-none rounded-1 mt-1"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal{{ $report->id }}">View</a>
                                             </td>
