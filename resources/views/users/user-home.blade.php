@@ -215,14 +215,13 @@
 
             <style>
                 .card:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease-in-out;
-}
-
+                    transform: scale(1.05);
+                    transition: transform 0.3s ease-in-out;
+                }
             </style>
             <div class="container card my-5">
-                <h1 class="text-center mb-4">New Update</h1>
-                <h3 class="text-center text-primary mb-5">New Incident Type Added</h3>
+                <h4 class="text-center mb-4">New Update</h4>
+                <h5 class="text-center text-primary mb-5">New Incident Type Added</h5>
 
 
                 <div class="row">
@@ -246,16 +245,17 @@
             </div>
 
             <div class="container card my-5">
-                <h1 class="text-center mb-4">Seminars</h1>  <!-- Title for the page -->
+                <h4 class="text-center mb-4">Seminars</h4> <!-- Title for the page -->
 
                 <div class="row">
                     @foreach ($seminars as $seminar)
                         <div class="col-md-4 mb-4"> <!-- Column for each seminar -->
                             <div class="card shadow h-100"> <!-- Box for each seminar -->
                                 <div class="card-body">
-                                    <h2 class="card-title text-center">{{ $seminar->title }}</h2>
-                                    <p class="text-center text-muted">{{ \Carbon\Carbon::parse($seminar->date)->format('d M Y') }}</p>
-                                    <p class="text-center"><strong>Location:</strong> {{ $seminar->location }}</p>
+                                    <h4 class="card-title text-center">{{ $seminar->title }}</h4>
+                                    <p class="text-center text-muted">
+                                        {{ \Carbon\Carbon::parse($seminar->date)->format('d M Y') }}</p>
+                                    <p class="text-start"><strong>Location:</strong> {{ $seminar->location }}</p>
                                     <p class="mt-4">{{ $seminar->description }}</p>
                                 </div>
                             </div>
