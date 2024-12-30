@@ -1,8 +1,9 @@
 <x-app-layout>
-    <div class="page-content scrollable-content bg-light">
+    <div class="content">
         <div class="page-header">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom">Closed Reports</h2>
+                <hr class="mt-0">
             </div>
         </div>
 
@@ -78,32 +79,30 @@
                         <p class="text-center text-muted">No reports available.</p>
                     @else
                         <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-bordered table-hover">
                                 <thead class="bg-secondary text-white">
                                     <tr>
-                                        <th class="text-center"></th>
+                                        <th class="text-center">No.</th>
                                         <th class="text-center">Incident/Disaster Type</th>
                                         <th class="text-center">Location</th>
                                         <th class="text-center">Date and Time</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-center">
                                     @foreach ($closed as $index => $report)
                                         <tr>
-                                            <td class="text-center">
+                                            <td>
                                                 {{ ($closed->currentPage() - 1) * $closed->perPage() + $index + 1 }}
                                             </td>
-                                            <td class="text-center">{{ $report->subject_type }}</td>
-                                            <td class="text-center">{{ $report->location }}</td>
-                                            <td class="text-center">{{ $report->created_at->format('d M Y, h:i A') }}</td>
-                                            <td class="text-center">
-                                                <div class="d-flex justify-content-center p-0">
-                                                    <a href="#" class="btn btn-secondary" data-bs-toggle="modal"
-                                                        data-bs-target="#reportModal{{ $report->id }}">
-                                                        View
-                                                    </a>
-                                                </div>
+                                            <td>{{ $report->subject_type }}</td>
+                                            <td>{{ $report->location }}</td>
+                                            <td>{{ $report->created_at->format('d M Y, h:i A') }}</td>
+                                            <td class="p-0">
+                                                <a href="#" class="btn btn-secondary mt-1" data-bs-toggle="modal"
+                                                    data-bs-target="#reportModal{{ $report->id }}">
+                                                    View
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
