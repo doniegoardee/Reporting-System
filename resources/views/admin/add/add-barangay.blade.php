@@ -3,8 +3,34 @@
         <div class="page-header">
             <div class="container-fluid">
                 <h2 class="h5 no-margin-bottom">Add Barangay</h2>
+                <hr class="mt-0">
+
             </div>
         </div>
+
+
+        @if (session('success'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast',
+                        },
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Barangay Added'
+                    });
+                });
+            </script>
+        @endif
+
 
         <div class="container-fluid mt-4">
             <div class="card">
@@ -12,11 +38,6 @@
                     <h4 class="card-title">Add Barangay</h4>
                 </div>
                 <div class="card-body">
-
-
-                        @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
 
                     <form action="{{ route('admin.add_barangay') }}" method="POST" enctype="multipart/form-data">
                         @csrf
