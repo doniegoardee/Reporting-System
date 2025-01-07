@@ -16,7 +16,7 @@ class Activity extends Model
         return $this->belongsTo(User::class, 'causer_id');
     }
 
-    // Add the polymorphic relationship
+
     public function subject()
     {
         return $this->morphTo();

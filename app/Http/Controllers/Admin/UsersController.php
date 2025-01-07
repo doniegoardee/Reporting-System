@@ -66,7 +66,7 @@ class UsersController extends Controller
 
     public function register_user(Request $request)
     {
-        // Validate the incoming request data
+
         $request->validate([
             'name' => 'required|string|max:255',
             'agency' => 'required|string|max:255',
@@ -76,27 +76,27 @@ class UsersController extends Controller
             'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Set the default image path if no profile image is uploaded
+
         $imagePath = 'image/default-avatar.png';
 
-        // Check if the profile image is uploaded
+
         if ($request->hasFile('profile_image')) {
-            // Generate a unique filename and save the image
+
             $file = $request->file('profile_image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('image'), $filename);
-            $imagePath = 'image/' . $filename; // Set the image path
+            $imagePath = 'image/' . $filename;
         }
 
-        // Create the new user in the database
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'agency' => $request->agency,
             'contact' => $request->contact,
-            'password' => Hash::make($request->password), // Secure the password
-            'role' => 1, // Assign user role (adjust as needed)
-            'profile_image' => $imagePath, // Save the profile image path
+            'password' => Hash::make($request->password),
+            'role' => 1,
+            'profile_image' => $imagePath,
         ]);
 
         // Redirect back with a success message

@@ -150,7 +150,7 @@
                                                     @if ($data->name === $report->subject_type)
                                                         <a href="{{ route('admin.send.email', ['id' => $report->id]) }}"
                                                             class="btn text-white mt-1"
-                                                            style="background-color: {{ $data->color }};">
+                                                            style="background-color: {{ $data->color }}; width: 150px; display: inline-block; text-align: center;">
                                                             {{ $data->agency }}
                                                         </a>
                                                     @endif
@@ -160,28 +160,29 @@
                                                     @if ($datas->name === $report->subject_type)
                                                         <a href="{{ route('admin.send.email', ['id' => $report->id]) }}"
                                                             class="btn text-white mt-1"
-                                                            style="background-color: rgb(205, 8, 8); ">
-                                                            'deleted'
+                                                            style="background-color: rgb(205, 8, 8); width: 150px; display: inline-block; text-align: center;">
+                                                            Deleted
                                                         </a>
                                                     @endif
                                                 @endforeach
 
                                                 <a href="#"
                                                     class="btn btn-secondary mt-1 text-light fw-semibold text-decoration-none rounded-1"
+                                                    style="width: 150px; display: inline-block; text-align: center;"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal{{ $report->id }}">
                                                     View
                                                 </a>
 
-                                                <a href="javascript:void(0)" class="btn btn-success mt-1"
+                                                <a href="javascript:void(0)"
+                                                    class="btn btn-success mt-1"
+                                                    style="width: 180px; display: inline-block; text-align: center;"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#resolveModal{{ $report->id }}">
                                                     Mark as Resolved
                                                 </a>
-
                                             </td>
 
-                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

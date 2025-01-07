@@ -165,14 +165,7 @@
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>About</h2>
-                <p>Incident Reporting Buguey Cagayan is a dedicated platform designed to enhance the safety and
-                    security of the Buguey community. It empowers residents to report incidents efficiently, ensuring
-                    prompt attention and resolution by local authorities. With features like detailed reporting,
-                    progress tracking, and real-time notifications, the system fosters transparency and accountability.
-                    Our mission is to create a more secure and united community where every voice is heard and every
-                    concern is
-                    addressed. Together, we can make Buguey, Cagayan, a safer place for everyone.
-                </p>
+                <p>Incident Reporting Buguey Cagayan is a dedicated platform designed to enhance the safety and security of the Buguey community. It empowers residents to report incidents efficiently, ensuring prompt attention and resolution by local authorities. With features like detailed reporting, progress tracking, and real-time notifications, the system fosters transparency and accountability. Our mission is to create a more secure and united community where every voice is heard and every concern is addressed. Together, we can make Buguey, Cagayan, a safer place for everyone.</p>
             </div><!-- End Section Title -->
 
             <div class="container">
@@ -180,30 +173,39 @@
                 <div class="row gy-3">
 
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                        <img src="assets/img/about.jpg" alt="" class="img-fluid">
+                        <img src="/images/reporting.jpg" width="600px" height="600px" alt="" class="img-fluid">
                     </div>
 
-                    <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up"
-                        data-aos-delay="200">
+                    <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="about-content ps-0 ps-lg-3">
-                            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                            <h3>Our Vision for a Safer Buguey</h3>
                             <p class="fst-italic">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore
-                                magna aliqua.
+                                Our platform is built to ensure that incidents are reported and resolved in a timely manner, fostering trust between the community and local authorities.
                             </p>
                             <ul>
                                 <li>
-                                    <i class="bi bi-diagram-3"></i>
+                                    <i class="bi bi-clipboard-data"></i>
                                     <div>
-                                        <h4>Ullamco laboris nisi ut aliquip consequat</h4>
-                                        <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre
-                                            trade</p>
+                                        <h4>Real-time Reporting</h4>
+                                        <p>Submit incidents directly from your mobile or computer and receive instant updates on the status of your report.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle"></i>
+                                    <div>
+                                        <h4>Progress Tracking</h4>
+                                        <p>Track the resolution of your reports and ensure that action is being taken to address the issues raised.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bi bi-bell"></i>
+                                    <div>
+                                        <h4>Real-time Notifications</h4>
+                                        <p>Stay informed about updates to your reports with instant notifications, ensuring you never miss important developments.</p>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-
                     </div>
                 </div>
 
@@ -211,93 +213,88 @@
 
         </section><!-- /About Section -->
 
+
         <!-- Services Section -->
         <section id="services" class="services section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Services</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                <h2>Our Services</h2>
+                <p>Efficient and user-friendly solutions for managing incidents and improving safety in your community</p>
             </div><!-- End Section Title -->
 
             <div class="container">
 
                 <div class="row g-5">
 
+                    <!-- Service Item 1: Incident Reporting -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                         <div class="service-item item-cyan position-relative">
-                            <i class="bi bi-activity icon"></i>
+                            <i class="bi bi-pencil-square icon"></i>
                             <div>
-                                <h3>Nesciunt Mete</h3>
-                                <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus
-                                    dolores iure perferendis tempore et consequatur.</p>
-                                <a href="service-details.html" class="read-more stretched-link">Learn More <i
-                                        class="bi bi-arrow-right"></i></a>
+                                <h3>Simple Incident Reporting</h3>
+                                <p>Easily report incidents like theft, vandalism, and disturbances with a simple online form. Your reports are instantly logged into the system for quick processing.</p>
+                                <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
 
+                    <!-- Service Item 2: Real-Time Notifications -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="service-item item-orange position-relative">
-                            <i class="bi bi-broadcast icon"></i>
+                            <i class="bi bi-bell icon"></i>
                             <div>
-                                <h3>Eosle Commodi</h3>
-                                <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque
-                                    eum hic non ut nesciunt dolorem.</p>
-                                <a href="service-details.html" class="read-more stretched-link">Learn More <i
-                                        class="bi bi-arrow-right"></i></a>
+                                <h3>Real-Time Notifications</h3>
+                                <p>Stay informed with real-time updates on the status of your incident report. Receive notifications for new updates, approvals, and resolutions.</p>
+                                <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
 
+                    <!-- Service Item 3: Admin Dashboard -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="service-item item-teal position-relative">
-                            <i class="bi bi-easel icon"></i>
+                            <i class="bi bi-bar-chart icon"></i>
                             <div>
-                                <h3>Ledo Markt</h3>
-                                <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id
-                                    voluptas adipisci eos earum corrupti.</p>
-                                <a href="service-details.html" class="read-more stretched-link">Learn More <i
-                                        class="bi bi-arrow-right"></i></a>
+                                <h3>Admin Dashboard</h3>
+                                <p>Our powerful admin dashboard allows you to easily manage and track reported incidents, analyze trends, and resolve issues efficiently.</p>
+                                <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
 
+                    <!-- Service Item 4: Chatbot Assistance -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="service-item item-red position-relative">
-                            <i class="bi bi-bounding-box-circles icon"></i>
+                            <i class="bi bi-chat-dots icon"></i>
                             <div>
-                                <h3>Asperiores Commodi</h3>
-                                <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea
-                                    fuga sit provident adipisci neque.</p>
-                                <a href="service-details.html" class="read-more stretched-link">Learn More <i
-                                        class="bi bi-arrow-right"></i></a>
+                                <h3>24/7 Chatbot Assistance</h3>
+                                <p>Our chatbot is available 24/7 to assist with filing incident reports, answering questions, and guiding you through the process seamlessly.</p>
+                                <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
 
+                    <!-- Service Item 5: Incident Follow-Up -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
                         <div class="service-item item-indigo position-relative">
-                            <i class="bi bi-calendar4-week icon"></i>
+                            <i class="bi bi-calendar-check icon"></i>
                             <div>
-                                <h3>Velit Doloremque.</h3>
-                                <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut.
-                                    Sed animi at autem alias eius labore.</p>
-                                <a href="service-details.html" class="read-more stretched-link">Learn More <i
-                                        class="bi bi-arrow-right"></i></a>
+                                <h3>Incident Follow-Up</h3>
+                                <p>Track the progress of your reported incidents, from submission to resolution. Receive updates on status changes and any further actions needed.</p>
+                                <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
 
+                    <!-- Service Item 6: Secure Data Management -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="600">
                         <div class="service-item item-pink position-relative">
-                            <i class="bi bi-chat-square-text icon"></i>
+                            <i class="bi bi-shield-lock icon"></i>
                             <div>
-                                <h3>Dolori Architecto</h3>
-                                <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure.
-                                    Corrupti recusandae ducimus enim.</p>
-                                <a href="service-details.html" class="read-more stretched-link">Learn More <i
-                                        class="bi bi-arrow-right"></i></a>
+                                <h3>Secure Data Management</h3>
+                                <p>Ensure the privacy and safety of your data. Our system employs top-level security protocols to safeguard your incident reports and personal information.</p>
+                                <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
@@ -308,13 +305,14 @@
 
         </section><!-- /Services Section -->
 
+
         <!-- Features Section -->
         <section id="features" class="features section light-background">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Features</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                <p>Discover the key features of our Online Incident Reporting System that make it easy, efficient, and accessible for everyone.</p>
             </div><!-- End Section Title -->
 
             <div class="container">
@@ -322,17 +320,14 @@
                 <div class="row gy-4 justify-content-between features-item">
 
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                        <img src="assets/img/features-1.jpg" class="img-fluid" alt="">
+                        <img src="/images/report.png" width="300px" height="300px" class="img-fluid" alt="Incident Reporting">
                     </div>
 
                     <div class="col-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
-                            <h3>Corporis temporibus maiores provident</h3>
+                            <h3>Easy Incident Reporting</h3>
                             <p>
-                                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate
-                                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident.
+                                Our system allows users to easily report incidents, providing details such as incident type, location, and severity. The simple, user-friendly interface ensures a quick and efficient reporting process.
                             </p>
                             <a href="#" class="btn more-btn">Learn More</a>
                         </div>
@@ -346,15 +341,14 @@
                         data-aos-delay="100">
 
                         <div class="content">
-                            <h3>Neque ipsum omnis sapiente quod quia dicta</h3>
+                            <h3>Real-Time Notifications & Status Tracking</h3>
                             <p>
-                                Quidem qui dolore incidunt aut. In assumenda harum id iusto lorena plasico mares
+                                Stay informed with real-time notifications and track the status of your incident reports. Whether your report is pending, resolved, or closed, you'll receive updates to keep you in the loop.
                             </p>
                             <ul>
-                                <li><i class="bi bi-easel flex-shrink-0"></i> Et corporis ea eveniet ducimus.</li>
-                                <li><i class="bi bi-patch-check flex-shrink-0"></i> Exercitationem dolorem sapiente.
-                                </li>
-                                <li><i class="bi bi-brightness-high flex-shrink-0"></i> Veniam quia modi magnam.</li>
+                                <li><i class="bi bi-bell flex-shrink-0"></i> Notifications on status updates.</li>
+                                <li><i class="bi bi-file-earmark-check flex-shrink-0"></i> Easily track report status from dashboard.</li>
+                                <li><i class="bi bi-geo-alt flex-shrink-0"></i> Location-based incident tracking.</li>
                             </ul>
                             <p></p>
                             <a href="#" class="btn more-btn">Learn More</a>
@@ -363,7 +357,25 @@
                     </div>
 
                     <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
-                        <img src="assets/img/features-2.jpg" class="img-fluid" alt="">
+                        <img src="/images/notif.jpg" width="630px" height="300px" class="img-fluid" alt="Tracking Reports">
+                    </div>
+
+                </div><!-- Features Item -->
+
+                <div class="row gy-4 justify-content-between features-item">
+
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                        <img src="images/bot.png" width="300px" height="300px" class="img-fluid" alt="Chatbot Support">
+                    </div>
+
+                    <div class="col-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="content">
+                            <h3>Chatbot Assistance</h3>
+                            <p>
+                                Get instant support with our AI-powered chatbot. The chatbot is available 24/7 to help guide you through the incident reporting process, answer questions, and provide immediate assistance.
+                            </p>
+                            <a href="#" class="btn more-btn">Learn More</a>
+                        </div>
                     </div>
 
                 </div><!-- Features Item -->
@@ -371,6 +383,7 @@
             </div>
 
         </section><!-- /Features Section -->
+        <!-- /Features Section -->
 
         <!-- Why Us Section -->
         {{-- <section id="why-us" class="why-us section">
@@ -498,8 +511,7 @@
                         <div class="content px-xl-5">
                             <h3><span>Frequently Asked </span><strong>Questions</strong></h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                                Find answers to common questions regarding our Online Incident Reporting System.
                             </p>
                         </div>
                     </div>
@@ -508,61 +520,41 @@
 
                         <div class="faq-container">
                             <div class="faq-item faq-active">
-                                <h3><span class="num">1.</span> <span>Non consectetur a erat nam at lectus urna
-                                        duis?</span></h3>
+                                <h3><span class="num">1.</span> <span>How do I report an incident?</span></h3>
                                 <div class="faq-content">
-                                    <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus
-                                        laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor
-                                        rhoncus dolor purus non.</p>
+                                    <p>To report an incident, simply log in to your account, navigate to the "Create Report" section, and fill out the required details including the type, location, and description of the incident. Once submitted, your report will be reviewed by the admin.</p>
                                 </div>
                                 <i class="faq-toggle bi bi-chevron-right"></i>
                             </div><!-- End Faq item-->
 
                             <div class="faq-item">
-                                <h3><span class="num">2.</span> <span>Feugiat scelerisque varius morbi enim nunc
-                                        faucibus a pellentesque?</span></h3>
+                                <h3><span class="num">2.</span> <span>What types of incidents can I report?</span></h3>
                                 <div class="faq-content">
-                                    <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id
-                                        interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus
-                                        scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim.
-                                        Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+                                    <p>Our system allows you to report various types of incidents such as theft, vandalism, public disturbance, and more. You can select the incident type from a dynamic list when submitting your report.</p>
                                 </div>
                                 <i class="faq-toggle bi bi-chevron-right"></i>
                             </div><!-- End Faq item-->
 
                             <div class="faq-item">
-                                <h3><span class="num">3.</span> <span>Dolor sit amet consectetur adipiscing elit
-                                        pellentesque?</span></h3>
+                                <h3><span class="num">3.</span> <span>How can I track the status of my report?</span></h3>
                                 <div class="faq-content">
-                                    <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci.
-                                        Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl
-                                        suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis
-                                        convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                                    </p>
+                                    <p>Once your report is submitted, you can log into your dashboard to check the status of your report. The status will update as the report progresses through stages like 'Pending', 'Resolved', or 'Closed'. Notifications will also be sent for status updates.</p>
                                 </div>
                                 <i class="faq-toggle bi bi-chevron-right"></i>
                             </div><!-- End Faq item-->
 
                             <div class="faq-item">
-                                <h3><span class="num">4.</span> <span>Ac odio tempor orci dapibus. Aliquam eleifend
-                                        mi in nulla?</span></h3>
+                                <h3><span class="num">4.</span> <span>Can I edit or update my report after submission?</span></h3>
                                 <div class="faq-content">
-                                    <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id
-                                        interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus
-                                        scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim.
-                                        Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+                                    <p>Yes, you can edit your report as long as it has not been marked as "Resolved" or "Closed." If the report is still in the "Pending" state, you can update the details or add additional information.</p>
                                 </div>
                                 <i class="faq-toggle bi bi-chevron-right"></i>
                             </div><!-- End Faq item-->
 
                             <div class="faq-item">
-                                <h3><span class="num">5.</span> <span>Tempus quam pellentesque nec nam aliquam sem
-                                        et tortor consequat?</span></h3>
+                                <h3><span class="num">5.</span> <span>How do I know if my report has been resolved?</span></h3>
                                 <div class="faq-content">
-                                    <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse
-                                        in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl
-                                        suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-                                    </p>
+                                    <p>When your report is resolved, you will receive a notification and can see the updated status in your report details. Additionally, once the report is marked as "Closed," you can no longer make changes to it.</p>
                                 </div>
                                 <i class="faq-toggle bi bi-chevron-right"></i>
                             </div><!-- End Faq item-->
@@ -575,6 +567,7 @@
             </div>
 
         </section><!-- /Faq Section -->
+
 
         <!-- Contact Section -->
         <section id="contact" class="contact section">
@@ -638,7 +631,7 @@
 
                     </div>
 
-                    <div class="col-lg-6">
+                    {{-- <div class="col-lg-6">
                         <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
                             data-aos-delay="200">
                             <div class="row gy-4">
@@ -672,7 +665,7 @@
 
                             </div>
                         </form>
-                    </div><!-- End Contact Form -->
+                    </div><!-- End Contact Form --> --}}
 
                 </div>
 
@@ -684,12 +677,12 @@
 
     <footer id="footer" class="footer dark-background">
 
-        <div class="footer-newsletter">
+        {{-- <div class="footer-newsletter">
             <div class="container">
                 <div class="row justify-content-center text-center">
                     <div class="col-lg-6">
                         <h4>Join Our Newsletter</h4>
-                        <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+                        <p>Subscribe to our newsletter and stay updated on new features and improvements to our reporting system!</p>
                         <form action="forms/newsletter.php" method="post" class="php-email-form">
                             <div class="newsletter-form"><input type="email" name="email"><input type="submit"
                                     value="Subscribe"></div>
@@ -700,17 +693,16 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="container footer-top">
             <div class="row gy-4">
                 <div class="col-lg-4 col-md-6 footer-about">
                     <a href="index.html" class="d-flex align-items-center">
-                        <span class="sitename">eBusiness</span>
+                        <span class="sitename">LGU Municipality of Buguey</span>
                     </a>
                     <div class="footer-contact pt-3">
-                        <p>A108 Adam Street</p>
-                        <p>New York, NY 535022</p>
+                        <p>Centro, Buguey, Cagayan</p>
                         <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
                         <p><strong>Email:</strong> <span>info@example.com</span></p>
                     </div>
@@ -720,25 +712,25 @@
                     <h4>Useful Links</h4>
                     <ul>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">About Us</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Incident Reporting</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of Service</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-2 col-md-3 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Incident Reporting</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Report Analysis</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Report Management</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">User Support</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-4 col-md-12">
                     <h4>Follow Us</h4>
-                    <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                    <p>Stay connected with us for the latest updates and improvements on our system.</p>
                     <div class="social-links d-flex">
                         <a href=""><i class="bi bi-twitter-x"></i></a>
                         <a href=""><i class="bi bi-facebook"></i></a>
@@ -751,11 +743,7 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">Buguey Reporting System</strong> <span>All Rights
-                    Reserved</span></p>
-            <div class="credits">
-
-            </div>
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">LGU Municipality of Buguey</strong> <span>All Rights Reserved</span></p>
         </div>
 
     </footer>
