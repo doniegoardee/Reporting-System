@@ -304,7 +304,7 @@ return [
             'type' => 'navbar-notification',
             'id' => 'my-notification',
             'icon' => 'fas fa-bell',
-            'icon_color' => 'blue',
+            'icon_color' => 'black',
             'url' => 'notifications/show', // Adjust this to your desired route
             'topnav_right' => true,
             'dropdown_mode' => true,
