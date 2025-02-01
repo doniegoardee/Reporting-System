@@ -33,9 +33,18 @@ class ReportsTableSeeder extends Seeder
                 $subjectType = $faker->randomElement(['Flood', 'Earthquake', 'Fire Related', 'Medical Emergency', 'Robbery']);
                 $respondingAgency = match ($subjectType) {
                     'Fire Related' => 'BFP',
-                    'Earthquake' => 'MDRRMO', // Example assignment; modify if needed
+                    'Earthquake' => 'MDRRMO',
                     'Robbery' => 'PNP',
-                    default => $faker->randomElement(['MDRRMO', 'PNP']), // Exclude BFP for other types
+                    default => $faker->randomElement(['MDRRMO', 'PNP']),
+                };
+
+                // Map images to subject types
+                $image = match ($subjectType) {
+                    'Flood' => 'flood_incident.jpg',
+                    'Earthquake' => 'earthquake_incident.jpg',
+                    'Fire Related' => 'fire_incident.jpg',
+                    'Medical Emergency' => 'medical_incident.jpg',
+                    'Robbery' => 'robbery_incident.jpg',
                 };
 
                 Reports::create([
@@ -47,7 +56,7 @@ class ReportsTableSeeder extends Seeder
                     'severity' => $faker->randomElement(['Low', 'Medium', 'High']),
                     'num_affected' => $faker->numberBetween(0, 500),
                     'needs' => $faker->sentence(5),
-                    'image' => $faker->imageUrl(640, 480, 'incident'),
+                    'image' => $image,
                     'contact' => $faker->phoneNumber,
                     'responding_agency' => $respondingAgency,
                     'email' => $faker->unique()->safeEmail,

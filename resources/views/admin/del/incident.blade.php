@@ -60,10 +60,10 @@
                             <tr>
                                 <th class="text-center">Id</th>
                                 <th class="text-center">Incident Type</th>
-                                <th class="text-center">Actions</th>
                                 <th class="text-center">Coresponding Agency</th>
                                 <th class="text-center">Contact Info</th>
                                 <th class="text-center">Email</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -107,7 +107,7 @@
                                 <th class="text-center">Coresponding Agency</th>
                                 <th class="text-center">Contact Info</th>
                                 <th class="text-center">Email</th>
-                                {{-- <th class="text-center">Actions</th> --}}
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>

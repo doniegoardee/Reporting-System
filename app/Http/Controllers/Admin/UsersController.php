@@ -14,8 +14,9 @@ class UsersController extends Controller
 
     public function user(Request $request)
     {
+
         $query = $request->input('query');
-        $usersQuery = User::where('role', 0);
+        $usersQuery = User::whereIn('role',[0,1]);
         if ($request->ajax()) {
 
 

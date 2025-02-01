@@ -81,68 +81,75 @@ class FilterController extends Controller
     }
 
     public function filter_resolved(Request $request)
-    {
-        $incident = IncidentType::all();
-        $barangay = Barangay::all();
+{
+    $incident = IncidentType::all();
+    $barangay = Barangay::all();
 
-        $query = Reports::query();
+    $query = Reports::query();
 
-        if ($request->filled('issue')) {
-            $incidentname = IncidentType::find($request->input('issue'))->name;
-            $query->where('subject_type', $incidentname);
-        }
-
-        if ($request->filled('location')) {
-            $barangayname = Barangay::find($request->input('location'))->barangay;
-            $query->where('location', $barangay);
-        }
-
-        if ($request->filled('start_date') && $request->filled('end_date')) {
-            $query->whereBetween('created_at', [
-                $request->input('start_date'),
-                $request->input('end_date')
-            ]);
-        } elseif ($request->filled('start_date')) {
-            $query->whereDate('created_at', '>=', $request->input('start_date'));
-        } elseif ($request->filled('end_date')) {
-            $query->whereDate('created_at', '<=', $request->input('end_date'));
-        }
-
-        $resolved = $query->where('status', 'resolved')->paginate(5, ['*'], 'resolved')->appends($request->all());
-
-        return view('admin.reports.resolved', compact('resolved', 'incident', 'barangay'));
+    if ($request->filled('issue')) {
+        $incidentname = IncidentType::find($request->input('issue'))->name;
+        $query->where('subject_type', $incidentname);
     }
 
-    public function filter_closed(Request $request)
-    {
-        $incident = IncidentType::all();
-        $barangay = Barangay::all();
-
-        $query = Reports::query();
-
-        if ($request->filled('issue')) {
-            $incidentname = IncidentType::find($request->input('issue'))->name;
-            $query->where('subject_type', $incidentname);
-        }
-
-        if ($request->filled('location')) {
-            $barangayname = Barangay::find($request->input('location'))->barangay;
-            $query->where('location', $barangayname);
-        }
-
-        if ($request->filled('start_date') && $request->filled('end_date')) {
-            $query->whereBetween('created_at', [
-                $request->input('start_date'),
-                $request->input('end_date')
-            ]);
-        } elseif ($request->filled('start_date')) {
-            $query->whereDate('created_at', '>=', $request->input('start_date'));
-        } elseif ($request->filled('end_date')) {
-            $query->whereDate('created_at', '<=', $request->input('end_date'));
-        }
-
-        $closed = $query->where('status', 'closed')->paginate(5, ['*'], 'closed')->appends($request->all());
-
-        return view('admin.reports.closed', compact('closed', 'incident', 'barangay'));
+    if ($request->filled('location')) {
+        $barangayname = Barangay::find($request->input('location'))->barangay;
+        $query->where('location', $barangayname);
     }
+
+    if ($request->filled('start_date') && $request->filled('end_date')) {
+        $query->whereBetween('created_at', [
+            $request->input('start_date'),
+            $request->input('end_date')
+        ]);
+    } elseif ($request->filled('start_date')) {
+        $query->whereDate('created_at', '>=', $request->input('start_date'));
+    } elseif ($request->filled('end_date')) {
+        $query->whereDate('created_at', '<=', $request->input('end_date'));
+    }
+
+    $resolved = $query->where('status', 'resolved')->paginate(5, ['*'], 'resolved')->appends($request->all());
+
+    return view('admin.reports.resolved', compact('resolved', 'incident', 'barangay'));
+}
+
+
+public function filter_closed(Request $request)
+{
+    $incident = IncidentType::all();
+    $barangay = Barangay::all();
+
+    $query = Reports::query();
+
+    if ($request->filled('issue')) {
+        $incidentname = IncidentType::find($request->input('issue'))->name;
+        $query->where('subject_type', $incidentname);
+    }
+
+    if ($request->filled('location')) {
+        $barangayname = Barangay::find($request->input('location'))->barangay;
+        $query->where('location', $barangayname);
+    }
+
+    if ($request->filled('start_date') && $request->filled('end_date')) {
+        $query->whereBetween('created_at', [
+            Carbon::parse($request->input('start_date'))->startOfDay(),
+            Carbon::parse($request->input('end_date'))->endOfDay()
+        ]);
+    } elseif ($request->filled('start_date')) {
+
+        $query->whereDate('created_at', '>=', Carbon::parse($request->input('start_date'))->startOfDay());
+
+    } elseif ($request->filled('end_date')) {
+
+        $query->whereDate('created_at', '<=', Carbon::parse($request->input('end_date'))->endOfDay());
+    }
+
+    $closed = $query->where('status', 'closed')
+        ->paginate(5)
+        ->appends($request->all());
+
+    return view('admin.reports.closed', compact('closed', 'incident', 'barangay'));
+}
+
 }

@@ -65,8 +65,7 @@
                         <div class="row mt-4">
                             <div class="col-md-12 text-end">
                                 <button type="submit" class="btn btn-primary">Filter</button>
-                                <a href="{{ route('admin.filter-closed') }}" class="btn btn-secondary ms-2">Clear
-                                    Filter</a>
+                                <a href="{{ route('admin.filter-closed') }}" class="btn btn-secondary ms-2">Clear Filter</a>
                             </div>
                         </div>
                     </form>
@@ -129,16 +128,17 @@
                             <div class="modal-body">
                                 <p><strong>Incident/Disaster Type:</strong> {{ $report->subject_type }}</p>
                                 <p><strong>Location:</strong> {{ $report->location }}</p>
-                                <p><strong>Date and Time:</strong> {{ $report->created_at->format('d M Y, h:i A') }}
-                                </p>
+                                <p><strong>Date and Time:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
                                 <p><strong>Severity:</strong> {{ $report->severity }}</p>
                                 <p><strong>Number of Affected People:</strong> {{ $report->num_affected }}</p>
 
                                 @if ($report->image)
                                     <div class="text-center mt-3">
-                                        <img src="{{ asset('image/' . $report->image) }}" class="img-fluid"
+                                        <img src="{{ asset('images/' . $report->image) }}" class="img-fluid"
                                             width="200" alt="Report Image">
                                     </div>
+                                    @else
+                                    No image available
                                 @endif
                             </div>
                             <div class="modal-footer">

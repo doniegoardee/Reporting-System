@@ -112,11 +112,11 @@
                                             </td>
                                             <td class="text-center">
                                                 <a href="#"
-                                                    class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal{{ $report->id }}">
-                                                    View
-                                                </a>
+                                                class="bg-secondary text-light fw-semibold text-decoration-none rounded-1 py-1 px-2"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#pendingModal{{ $report->id }}">
+                                                View
+                                             </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -129,7 +129,6 @@
                     @endif
                 </div>
             </div>
-
             {{-- RESOLVED --}}
             <div class="card mb-4">
                 <div class="card-header bg-success text-white">
@@ -231,29 +230,82 @@
             </div>
         </div>
 
-        <!-- Modal for each report -->
-        @foreach ($allReports as $report)
-            <div class="modal fade" id="exampleModal{{ $report->id }}" tabindex="-1"
-                aria-labelledby="exampleModalLabel{{ $report->id }}" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel{{ $report->id }}">Report Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p><strong>Incident/Disaster Type:</strong> {{ $report->subject_type }}</p>
-                            <p><strong>Location:</strong> {{ $report->location }}</p>
-                            <p><strong>Date:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
-                            <p><strong>Status:</strong> {{ $report->status }}</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
+        @foreach ($pending as $report)
+    <div class="modal fade" id="pendingModal{{ $report->id }}" tabindex="-1"
+         aria-labelledby="exampleModalLabel{{ $report->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel{{ $report->id }}">Pending Report #{{ $report->id }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Subject Type:</strong> {{ $report->subject_type }}</p>
+                    <p><strong>Location:</strong> {{ $report->location }}</p>
+                    <p><strong>Description:</strong> {{ $report->description }}</p>
+                    <p><strong>Reported by:</strong> {{ $report->name }}</p>
+                    <p><strong>Date Reported:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
+                    <p><strong>Status:</strong> {{ ucfirst($report->status) }}</p>
+                    @if (!empty($report->image))
+                        @php
+                            $images = is_array($report->image) ? $report->image : json_decode($report->image, true);
+                        @endphp
+                        @if (!empty($images) && is_array($images))
+                            @foreach ($images as $image)
+                                <img src="{{ asset('images/' . $image) }}" alt="Report Image" style="width: 100%; margin-bottom: 10px;">
+                            @endforeach
+                        @else
+                            <img src="{{ asset('images/' . $report->image) }}" alt="Report Image" style="width: 100%; margin-bottom: 10px;">
+                        @endif
+                    @else
+                        <p class="text-muted">No images available for this report.</p>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
-        @endforeach
+        </div>
     </div>
+    @endforeach
+    <!-- Modal for each report (for all sections) -->
+@foreach ($allReports as $report)
+<div class="modal fade" id="exampleModal{{ $report->id }}" tabindex="-1"
+     aria-labelledby="exampleModalLabel{{ $report->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel{{ $report->id }}">Report #{{ $report->id }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Subject Type:</strong> {{ $report->subject_type }}</p>
+                <p><strong>Location:</strong> {{ $report->location }}</p>
+                <p><strong>Description:</strong> {{ $report->description }}</p>
+                <p><strong>Reported by:</strong> {{ $report->name }}</p>
+                <p><strong>Date Reported:</strong> {{ $report->created_at->format('d M Y, h:i A') }}</p>
+                <p><strong>Status:</strong> {{ ucfirst($report->status) }}</p>
+                @if (!empty($report->image))
+                    @php
+                        $images = is_array($report->image) ? $report->image : json_decode($report->image, true);
+                    @endphp
+                    @if (!empty($images) && is_array($images))
+                        @foreach ($images as $image)
+                            <img src="{{ asset('images/' . $image) }}" alt="Report Image" style="width: 100%; margin-bottom: 10px;">
+                        @endforeach
+                    @else
+                        <img src="{{ asset('images/' . $report->image) }}" alt="Report Image" style="width: 100%; margin-bottom: 10px;">
+                    @endif
+                @else
+                    <p class="text-muted">No images available for this report.</p>
+                @endif
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+</div>
 </x-app-layout>

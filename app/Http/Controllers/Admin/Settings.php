@@ -55,6 +55,10 @@ class Settings extends Controller
             'new_password' => 'required|string|min:8|confirmed',
         ]);
 
+        if ($request->input('new_password') !== $request->input('new_password_confirmation')) {
+            return redirect()->back()->withErrors(['new_password' => 'New password and confirm password do not match.']);
+        }
+
         $user = User::find(auth()->id());
 
         if (!Hash::check($request->input('current_password'), $user->password)) {
@@ -64,7 +68,7 @@ class Settings extends Controller
         $user->password = Hash::make($request->input('new_password'));
         $user->save();
 
-        return redirect()->back()->with('success', 'Password changed successfully!');
+        return redirect()->back()->with('password_changed', 'Password changed successfully!');
     }
 
     public function deleteAccount(Request $request)
@@ -75,7 +79,7 @@ class Settings extends Controller
 
         auth()->logout();
 
-
-        return redirect('/')->with('success', 'Your account has been deleted successfully.');
+        return redirect('/')->with('account_deleted', 'Your account has been deleted successfully.');
     }
+
 }

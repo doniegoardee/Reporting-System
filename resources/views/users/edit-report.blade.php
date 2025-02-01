@@ -81,7 +81,7 @@
                                 <label for="image">Image</label>
                                 @if ($report->image)
                                     <div class="mb-3">
-                                        <img src="{{ url('/image', $report->image) }}" class="img-fluid img-thumbnail" style="width:500px; height:200px; border-radius:0;" alt="Report Image">
+                                        <img src="{{ url('/images', $report->image) }}" class="img-fluid img-thumbnail" style="width:500px; height:200px; border-radius:0;" alt="Report Image">
                                     </div>
                                 @endif
                                 <input type="file" class="form-control-file" id="image" name="image">

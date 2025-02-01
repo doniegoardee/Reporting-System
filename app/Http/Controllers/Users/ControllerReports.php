@@ -125,7 +125,7 @@ class ControllerReports extends Controller
 
             if ($image) {
                 $imagename = time() . '.' . $image->getClientOriginalExtension();
-                $request->image->move(public_path('/image'), $imagename);
+                $request->image->move(public_path('/images'), $imagename);
                 $reports->image = $imagename;
             }
 
@@ -211,7 +211,7 @@ class ControllerReports extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imagename = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('/image'), $imagename);
+            $image->move(public_path('/images'), $imagename);
             $report->image = $imagename;
         }
 

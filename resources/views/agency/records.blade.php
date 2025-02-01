@@ -60,6 +60,13 @@
                                     </p>
                                     <p><strong>Contact:</strong> {{ $report->contact }}</p>
                                     <p><strong>Email:</strong> {{ $report->email }}</p>
+                                    @if ($report->image)
+                                    <p><strong>Image:</strong>
+                                        <img src="{{ asset('images/' . $report->image) }}"
+                                            alt="Report Image" class="img-fluid rounded"
+                                            style="max-width: 200px;">
+                                    </p>
+                                @endif
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"

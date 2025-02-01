@@ -55,19 +55,27 @@
                                     <th>No.</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Usertype</th>
                                     <th>User ID</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($users as $index => $user)
-                                    <tr class="text-center">
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->id }}</td>
-                                    </tr>
+                                <tr class="text-center">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td class="text-center">
+                                        @if($user->role == 'user')
+                                            User
+                                        @elseif($user->role == 'agency')
+                                            Agency
+                                        @endif
+                                    </td>
+                                    <td>{{ $user->id }}</td>
+                                </tr>
                                 @endforeach
-                            </tbody>
+                             </tbody>
                         </table>
                     </div>
                 </div>

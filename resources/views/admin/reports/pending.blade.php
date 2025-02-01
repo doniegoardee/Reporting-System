@@ -97,6 +97,28 @@
                         </script>
                     @endif
 
+                    @if (session('sent_success'))
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    iconColor: 'white',
+                                    customClass: {
+                                        popup: 'colored-toast',
+                                    },
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: 'Message has been succesfully sent!'
+                                });
+                            });
+                        </script>
+                    @endif
+
                     @if (session('error'))
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
@@ -216,7 +238,7 @@
 
                                 @if ($report->image)
                                     <div class="text-center mt-3">
-                                        <img src="{{ asset('image/' . $report->image) }}" class="img-fluid"
+                                        <img src="{{ asset('images/' . $report->image) }}" class="img-fluid"
                                             alt="Report Image">
                                     </div>
                                 @endif

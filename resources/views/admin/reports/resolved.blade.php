@@ -14,7 +14,6 @@
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.filter-resolved') }}">
                         <div class="row g-3">
-
                             <div class="col-md-4">
                                 <label for="issue" class="form-label">Report Type</label>
                                 <select class="form-select" name="issue" id="issue">
@@ -74,7 +73,6 @@
 
             <div class="card mb-4">
                 <div class="card-body">
-
                     @if (session('success'))
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
@@ -138,7 +136,6 @@
                                             </td>
                                         </tr>
 
-                                        <!-- View Modal -->
                                         <div class="modal fade" id="viewModal{{ $report->id }}" tabindex="-1"
                                             aria-labelledby="viewModalLabel{{ $report->id }}" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
@@ -162,6 +159,14 @@
                                                         <p><strong>Resolved Time:</strong>
                                                             {{ $report->resolved_time ? \Carbon\Carbon::parse($report->resolved_time)->format('d M Y, h:i A') : 'N/A' }}
                                                         </p>
+                                                        @if ($report->image)
+                                                        <div class="text-center mt-3">
+                                                            <img src="{{ asset('images/' . $report->image) }}" class="img-fluid"
+                                                                width="200" alt="Report Image">
+                                                        </div>
+                                                        @else
+                                                        No image available
+                                                    @endif
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
@@ -171,7 +176,6 @@
                                             </div>
                                         </div>
 
-                                        <!-- Confirmation Modal -->
                                         <div class="modal fade" id="confirmModal{{ $report->id }}" tabindex="-1"
                                             aria-labelledby="confirmModalLabel{{ $report->id }}"
                                             aria-hidden="true">
@@ -202,8 +206,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!-- End of Modal -->
                                     @endforeach
                                 </tbody>
                             </table>

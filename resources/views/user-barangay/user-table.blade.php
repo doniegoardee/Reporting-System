@@ -41,6 +41,7 @@
                                         <th></th>
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Email</th>
+                                        <th class="text-center">Role</th>
                                         <th class="text-center">User ID</th>
                                     </tr>
                                 </thead>
@@ -50,6 +51,12 @@
                                             <td class="text-center">{{ $index + 1 }}</td>
                                             <td class="text-center">{{ $user->name }}</td>
                                             <td class="text-center">{{ $user->email }}</td>
+                                            <td class="text-center">@if($user->role == 0)
+                                                User
+                                            @elseif($user->role == 1)
+                                                Agency
+                                                @endif
+                                            </td>
                                             <td class="text-center">{{ $user->id }}</td>
                                         </tr>
                                     @endforeach

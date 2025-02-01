@@ -143,7 +143,7 @@
 
                                 @if ($report->image)
                                     <div class="text-center mt-3">
-                                        <img src="{{ asset('image/' . $report->image) }}" class="img-fluid"
+                                        <img src="{{ asset('images/' . $report->image) }}" class="img-fluid"
                                             width="150rem" length="150rem" alt="Report Image">
                                     </div>
                                 @endif

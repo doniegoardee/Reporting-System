@@ -38,7 +38,7 @@ class MailController extends Controller
         try {
             Mail::to($email)->send(new ReportMail($report));
 
-            return redirect()->route('admin.pending')->with('success', 'Message sent successfully!');
+            return redirect()->route('admin.pending')->with('sent_success', 'Message sent successfully!');
         } catch (Exception $e) {
             \Log::error('Mail sending failed: ' . $e->getMessage());
 

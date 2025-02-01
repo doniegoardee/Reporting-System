@@ -41,12 +41,14 @@
 
                                             <td class="">
 
-                                                <a class="btn btn-sm btn-primary {{ ($report->status === 'resolved') | ($report->status === 'closed') ? 'disabled-link' : '' }}"
+                                                <a class="btn btn-sm btn-primary
+                                                    {{
+                                                        ($report->status === 'resolved' || $report->status === 'closed' || $report->status === 'in-progress')
+                                                        ? 'disabled-link' : ''
+                                                    }}"
                                                     href="{{ $report->status === 'pending' ? route('reports.edit', $report->id) : '#' }}">
                                                     Edit
                                                 </a>
-
-
                                                 <a class="btn btn-sm btn-info" href="#" data-bs-toggle="modal"
                                                     data-bs-target="#viewReportModal{{ $report->id }}">
                                                     View
@@ -79,7 +81,7 @@
                                                         </p>
                                                         @if ($report->image)
                                                             <p><strong>Image:</strong>
-                                                                <img src="{{ asset('image/' . $report->image) }}"
+                                                                <img src="{{ asset('images/' . $report->image) }}"
                                                                     alt="Report Image" class="img-fluid rounded"
                                                                     style="max-width: 200px;">
                                                             </p>
