@@ -115,6 +115,7 @@ class ControllerReports extends Controller
             $reports->severity = $request->severity;
             $reports->num_affected = $request->num_affected;
             $reports->needs = $request->needs;
+            $reports->privacy = 'private';
 
             $reports->name = $username;
             $reports->email = $email;

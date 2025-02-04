@@ -305,7 +305,7 @@ return [
             'id' => 'my-notification',
             'icon' => 'fas fa-bell',
             'icon_color' => 'black',
-            'url' => 'notifications/show', // Adjust this to your desired route
+            'url' => 'notifications/show',
             'topnav_right' => true,
             'dropdown_mode' => true,
         ],
@@ -407,6 +407,23 @@ return [
                 [
                     'text' => 'Archive Barangay',
                     'url' => 'admin/del/barangays',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Manage Incident Info',
+            'icon' => 'fa-solid fa-plus',
+            // 'icon_color' => 'success',
+            'submenu' => [
+                [
+                    'text' => 'Incident List',
+                    'url' => 'admin/info',
+                    'icon' => 'fa-solid fa-folder-plus',
+                ],
+                [
+                    'text' => 'Incident Privacy',
+                    'url' => 'admin/privacy',
+                    'icon' => 'fa-regular fa-square-plus'
                 ],
             ],
         ],

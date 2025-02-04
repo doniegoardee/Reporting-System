@@ -19,11 +19,12 @@ use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\ExportFileController;
 use App\Http\Controllers\Admin\BarangayAndIncident;
-
+use App\Http\Controllers\Admin\PrivacyCtrl;
 use App\Http\Controllers\Agency\ReportController;
 use App\Http\Controllers\Agency\Profile;
 
 use App\Http\Controllers\Users\ChatBotController;
+use App\Http\Controllers\Users\IncidentHistoryController;
 use App\Http\Controllers\Users\Setting;
 use App\Http\Controllers\Users\Notification;
 use App\Http\Controllers\Users\ControllerReports;
@@ -71,7 +72,6 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
             Route::get('/{id}/edit', [ControllerReports::class, 'editReport'])->name('reports.edit');
         });
 
-
         Route::prefix('settings')->group(function () {
             Route::get('/setting', [Setting::class, 'user_settings'])->name('user.settings');
             Route::put('/profile', [Setting::class, 'update'])->name('user.profile-update');
@@ -80,6 +80,12 @@ Route::middleware(['auth', 'user-role:user'])->group(function () {
         });
 
         Route::post('/botman', [ChatBotController::class, 'handleBot']);
+
+        Route::get('/history', [IncidentHistoryController::class, 'index'])->name('user.history');
+        Route::get('/incident-history/search', [IncidentHistoryController::class, 'searchIncidentHistory'])->name('incident.history.search');
+
+        Route::get('/view/info/{id}', [IncidentHistoryController::class, 'view'])->name('user.view-info');
+
 
         Route::post('/notifications/{id}/read', [Notification::class, 'markNotificationAsRead']);
 
@@ -159,10 +165,30 @@ Route::middleware(['auth', 'user-role:admin'])->prefix('admin')->name('admin.')-
         Route::delete('/delete-account', [Settings::class, 'deleteAccount'])->name('delete');
     });
 
+    Route::prefix('privacy')->group(function () {
+
+    });
+
+    Route::prefix('information')->group(function () {
+
+    });
+
     Route::post('/notifications/{id}/read', [NotificationController::class, 'markNotificationAsRead'])
     ->name('notif');
     Route::get('/notifications/unread-count', [NotificationController::class, 'getUnreadCount'])
     ->name('notifications.unread-count');
+
+    Route::get('/info', [PrivacyCtrl::class, 'index'])->name('list.info');
+    Route::get('/reports/{subject_type}', [PrivacyCtrl::class, 'listByIncident'])->name('reports.byIncident');
+    Route::get('/reports/view/{id}', [PrivacyCtrl::class, 'viewReport'])->name('reports.view');
+    Route::get('/admin/report/{id}', [PrivacyCTRL::class, 'show'])->name('admin.view');
+    Route::post('/admin/reports/{id}/info', [PrivacyCTRL::class, 'store'])->name('reports.info.store');
+    Route::put('/admin/reports/info/{id}', [PrivacyCTRL::class, 'update'])->name('reports.info.update');
+    Route::delete('/admin/reports/info/{id}', [PrivacyCTRL::class, 'destroy'])->name('reports.info.delete');
+
+    Route::get('/privacy', [PrivacyCtrl::class, 'privacy'])->name('privacy');
+    Route::post('/admin/reports/toggle-privacy', [PrivacyCtrl::class, 'togglePrivacy'])->name('reports.togglePrivacy');
+
 
     Route::put('/update/{id}/{status}', [Status::class, 'updateStatus'])->name('update');
 
