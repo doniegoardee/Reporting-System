@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('responding_agency')->nullable();
             $table->string('resolved_time')->nullable();
+            $table->string('privacy')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

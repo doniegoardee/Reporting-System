@@ -62,6 +62,7 @@ class ReportsTableSeeder extends Seeder
                     'email' => $faker->unique()->safeEmail,
                     'name' => $faker->name,
                     'resolved_time' => $resolvedTime,
+                    'privacy' => $faker->randomElement([ 'private', 'public']),
                     'created_at' => $date,
                     'updated_at' => $date,
                 ]);

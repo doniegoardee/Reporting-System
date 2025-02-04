@@ -312,6 +312,7 @@
                 <li><a href="{{ route('home.user') }}" class="active">Home</a></li>
                 <li><a href="{{ route('user.incident') }}">Make Report</a></li>
                 <li><a href="{{ route('user.report') }}">My Reports</a></li>
+                <li><a href="{{ route('user.history') }}">Incident History</a></li>
             </ul>
 
             <div class="dropdown position-relative">

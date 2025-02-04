@@ -21,6 +21,7 @@ class Reports extends Model
         'num_affected',
         'needs',
         'image',
+        'privacy',
         'contact',
         'responding_agency',
         'resolved_time'
@@ -40,4 +41,10 @@ class Reports extends Model
 {
     return $this->belongsTo(User::class);
 }
+
+public function reportInfo()
+{
+    return $this->hasMany(ReportInfo::class, 'report_id');
+}
+
 }

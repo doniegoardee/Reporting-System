@@ -40,7 +40,7 @@
             <a href="/image/logo.jpg" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h2 class="sitename">Reporting System</h2>
+                <h2 class="sitename">Online incident Information System</h2>
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -70,21 +70,17 @@
             @endif --}}
     </header>
 
-    <main class="main">
 
         <!-- Hero Section -->
         <section id="hero" class="hero section dark-background">
 
-            <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
-                data-bs-interval="5000">
+            <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
 
                 <div class="carousel-item active">
                     <img src="image/sample.jpg" alt="">
                     <div class="carousel-container">
-                        <h2 class="text-center">Incident Reporting Buguey Cagayan</h2>
-                        <p class="text-center">Empowering Buguey, Cagayan with safer communities. Report incidents
-                            quickly, track progress
-                            seamlessly, and foster accountability. Together, we create a more secure tomorrow.</p>
+                        <h2 class="text-center">Buguey Cagayan Incident Reporting & Information System</h2>
+                        <p class="text-center">A centralized platform for reporting incidents and accessing real-time community information. Stay informed and contribute to a safer Buguey, Cagayan.</p>
                         @if (Route::has('login'))
                             <div>
                                 @auth
@@ -104,9 +100,8 @@
                 <div class="carousel-item">
                     <img src="image/sample3.jpg" alt="">
                     <div class="carousel-container">
-                        <h2>Incident Reporting Buguey Cagayan</h2>
-                        <p>Incident Reporting Buguey Cagayan – your voice for change and safety. Submit reports with
-                            ease and ensure swift resolutions. Building trust, one incident at a time.</p>
+                        <h2>Buguey Cagayan Incident Reporting & Information System</h2>
+                        <p>Report incidents, access safety updates, and stay aware of community concerns. Join us in making Buguey a safer and more informed place.</p>
                         @if (Route::has('login'))
                             <div>
                                 @auth
@@ -126,9 +121,8 @@
                 <div class="carousel-item">
                     <img src="image/sample2.jpg" alt="">
                     <div class="carousel-container">
-                        <h2>Incident Reporting Buguey Cagayan</h2>
-                        <p>Your safety, our priority in Buguey, Cagayan. A simple platform to report, resolve, and
-                            improve. Strengthening communities through transparency and action.</p>
+                        <h2>Buguey Cagayan Incident Reporting & Information System</h2>
+                        <p>Your go-to platform for submitting reports and staying updated on local incidents. Empower your community by contributing to real-time information.</p>
                         @if (Route::has('login'))
                             <div>
                                 @auth
@@ -139,6 +133,23 @@
                                     @endif
                                 @else
                                     <a href="{{ route('login') }}" class="btn-get-started">Get Started</a>
+                                @endauth
+                            </div>
+                        @endif
+                    </div>
+                </div><!-- End Carousel Item -->
+
+                <div class="carousel-item">
+                    <img src="image/sample4.jpg" alt="">
+                    <div class="carousel-container">
+                        <h2>Report an Incident</h2>
+                        <p>Have an issue or safety concern? Report it here to keep the community informed and safe.</p>
+                        @if (Route::has('login'))
+                            <div>
+                                @auth
+                                    <a href="{{ route('create-reports') }}" class="btn-get-started">Report Now</a>
+                                @else
+                                    <a href="{{ route('login') }}" class="btn-get-started">Report Now</a>
                                 @endauth
                             </div>
                         @endif
@@ -157,15 +168,17 @@
 
             </div>
 
-        </section><!-- /Hero Section -->
+        </section>
+
+        <!-- /Hero Section -->
 
         <!-- About Section -->
         <section id="about" class="about section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>About</h2>
-                <p>Incident Reporting Buguey Cagayan is a dedicated platform designed to enhance the safety and security of the Buguey community. It empowers residents to report incidents efficiently, ensuring prompt attention and resolution by local authorities. With features like detailed reporting, progress tracking, and real-time notifications, the system fosters transparency and accountability. Our mission is to create a more secure and united community where every voice is heard and every concern is addressed. Together, we can make Buguey, Cagayan, a safer place for everyone.</p>
+                <h2>About the Buguey Cagayan Incident Reporting & Information System</h2>
+                <p>The Buguey Cagayan Incident Reporting & Information System is a modern, integrated platform designed to empower the community by providing real-time updates and insights on incidents across Buguey, Cagayan. This system enhances safety and communication by offering transparent, location-based information and enabling users to report and track incidents effectively. With a focus on awareness and responsiveness, the system helps foster a safer and more informed community.</p>
             </div><!-- End Section Title -->
 
             <div class="container">
@@ -173,35 +186,42 @@
                 <div class="row gy-3">
 
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                        <img src="/images/reporting.jpg" width="600px" height="600px" alt="" class="img-fluid">
+                        <img src="/images/reporting.jpg" width="600px" height="600px" alt="Incident Reporting" class="img-fluid">
                     </div>
 
                     <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="about-content ps-0 ps-lg-3">
-                            <h3>Our Vision for a Safer Buguey</h3>
+                            <h3>Empowering the Community with Real-Time Information</h3>
                             <p class="fst-italic">
-                                Our platform is built to ensure that incidents are reported and resolved in a timely manner, fostering trust between the community and local authorities.
+                                Our system ensures that incidents are reported and tracked in real-time, providing transparency and fostering a proactive community response.
                             </p>
                             <ul>
                                 <li>
                                     <i class="bi bi-clipboard-data"></i>
                                     <div>
-                                        <h4>Real-time Reporting</h4>
-                                        <p>Submit incidents directly from your mobile or computer and receive instant updates on the status of your report.</p>
+                                        <h4>Comprehensive Incident Database</h4>
+                                        <p>Access detailed records of past and present incidents, enabling the community to stay informed about safety trends and common issues.</p>
                                     </div>
                                 </li>
                                 <li>
                                     <i class="bi bi-check-circle"></i>
                                     <div>
-                                        <h4>Progress Tracking</h4>
-                                        <p>Track the resolution of your reports and ensure that action is being taken to address the issues raised.</p>
+                                        <h4>Incident Tracking & Updates</h4>
+                                        <p>Get real-time status updates on reported incidents and responses, ensuring the community is always in the loop.</p>
                                     </div>
                                 </li>
                                 <li>
                                     <i class="bi bi-bell"></i>
                                     <div>
-                                        <h4>Real-time Notifications</h4>
-                                        <p>Stay informed about updates to your reports with instant notifications, ensuring you never miss important developments.</p>
+                                        <h4>Instant Alerts & Notifications</h4>
+                                        <p>Receive timely notifications about new reports, updates, and changes in the status of incidents happening in your area.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="bi bi-geo-alt"></i>
+                                    <div>
+                                        <h4>Location-Based Incident Insights</h4>
+                                        <p>View incidents by location to prioritize areas that need attention and track community safety on a map.</p>
                                     </div>
                                 </li>
                             </ul>
@@ -211,7 +231,9 @@
 
             </div>
 
-        </section><!-- /About Section -->
+        </section>
+
+        <!-- /About Section -->
 
 
         <!-- Services Section -->
@@ -220,56 +242,56 @@
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Our Services</h2>
-                <p>Efficient and user-friendly solutions for managing incidents and improving safety in your community</p>
+                <p>Providing comprehensive incident reporting and real-time information to keep your community safe, informed, and connected.</p>
             </div><!-- End Section Title -->
 
             <div class="container">
 
                 <div class="row g-5">
 
-                    <!-- Service Item 1: Incident Reporting -->
+                    <!-- Service Item 1: Incident Information Access -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                         <div class="service-item item-cyan position-relative">
-                            <i class="bi bi-pencil-square icon"></i>
+                            <i class="bi bi-journal-text icon"></i>
                             <div>
-                                <h3>Simple Incident Reporting</h3>
-                                <p>Easily report incidents like theft, vandalism, and disturbances with a simple online form. Your reports are instantly logged into the system for quick processing.</p>
+                                <h3>Incident Information Access</h3>
+                                <p>Stay informed about the latest incidents in your area. Access detailed information about community safety concerns, affected locations, and response actions in real time.</p>
                                 <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
 
-                    <!-- Service Item 2: Real-Time Notifications -->
+                    <!-- Service Item 2: Real-Time Alerts -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="service-item item-orange position-relative">
                             <i class="bi bi-bell icon"></i>
                             <div>
-                                <h3>Real-Time Notifications</h3>
-                                <p>Stay informed with real-time updates on the status of your incident report. Receive notifications for new updates, approvals, and resolutions.</p>
+                                <h3>Real-Time Alerts</h3>
+                                <p>Receive instant alerts about new incidents, critical updates, and emergency notifications, ensuring you're always aware of what's happening around you.</p>
                                 <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
 
-                    <!-- Service Item 3: Admin Dashboard -->
+                    <!-- Service Item 3: Data Dashboard -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="service-item item-teal position-relative">
                             <i class="bi bi-bar-chart icon"></i>
                             <div>
-                                <h3>Admin Dashboard</h3>
-                                <p>Our powerful admin dashboard allows you to easily manage and track reported incidents, analyze trends, and resolve issues efficiently.</p>
+                                <h3>Data Dashboard</h3>
+                                <p>Analyze incident trends, view detailed statistics, and monitor patterns to better understand safety concerns and make informed decisions.</p>
                                 <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
 
-                    <!-- Service Item 4: Chatbot Assistance -->
+                    <!-- Service Item 4: Community Engagement -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="service-item item-red position-relative">
-                            <i class="bi bi-chat-dots icon"></i>
+                            <i class="bi bi-people icon"></i>
                             <div>
-                                <h3>24/7 Chatbot Assistance</h3>
-                                <p>Our chatbot is available 24/7 to assist with filing incident reports, answering questions, and guiding you through the process seamlessly.</p>
+                                <h3>Community Engagement</h3>
+                                <p>Engage your community by providing access to incident reports and enabling discussion on local safety measures and concerns, fostering a collaborative approach to problem-solving.</p>
                                 <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
@@ -281,7 +303,7 @@
                             <i class="bi bi-calendar-check icon"></i>
                             <div>
                                 <h3>Incident Follow-Up</h3>
-                                <p>Track the progress of your reported incidents, from submission to resolution. Receive updates on status changes and any further actions needed.</p>
+                                <p>Track the status and progress of reported incidents. View updates, follow resolutions, and maintain access to historical records for reference and accountability.</p>
                                 <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
@@ -293,7 +315,7 @@
                             <i class="bi bi-shield-lock icon"></i>
                             <div>
                                 <h3>Secure Data Management</h3>
-                                <p>Ensure the privacy and safety of your data. Our system employs top-level security protocols to safeguard your incident reports and personal information.</p>
+                                <p>Safeguard sensitive incident data with state-of-the-art security measures. Protect the privacy of individuals and ensure the integrity of all reports stored in the system.</p>
                                 <a href="service-details.html" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
@@ -303,7 +325,9 @@
 
             </div>
 
-        </section><!-- /Services Section -->
+        </section>
+
+        <!-- /Services Section -->
 
 
         <!-- Features Section -->
@@ -312,77 +336,71 @@
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Features</h2>
-                <p>Discover the key features of our Online Incident Reporting System that make it easy, efficient, and accessible for everyone.</p>
+                <p>Explore the powerful features of our Online Incident Information System, designed to provide real-time updates, insights, and data accessibility for your community.</p>
             </div><!-- End Section Title -->
 
             <div class="container">
 
                 <div class="row gy-4 justify-content-between features-item">
 
+                    <!-- Feature Item 1: Comprehensive Incident Database -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                        <img src="/images/report.png" width="300px" height="300px" class="img-fluid" alt="Incident Reporting">
+                        <img src="/images/report.png" srcset="/images/report-small.png 480w, /images/report.png 768w" width="300px" height="300px" class="img-fluid" alt="Incident Information">
                     </div>
 
                     <div class="col-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
-                            <h3>Easy Incident Reporting</h3>
-                            <p>
-                                Our system allows users to easily report incidents, providing details such as incident type, location, and severity. The simple, user-friendly interface ensures a quick and efficient reporting process.
-                            </p>
+                            <h3>Comprehensive Incident Database</h3>
+                            <p>Access a detailed record of past and ongoing incidents, including incident type, location, severity, and resolution status. Our system ensures easy data retrieval and transparency.</p>
                             <a href="#" class="btn more-btn">Learn More</a>
                         </div>
                     </div>
 
-                </div><!-- Features Item -->
+                </div><!-- End Feature Item -->
 
                 <div class="row gy-4 justify-content-between features-item">
 
-                    <div class="col-lg-5 d-flex align-items-center order-2 order-lg-1" data-aos="fade-up"
-                        data-aos-delay="100">
-
+                    <!-- Feature Item 2: Real-Time Notifications & Updates -->
+                    <div class="col-lg-5 d-flex align-items-center order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">
                         <div class="content">
-                            <h3>Real-Time Notifications & Status Tracking</h3>
-                            <p>
-                                Stay informed with real-time notifications and track the status of your incident reports. Whether your report is pending, resolved, or closed, you'll receive updates to keep you in the loop.
-                            </p>
+                            <h3>Real-Time Notifications & Updates</h3>
+                            <p>Stay informed with real-time alerts about incidents in your area. Get notified when new incidents are reported, updated, or resolved.</p>
                             <ul>
-                                <li><i class="bi bi-bell flex-shrink-0"></i> Notifications on status updates.</li>
-                                <li><i class="bi bi-file-earmark-check flex-shrink-0"></i> Easily track report status from dashboard.</li>
-                                <li><i class="bi bi-geo-alt flex-shrink-0"></i> Location-based incident tracking.</li>
+                                <li><i class="bi bi-bell flex-shrink-0" alt="Bell Icon"></i> Instant alerts on new incidents.</li>
+                                <li><i class="bi bi-file-earmark-check flex-shrink-0" alt="Checkmark Icon"></i> View status updates in real time.</li>
+                                <li><i class="bi bi-geo-alt flex-shrink-0" alt="Location Icon"></i> Location-based incident mapping.</li>
                             </ul>
-                            <p></p>
                             <a href="#" class="btn more-btn">Learn More</a>
                         </div>
-
                     </div>
 
                     <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
-                        <img src="/images/notif.jpg" width="630px" height="300px" class="img-fluid" alt="Tracking Reports">
+                        <img src="/images/notif.jpg" srcset="/images/notif-small.jpg 480w, /images/notif.jpg 768w" width="630px" height="300px" class="img-fluid" alt="Incident Updates">
                     </div>
 
-                </div><!-- Features Item -->
+                </div><!-- End Feature Item -->
 
                 <div class="row gy-4 justify-content-between features-item">
 
+                    <!-- Feature Item 3: Chatbot Assistance -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                        <img src="images/bot.png" width="300px" height="300px" class="img-fluid" alt="Chatbot Support">
+                        <img src="images/bot.png" srcset="/images/bot-small.png 480w, /images/bot.png 768w" width="300px" height="300px" class="img-fluid" alt="Chatbot Support">
                     </div>
 
                     <div class="col-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
                             <h3>Chatbot Assistance</h3>
-                            <p>
-                                Get instant support with our AI-powered chatbot. The chatbot is available 24/7 to help guide you through the incident reporting process, answer questions, and provide immediate assistance.
-                            </p>
+                            <p>Get instant answers with our AI-powered chatbot. Available 24/7, it helps you navigate the incident database, check recent updates, and find important community alerts.</p>
                             <a href="#" class="btn more-btn">Learn More</a>
                         </div>
                     </div>
 
-                </div><!-- Features Item -->
+                </div><!-- End Feature Item -->
 
             </div>
 
-        </section><!-- /Features Section -->
+        </section>
+
         <!-- /Features Section -->
 
         <!-- Why Us Section -->
@@ -501,7 +519,7 @@
         </section><!-- /Portfolio Section --> --}}
 
         <!-- Faq Section -->
-        <section id="faq" class="faq section light-background">
+        <section id="faq" class="faq section light-background py-5">
 
             <div class="container">
 
@@ -510,63 +528,89 @@
                     <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                         <div class="content px-xl-5">
                             <h3><span>Frequently Asked </span><strong>Questions</strong></h3>
-                            <p>
-                                Find answers to common questions regarding our Online Incident Reporting System.
-                            </p>
+                            <p>Find answers to common questions regarding our Online Incident Information System.</p>
                         </div>
                     </div>
 
                     <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
 
-                        <div class="faq-container">
-                            <div class="faq-item faq-active">
-                                <h3><span class="num">1.</span> <span>How do I report an incident?</span></h3>
-                                <div class="faq-content">
-                                    <p>To report an incident, simply log in to your account, navigate to the "Create Report" section, and fill out the required details including the type, location, and description of the incident. Once submitted, your report will be reviewed by the admin.</p>
-                                </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
+                        <div class="accordion" id="faqAccordion">
 
-                            <div class="faq-item">
-                                <h3><span class="num">2.</span> <span>What types of incidents can I report?</span></h3>
-                                <div class="faq-content">
-                                    <p>Our system allows you to report various types of incidents such as theft, vandalism, public disturbance, and more. You can select the incident type from a dynamic list when submitting your report.</p>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+                                        <span class="num">1.</span> What kind of incident information is available?
+                                    </button>
+                                </h2>
+                                <div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqOne" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Our system provides real-time updates on various incidents in your community, including theft, vandalism, public disturbances, and more. You can access details like location, severity, and resolution status.
+                                    </div>
                                 </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
+                            </div><!-- End FAQ item -->
 
-                            <div class="faq-item">
-                                <h3><span class="num">3.</span> <span>How can I track the status of my report?</span></h3>
-                                <div class="faq-content">
-                                    <p>Once your report is submitted, you can log into your dashboard to check the status of your report. The status will update as the report progresses through stages like 'Pending', 'Resolved', or 'Closed'. Notifications will also be sent for status updates.</p>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                                        <span class="num">2.</span> How can I stay updated on incidents in my area?
+                                    </button>
+                                </h2>
+                                <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        You can subscribe to real-time notifications for incident updates. The system will send alerts when new incidents are reported or when an ongoing incident changes status.
+                                    </div>
                                 </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
+                            </div><!-- End FAQ item -->
 
-                            <div class="faq-item">
-                                <h3><span class="num">4.</span> <span>Can I edit or update my report after submission?</span></h3>
-                                <div class="faq-content">
-                                    <p>Yes, you can edit your report as long as it has not been marked as "Resolved" or "Closed." If the report is still in the "Pending" state, you can update the details or add additional information.</p>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                                        <span class="num">3.</span> How does the system track incident status?
+                                    </button>
+                                </h2>
+                                <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Each incident goes through different stages, such as "Pending Review," "Under Investigation," and "Resolved." You can track the progress of incidents through the dashboard and receive status updates.
+                                    </div>
                                 </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
+                            </div><!-- End FAQ item -->
 
-                            <div class="faq-item">
-                                <h3><span class="num">5.</span> <span>How do I know if my report has been resolved?</span></h3>
-                                <div class="faq-content">
-                                    <p>When your report is resolved, you will receive a notification and can see the updated status in your report details. Additionally, once the report is marked as "Closed," you can no longer make changes to it.</p>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
+                                        <span class="num">4.</span> Can I contribute additional details to an existing incident?
+                                    </button>
+                                </h2>
+                                <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqFour" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Yes! If you have relevant information about an incident, you can submit additional details, which will be reviewed and included in the incident's record.
+                                    </div>
                                 </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
+                            </div><!-- End FAQ item -->
 
-                        </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faqFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFive" aria-expanded="false" aria-controls="faqCollapseFive">
+                                        <span class="num">5.</span> Is my personal information protected?
+                                    </button>
+                                </h2>
+                                <div id="faqCollapseFive" class="accordion-collapse collapse" aria-labelledby="faqFive" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Absolutely! Our system follows strict data security measures to ensure that all user information remains confidential and protected from unauthorized access.
+                                    </div>
+                                </div>
+                            </div><!-- End FAQ item -->
+
+                        </div><!-- End Accordion -->
 
                     </div>
                 </div>
 
             </div>
 
-        </section><!-- /Faq Section -->
+        </section>
+
+        <!-- /Faq Section -->
 
 
         <!-- Contact Section -->
